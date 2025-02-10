@@ -68,7 +68,7 @@ class Model
         $query = $this->conn->createQueryBuilder();
         $query->select('*')
             ->from($this->tableName)
-            ->where('id : = id')
+            ->where('user_id = :id')
             ->setParameter('id', $id);
         return $query->fetchAllAssociative();
     }
@@ -79,7 +79,7 @@ class Model
         return $this->conn->lastInsertId();
     }
 
-    public function uơdate($id, array $data)
+    public function update($id, array $data)
     {
         return $this->conn->update($this->tableName, $data, ['id' => $id]);
     }
