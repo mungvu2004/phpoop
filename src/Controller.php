@@ -22,7 +22,10 @@ class Controller
         }
 
         $destPath = $uploaDir . $fileName;
-
-        return move_uploaded_file($fileTmpPath, $destPath);
+        
+        if(move_uploaded_file($fileTmpPath, $destPath)) {
+            return $destPath;
+        }
+        throw new \Exception("looi up load");
     }
 }

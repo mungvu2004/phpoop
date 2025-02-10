@@ -20,7 +20,7 @@
         </h2>
     @endif
 
-    <form action="/admin/user/testUploadFile" method="post" enctype="multipart/form-data">
+    <form action="/admin/users/testUploadFile" method="post" enctype="multipart/form-data">
         <label for="avatar">Choose avatar:</label>
         <input type="file" name="avatar" id="avatar" required>
         <br>

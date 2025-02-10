@@ -3,8 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Models\User;
+use App\Controller;
 
-class UserController
+class UserController extends Controller
 {
     private User $user;
     public function __construct()
@@ -38,7 +39,15 @@ class UserController
     }
     public function testUploadFile()
     {
-        
-        
+        try {
+            $pathFile = $this->uploadFile($_FILES['avatar'], 'users');
+            $_SESSION['msg'] = 'Upload file Thanh cong';
+
+        } catch (\Throwable $error) {
+            $this->logError($error->getMessage());
+            $_SESSION['msg'] = 'Upload file That bai';
+        }
+        header('Location: /admin/users');
+        exit;
     }
 }
