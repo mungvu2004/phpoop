@@ -4,7 +4,7 @@ use App\Controllers\Admin\UserController;
 
 $router->mount('/admin', function() use ($router) {
     $router->get('/', function() {
-        echo 'Admin Area';
+        return view('admin.layouts.main');
     });
     $router->get('/users', UserController::class . '@index');
 
