@@ -2,8 +2,9 @@
 
 namespace App\Controllers\Client;
 
+use App\Controller;
 use App\Models\Product;
-class ProductController
+class ProductController extends Controller
 {
     private Product $product;
 
@@ -23,4 +24,5 @@ class ProductController
         );
     }
 
+    
 }

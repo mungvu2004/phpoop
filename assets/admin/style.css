@@ -1,0 +1,53 @@
+:root {
+    --main-width: 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+li {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+}
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    overflow: hidden;
+    padding: 20px;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.navbar {
+    background-color: #fff;
+    padding: 30px;
+    height: 100%;
+    width: 15%;
+    align-items: center;
+    gap: 30px;
+}
+.navbar-logo {
+    align-items: center;
+}
+.navbar-menu {
+    flex: 1;
+}
+.navbar-menu li {
+    gap: 20px;
+    height: 50px;
+    align-items: center;
+    justify-content: start;
+}
