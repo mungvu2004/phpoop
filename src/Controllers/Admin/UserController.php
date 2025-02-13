@@ -22,20 +22,29 @@ class UserController extends Controller
     //     $data = $this->user->find(1);
     //     print_r($data);
     // }
+    public function account() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['username'];
+            $password = $_POST['password'];
+            // echo $name . ' + ' . $password;
+            $account = $this->user->login($name, $password);
 
-    public function index()
-    {
-        $title = 'Trang danh sách người dùng';
-        $data = $this->user->findALL();
+            if($account == null || count($account) >= 2) {
+                $_SESSION['msg'] = 'Username hoặc password không đúng';
+            } else {
+                if($account[0]['role'] == 'admin') {
+                    $_SESSION['admin'] = $account;
+                    $_SESSION['msg'] = 'Đã đăng nhập thành công với quyền admin';
+                    return view('admin.layouts.main');
+                } else {
+                    $_SESSION['msg'] = 'Đã đăng nhập thành công';
+                    // header('Location: /client/home.php');
+                    exit;
+                }
+            }
 
-        return view(
-            'admin.users.index',
-            compact('title', 'data')
-            // [
-            //     'title' => $title,
-            //     'data' => $data
-            // ]
-        );
+        }
+        return view('elements.login.login');
     }
     public function testUploadFile()
     {

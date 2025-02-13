@@ -4,9 +4,9 @@ use App\Controllers\Admin\UserController;
 
 $router->mount('/admin', function() use ($router) {
     $router->get('/', function() {
-        return view('admin.layouts.main');
+        return view('elements.login.login');
     });
-    $router->get('/users', UserController::class . '@index');
+    $router->post('/users', UserController::class . '@account');
 
     $router->post('/users/testUploadFile', UserController::class . '@testUploadFile');
 });

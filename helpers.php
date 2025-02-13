@@ -17,7 +17,8 @@ if(!function_exists('file_url')) {
         if(!file_exists($path)) {
             return null;
         }
-        return $_ENV['APP_URL'] . $path;
+        $version = filemtime($path);
+        return $_ENV['APP_URL'] . $path . '?v=' . $version;
     }
 }
 if(!function_exists('debug')){

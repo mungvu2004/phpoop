@@ -68,7 +68,7 @@ class Model
         $query = $this->conn->createQueryBuilder();
         $query->select('*')
             ->from($this->tableName)
-            ->where('user_id = :id')
+            ->where('id = :id')
             ->setParameter('id', $id);
         return $query->fetchAllAssociative();
     }
@@ -102,5 +102,16 @@ class Model
     public function rollback()
     {
         $this->conn->rollBack();
+    }
+    public function login($user, $pass)
+    {
+        $query = $this->conn->createQueryBuilder();
+        $query->select('*')
+            ->from($this->tableName)
+            ->where('name = :name')
+            ->andWhere('password = :password')
+            ->setParameter('name', $user)
+            ->setParameter('password', $pass);
+        return $query->fetchAllAssociative();
     }
 }
