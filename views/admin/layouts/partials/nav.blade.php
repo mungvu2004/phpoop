@@ -1,7 +1,7 @@
 <nav class="navbar flex-column">
     <div class="navbar-logo flex-column">
         <a href="{{ file_url('admin') }}">
-            <img src="{{ file_url('assets/admin/img/favicon.png') }}" alt="Logo">
+            <img src="{{ file_url('assets/img/favicon.png') }}" alt="Logo">
         </a>
         <h1>MNA</h1>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="navbar-user flex-column">
         <div class="user_img">
-            <img src="{{ file_url('assets/admin/img/favicon.png') }}" alt="User">
+            <img src="{{ file_url('assets/img/favicon.png') }}" alt="User">
         </div>
         <div class="navbar-icon">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>

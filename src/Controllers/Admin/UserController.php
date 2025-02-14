@@ -22,27 +22,42 @@ class UserController extends Controller
     //     $data = $this->user->find(1);
     //     print_r($data);
     // }
+    private function role($role) {
+        if ($role == 'admin') {
+            $_SESSION['msg'] = 'Đã đăng nhập thành công với quyền admin.';
+            return true;
+        } else {
+            $_SESSION['msg'] = 'Đã đăng nhập thành công.';
+            return false;
+        }
+    }
     public function account() {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = $_POST['username'];
-            $password = $_POST['password'];
-            // echo $name . ' + ' . $password;
-            $account = $this->user->login($name, $password);
-
-            if($account == null || count($account) >= 2) {
-                $_SESSION['msg'] = 'Username hoặc password không đúng';
-            } else {
-                if($account[0]['role'] == 'admin') {
-                    $_SESSION['admin'] = $account;
-                    $_SESSION['msg'] = 'Đã đăng nhập thành công với quyền admin';
-                    return view('admin.layouts.main');
-                } else {
-                    $_SESSION['msg'] = 'Đã đăng nhập thành công';
-                    // header('Location: /client/home.php');
-                    exit;
-                }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Làm sạch và xác thực dữ liệu đầu vào
+            $name = htmlspecialchars($_POST['username'] ?? '');
+            $password = $_POST['password'] ?? '';
+            
+            if (empty($name) || empty($password)) {
+                $_SESSION['msg'] = 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.';
+                return view('elements.login.login');
             }
-
+    
+            // Thực hiện đăng nhập
+            $account = $this->user->login($name, $password);
+    
+            if ($account === null || count($account) != 1) {
+                $_SESSION['msg'] = 'Tên đăng nhập hoặc mật khẩu không đúng.';
+                return view('elements.login.login');
+            }
+            $role = $account[0]['role'];
+            // Kiểm tra vai trò của người dùng
+            if($this->role($role)) {
+                $_SESSION['admin'] = $account[0];
+                return view('admin.layouts.main');
+            } else {
+                $_SESSION['user'] = $account[0];
+                return view('client.layouts.main');
+            }
         }
         return view('elements.login.login');
     }

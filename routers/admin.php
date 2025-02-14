@@ -3,8 +3,11 @@
 use App\Controllers\Admin\UserController;
 
 $router->mount('/admin', function() use ($router) {
+    // $router->get('/', function() {
+    //     return view('admin.dashboard');
+    // });
     $router->get('/', function() {
-        return view('elements.login.login');
+        return view('elements.dashboard-login');
     });
     $router->post('/users', UserController::class . '@account');
 

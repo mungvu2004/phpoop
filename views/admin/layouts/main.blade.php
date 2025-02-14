@@ -12,6 +12,8 @@
     @include('admin.layouts.partials.nav')
     <div class="container">
         <div class="row">
+            @yield('content')
+
             @include('admin.layouts.partials.sidebar')
         </div>
     </div>
