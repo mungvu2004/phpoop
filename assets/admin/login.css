@@ -49,9 +49,13 @@ body {
     transition: all 1.5s ease-in-out;
 }
 .element-1 {
+    transform: translateX(0);
     position: relative;
     flex: 1;
-    transition: all 1.5s ease-in-out-in-out;
+    overflow: hidden;
+    transition: all 1.5s ease-in-out;
+    height: 100%;
+    justify-content: center;
 }
 
 .form-header >h3{
@@ -75,10 +79,10 @@ body {
     padding-left: 50px;
     outline: none;
 }
-.input-user, .input-pass {
+.input-user, .input-pass , .input-email{
     position: relative;
 }
-.input-user >i, .input-pass >i {
+.input-user >i, .input-pass >i , .input-email >i{
     position: absolute;
     top : 30%;
     left: 20px;
@@ -142,6 +146,7 @@ body {
     gap: 10px;
 }
 .element-2 {
+    transform: translateX(0);
     transition: all 1.5s ease-in-out;
     display: flex;
     justify-content: center;
@@ -224,6 +229,15 @@ body {
     left: calc(100% - 40px);
     /* transform: translateX(-100%); */
 }
+.element-3:not(.swapped) {
+    left: -40px;
+}
+.element-4:not(.swapped) {
+    right: -40px;
+}   
 .element-4.swapped {
     right: calc(100% - 40px);
+}
+#login-element:not(.swapped) {
+    transform: translateX(0);
 }
