@@ -8,9 +8,6 @@
 <body>
     <h1>Home PHP</h1>
 
-    <?php foreach ($data as $product) : ?>
-        <h2><?= $product['name'] ?></h2>
-        <p><?= $product['price'] ?></p>
-    <?php endforeach; ?>
+    
 </body>
 </html>

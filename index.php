@@ -7,4 +7,4 @@ Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 require 'routers/index.php';
 
-session_destroy();
+// session_destroy();

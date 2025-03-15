@@ -3,8 +3,8 @@
 use App\Controllers\Client\HomeController;
 use App\Controllers\Client\ProductController;
 
-// $router->get('/', HomeController::class . '@index');
-
+$router->get('/', HomeController::class . '@index');
+// $router->get('/home', 'App\Controllers\Client\HomeController@index');
 // $router->get('/about', function() {
 //     echo 'Client Area';
 // });
