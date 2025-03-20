@@ -1,9 +1,9 @@
 <?php
 
 use App\Controllers\Admin\UserController;
-$router->get('/', function() {
-    require __DIR__ . '/../views/client/home.php'; // Thay 'home' bằng trang bạn muốn hiển thị
-});
+// $router->get('/', function() {
+//     require __DIR__ . '/../views/client/home.php'; // Thay 'home' bằng trang bạn muốn hiển thị
+// });
 
 $router->mount('/admin', function() use ($router) {
     $router->get('/', function() {

@@ -4,7 +4,7 @@ use Bramus\Router\Router;
 
 $router = new Router();
 
-// require 'admin.php';
-require 'client.php';
+require 'admin.php';
+// require 'client.php';
 
 $router->run();
