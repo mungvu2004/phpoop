@@ -1,7 +1,16 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-class CouponController {
+use App\Models\Coupon;
+use App\Controller;
+
+class CouponController extends Controller
+{
+    private Coupon $coupon;
+    public function __construct()
+    {
+        $this->coupon = new Coupon();
+    }
     public function index() {
         echo "Danh sách dữ liệu.";
     }

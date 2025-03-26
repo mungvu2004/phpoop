@@ -1,41 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let items = document.querySelectorAll(".menu-item, .page-item"); // Lấy tất cả menu-item và page-item
-    let mainTitle = document.querySelector('.title-h1');
+    const items = document.querySelectorAll(".menu-item, .page-item");
+    const mainTitle = document.querySelector('.title-h1');
 
-    if (items.length > 0) {
-        let firstItem = items[0]; // Chọn phần tử đầu tiên
-        let firstIcon = firstItem.querySelector(".menu-icon");
-        let firstHide = firstItem.querySelector(".hide");
+    // Hàm cập nhật trạng thái
+    function updateSelection(item) {
+        items.forEach(el => {
+            const icon = el.querySelector(".menu-icon");
+            const hide = el.querySelector(".hide");
+            if (icon) icon.classList.remove("selected");
+            if (hide) hide.classList.remove("selected");
+        });
 
-        if (firstIcon) firstIcon.classList.add("selected");
-        if (firstHide) firstHide.classList.add("selected");
+        const icon = item.querySelector(".menu-icon");
+        const hide = item.querySelector(".hide");
+        if (icon) icon.classList.add("selected");
+        if (hide) hide.classList.add("selected");
 
-        // Đặt tiêu đề ban đầu từ thẻ h3 đầu tiên
-        if (mainTitle && firstIcon) {
-            let firstTitle = firstIcon.querySelector('h3').innerText;
-            mainTitle.innerText = firstTitle;
+        if (mainTitle && icon) {
+            const title = icon.querySelector('h3').innerText;
+            mainTitle.innerText = title;
+            localStorage.setItem('pageTitle', title); // Lưu tiêu đề vào localStorage
         }
     }
 
+    // Lấy URL hiện tại
+    const currentPath = window.location.pathname.replace(/\/$/, ''); // Xóa '/' ở cuối nếu có
+
+    // Khởi tạo dựa trên URL hiện tại
+    let matched = false;
     items.forEach(item => {
-        item.addEventListener("click", function () {
-            items.forEach(el => {
-                let icon = el.querySelector(".menu-icon");
-                let hide = el.querySelector(".hide");
-                if (icon) icon.classList.remove("selected");
-                if (hide) hide.classList.remove("selected");
+        const link = item.querySelector('a');
+        const href = link.getAttribute('href').replace(/\/$/, '');
+
+        if (href === currentPath) {
+            updateSelection(item);
+            matched = true;
+        }
+    });
+
+    // Nếu không khớp với URL, dùng localStorage hoặc mặc định mục đầu tiên
+    if (!matched) {
+        const savedTitle = localStorage.getItem('pageTitle');
+        if (savedTitle) {
+            items.forEach(item => {
+                const title = item.querySelector('h3')?.innerText;
+                if (title === savedTitle) {
+                    updateSelection(item);
+                }
             });
+        } else if (items.length > 0) {
+            updateSelection(items[0]); // Mặc định chọn mục đầu tiên
+        }
+    }
 
-            let icon = this.querySelector(".menu-icon");
-            let hide = this.querySelector(".hide");
-            if (icon) icon.classList.add("selected");
-            if (hide) hide.classList.add("selected");
-
-            // Cập nhật tiêu đề
-            if (mainTitle && icon) {
-                let title = icon.querySelector('h3').innerText;
-                mainTitle.innerText = title;
-            }
+    // Xử lý sự kiện nhấp chuột
+    items.forEach(item => {
+        item.addEventListener("click", function (e) {
+            updateSelection(this);
+            // Không ngăn chuyển hướng, để trang tải lại bình thường
         });
     });
 });

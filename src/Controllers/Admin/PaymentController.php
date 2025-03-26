@@ -1,5 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Models\Payment;
+use App\Controller;
 
 class PaymentController {
     public function index() {

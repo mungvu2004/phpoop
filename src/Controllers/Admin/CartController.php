@@ -1,5 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Models\Cart;
+use App\Controller;
 
 class CartController {
     public function index() {

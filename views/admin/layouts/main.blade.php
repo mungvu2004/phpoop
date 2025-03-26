@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ file_url('assets/admin/style.css') }}">
     <link rel="stylesheet" href="{{ file_url('assets/admin/media.css') }}">
+    @stack('styles')
     <script src="{{ file_url('assets/js/admin.js') }}"></script>
 </head>
 <body>
@@ -19,5 +20,7 @@
 
     </div>
     {{-- @include('admin.layouts.partials.footer') --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ file_url('assets/js/chart.js') }}"></script>
 </body>
 </html>

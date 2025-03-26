@@ -1,5 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Models\Review;
+use App\Controller;
 
 class ReviewController {
     public function index() {

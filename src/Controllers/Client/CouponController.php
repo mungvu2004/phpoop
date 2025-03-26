@@ -1,5 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Client;
+
+use App\Controller;
+use App\Models\Coupon;
 
 class CouponController {
     public function index() {

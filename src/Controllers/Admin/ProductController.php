@@ -1,9 +1,26 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-class ProductController {
+use App\Models\Product;
+use App\Controller;
+
+class ProductController extends Controller{
+
+    private Product $product;
+
+    public function __construct()
+    {
+        $this->product = new Product();
+    }
+
     public function index() {
-        echo "Danh sách dữ liệu.";
+        
+        $product = $this->product->paginate();
+
+        return view(
+            "admin.product", 
+            compact("product")    
+        );
     }
 
     public function create() {

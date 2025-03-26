@@ -1,5 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Controllers\Admin;
+
+use App\Models\Order;
+use App\Controller;
 
 class OrderController {
     public function index() {

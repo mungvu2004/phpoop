@@ -3,7 +3,7 @@
 if ($argc < 2) {
     die("Usage: php make-controller.php ControllerName\n");
 }
-
+$name = $argv[1];
 $controllerName = ucfirst($argv[1]) . "Controller";
 $controllerPath = __DIR__ . "/src/Controllers/{$controllerName}.php";
 
@@ -11,7 +11,12 @@ $template = <<<PHP
 <?php
 namespace App\Controllers;
 
-class $controllerName {
+use App\Controller;
+use App\Models\ $name;
+
+class $controllerName extends Controller{
+    
+
     public function index() {
         echo "Danh sách dữ liệu.";
     }

@@ -21,6 +21,13 @@ if(!function_exists('file_url')) {
         return $_ENV['APP_URL'] . $path . '?v=' . $version;
     }
 }
+if (!function_exists('route_url')) {
+    function route_url($path)
+    {
+        $baseUrl = $_ENV['APP_URL'];
+        return rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
+    }
+}
 if(!function_exists('debug')){
     function debug(...$data){
         echo '<pre>';
