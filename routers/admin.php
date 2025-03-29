@@ -9,11 +9,6 @@ use App\Controllers\Admin\OrderDetailController;
 use App\Controllers\Admin\PaymentController;
 use App\Controllers\Admin\CartController;
 use App\Controllers\Admin\DashBoardController;
-use App\Models\Coupon;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Review;
-use App\Models\User;
 
 $router->mount('/admin', function() use ($router) {
     // $router->get('/', DashBoardController::class . '@index');

@@ -1,0 +1,8 @@
+@media(max-width: 1440px) {
+    body {
+        transform: scale(0.889);
+        transform-origin: top left;
+        width: calc(100% / 0.889);
+        height: auto;
+    }
+}
