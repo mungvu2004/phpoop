@@ -16,14 +16,14 @@ html {
     height: 100%;
 }
 body {
-    transform: scale(0.8889);
-    transform-origin: top left;
-    background: #F5F6FA;
-    width: calc(100% / 0.889);
-    height: auto;
-    font-family: Nunito Sans;
-    display: flex;
-    flex-direction: row;
+    transform: scale(1.06667);
+        transform-origin: top left;
+        background: #F5F6FA;
+        width: calc(100% / 1.06667);
+        height: auto;
+        font-family: Nunito Sans;
+        display: flex;
+        flex-direction: row;
 }
 .nav {
     width: 240px;
