@@ -14,8 +14,7 @@ class HomeController
     }
     public function index()
     {
-        $categories = $this->category->findALL();
-        return view('client.dashboard', compact('categories'));
+        return view('client.layouts.main');
     }
     public function category() {
         

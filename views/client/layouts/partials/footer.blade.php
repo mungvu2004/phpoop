@@ -1,35 +1,67 @@
 <div class="footer">
-    <div class="frame-1">
-        <div class="item-1">
-            <a href=""><img src="{{ file_url('assets/imgb2/LOGO.svg') }}" alt=""></a>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, ipsam! Provident neque adipisci alias deleniti tenetur odio, soluta cupiditate nihil, repellendus beatae eum modi perferendis voluptatum animi cumque tempora delectus.</p>
+    <div class="footer-content">
+        <div class="content-item flex-2">
+            <a href=""><h1>PureWare</h1></a>
+            <p>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
+            <div class="item-icon">
+                <div class="icon"><i class="bi bi-twitter"></i></div>
+                <div class="icon"><i class="bi bi-facebook"></i></div>
+                <div class="icon"><i class="bi bi-instagram"></i></div>
+                <div class="icon"><i class="bi bi-github"></i></div>
+            </div>
         </div>
-        <div class="item-2">
-            <h1>Get Help</h1>
+        <div class="content-item">
+            <h2>Company</h2>
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>About</li>        
+                <li>Features</li>
+                <li>Works</li>
+                <li>Career</li>
             </ul>
         </div>
-        <div class="item-3">
-            <h1>Program</h1>
+        <div class="content-item">
+            <h2>Help</h2>
             <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
+                <li>Customer Support</li>
+                <li>Delivery Details</li>
+                <li>Terms & Conditions</li>
+                <li>Privacy Policy</li>
             </ul>
         </div>
-        <div class="item-4">
-            <h1>contacs us</h1>
-            <p>Address: 2321 New Design Str, Lorem Ipsum10 Hudson Yards, USA</p>
-            <p>Tel: + (123) 2500-567-8988
-                Mail: supportlms@gmail.com</p>
-            <div class="item_icon"></div>
+        <div class="content-item">
+            <h2>Faq</h2>
+            <ul>
+                <li>Account</li>
+                <li>Manage Deliveries</li>
+                <li>Orders</li>
+                <li>Payments</li>
+            </ul>
+        </div>
+        <div class="content-item">
+            <h2>Resources</h2>
+            <ul>
+                <li>Free eBooks</li>
+                <li>Development Tutorial</li>
+                <li>How to - Blog</li>
+                <li>Youtube Playlist</li>
+            </ul>
         </div>
     </div>
-    <div class="frame-2">
-        <p>Copyright © 2024 LearnPress LMS | Powered by ThimPress</p>
+    <div class="footer-posi">
+        <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
+        <div class="posi-input">
+            <input type="email" placeholder="Email">
+            <button type="submit">Subscribe to Newsletter</button>
+        </div>
+    </div>
+    <div class="footer-end">
+        <p>Shop.co © 2000-2023, All Rights Reserved</p>
+        <div class="end-pay">
+            <img src="./storage/Badge/Badge.png" alt="">
+            <img src="./storage/Badge/Badge-1.png" alt="">
+            <img src="./storage/Badge/Badge-2.png" alt="">
+            <img src="./storage/Badge/Badge-3.png" alt="">
+            <img src="./storage/Badge/Badge-4.png" alt="">
+        </div>
     </div>
 </div>
