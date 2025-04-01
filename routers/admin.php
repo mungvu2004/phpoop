@@ -26,22 +26,22 @@ $router->mount('/login', function() use ($router) {
 });
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
-    $router->get('/create', CouponController::class . '@create');
+    $router->post('/create', CouponController::class . '@create');
     $router->post('/store', CouponController::class . '@store');
-    $router->get('/edit/{id}', CouponController::class . '@edit');
+    $router->post('/edit/{id}', CouponController::class . '@edit');
     $router->post('/update/{id}', CouponController::class . '@update');
-    $router->get('/delete/{id}', CouponController::class . '@delete');
+    $router->post('/delete/{id}', CouponController::class . '@delete');
 });
 $router->mount('/admin/product', function() use ($router) {
     $router->get('/', ProductController::class . '@index');
-    $router->get('/create', ProductController::class . '@create');
+    $router->post('/create', ProductController::class . '@create');
     $router->post('/store', ProductController::class . '@store');
     $router->get('/edit/{id}', ProductController::class . '@edit');
     $router->post('/update/{id}', ProductController::class . '@update');
     $router->get('/delete/{id}', ProductController::class . '@delete');
 });
 
-$router->mount('/cart', function() use ($router) {
+$router->mount('/admin/cart', function() use ($router) {
     $router->get('/', CartController::class . '@index');
     $router->get('/create', CartController::class . '@create');
     $router->post('/store', CartController::class . '@store');
@@ -50,7 +50,7 @@ $router->mount('/cart', function() use ($router) {
     $router->get('/delete/{id}', CartController::class . '@delete');
 });
 
-$router->mount('/order', function() use ($router) {
+$router->mount('/admin/order', function() use ($router) {
     $router->get('/', OrderController::class . '@index');
     $router->get('/create', OrderController::class . '@create');
     $router->post('/store', OrderController::class . '@store');
@@ -59,7 +59,7 @@ $router->mount('/order', function() use ($router) {
     $router->get('/delete/{id}', OrderController::class . '@delete');
 });
 
-$router->mount('/order_detail', function() use ($router) {
+$router->mount('admin/order_detail', function() use ($router) {
     $router->get('/', OrderDetailController::class . '@index');
     $router->get('/create', OrderDetailController::class . '@create');
     $router->post('/store', OrderDetailController::class . '@store');

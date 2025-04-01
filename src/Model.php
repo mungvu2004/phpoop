@@ -36,7 +36,7 @@ class Model
         return $query->fetchAllAssociative();
     }
 
-    public function paginate($page = 1, $limit = 9) 
+    public function paginate($page = 1, $limit = 8) 
     {
         $offset = ($page - 1) * $limit;
 

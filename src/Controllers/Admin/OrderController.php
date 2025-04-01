@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 use App\Models\Order;
 use App\Controller;
 
-class OrderController {
+class OrderController extends Controller{
     public function index() {
         echo "Danh sách dữ liệu.";
     }

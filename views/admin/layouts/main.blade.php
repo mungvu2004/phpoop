@@ -13,12 +13,14 @@
     <script src="{{ file_url('assets/js/admin.js') }}"></script>
 </head>
 <body>
+    <div class="overlay"></div>
     @include('admin.layouts.partials.nav')
     <div class="container">
         @include('admin.layouts.partials.sidebar')
         @yield('content')
 
     </div>
+    @stack('scripts')
     {{-- @include('admin.layouts.partials.footer') --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ file_url('assets/js/chart.js') }}"></script>
