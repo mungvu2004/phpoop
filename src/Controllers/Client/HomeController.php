@@ -7,14 +7,19 @@ use App\Models\Category;
 class HomeController
 {
     private Category $category;
+    private Product $product;
 
     public function __construct()
     {
         $this->category = new Category();
+        $this->product = new Product();
     }
     public function index()
     {
-        return view('client.layouts.main');
+        $products = $this->product->findAll();
+        return view('client.dashboard', 
+            compact('products')
+        );
     }
     public function category() {
         

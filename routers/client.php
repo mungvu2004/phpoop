@@ -10,7 +10,9 @@ use App\Controllers\Client\OrderDetailController;
 use App\Controllers\Client\PaymentController;
 use App\Controllers\Client\ReviewController;
 
-$router->get('/', HomeController::class . '@index');
+$router->mount('', function() use ($router) {
+    $router->get('/', HomeController::class . '@index');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');

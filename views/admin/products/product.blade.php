@@ -8,65 +8,83 @@
 @endpush
 
 @section('content')
+    @if (isset($_SESSION['errors']) && !empty($_SESSION['errors']))
+        <div class="error-messages" style="color: red; margin-bottom: 10px;">
+            @foreach ($_SESSION['errors'] as $err)
+                <p>{{ $err }}</p>
+            @endforeach
+        </div>
+        @php unset($_SESSION['errors']) @endphp
+    @endif
+
+    @if (isset($_SESSION['success']) && !empty($_SESSION['success']))
+        <div class="success-messages" style="color: green; margin-bottom: 10px;">
+            @foreach ($_SESSION['success'] as $msg)
+                <p>{{ $msg }}</p>
+            @endforeach
+        </div>
+        @php unset($_SESSION['success']) @endphp
+    @endif
     <main class="main">
         <div class="main-title">
             <h1 class="title-h1"></h1>
             <button class="create-product">Thêm mới</button>
         </div>
-        
+
         @php
             $products = $product['data'];
             $currentPage = $product['page'];
             $totalPage = $product['totalPage'];
         @endphp
-        
+
         <div class="main-product">
-            @foreach($products as $item)
-                <div class="product-item">
-                    @php
-                        $imgPath = 'storage/uploads/' . $item['image_url'];
-                        $defaultImg = file_url("storage/uploads/users/download.jpg");
-                        $imgSrc = file_exists($imgPath) ? file_url($imgPath) : $defaultImg;
-                    @endphp 
-                    <img src="{{ $imgSrc }}" alt="{{ $item['name'] }}">
-                    <div class="item-tp">
-                        <h3>{{ $item['name'] }}</h3>
-                        <span>Đơn giá: {{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
-                        <span>Số lượng: {{ $item['stock_quantity'] }}</span>
-                        <button>Chỉnh sửa</button>
+            @foreach ($products as $item)
+                <a href="{{route_url('admin/product/show/' . $item['id'])}}" class="product-link">
+                    <div class="product-item">
+                        @php
+                            $imgPath = $item['image_url'];
+                            $defaultImg = file_url('storage/uploads/users/error.png');
+                            $imgSrc = file_exists($imgPath) ? file_url($imgPath) : $defaultImg;
+                        @endphp
+                        <img src="{{ $imgSrc }}" alt="{{ $item['name'] }}">
+                        <div class="item-tp">
+                            <h3>{{ $item['name'] }}</h3>
+                            <span>Đơn giá: {{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
+                            <span>Số lượng: {{ $item['stock_quantity'] }}</span>
+                            <button>Chỉnh sửa</button>
+                        </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
 
         <!-- Phân trang -->
-        @if($totalPage >= 1)
+        @if ($totalPage >= 1)
             <div class="pagination">
-                @if($currentPage >= 1)
-                    <a href="?page={{1}}" class="page-link"><<</a>
+                <!-- Trang đầu và trang trước -->
+                @if ($currentPage > 1)
+                    <a href="?page=1" class="page-link"><<</a>
                     <a href="?page={{ $currentPage - 1 }}" class="page-link"><</a>
                 @endif
 
                 <!-- Hiển thị các số trang -->
-                @for($i = 1; $i <= $totalPage; $i++)
-                    <a href="?page={{ $i }}" 
-                       class="page-number {{ $currentPage == $i ? 'active' : '' }}">
-                        {{ $i }} ... 
+                @for ($i = 1; $i <= $totalPage; $i++)
+                    <a href="?page={{ $i }}" class="page-number {{ $currentPage == $i ? 'active' : '' }}">
+                        {{ $i }}
                     </a>
-                    @if($totalPage > 1)
-                        <a href="?page={{ $totalPage}}" class="page-link">{{$totalPage}}</a>
-                    @endif 
                 @endfor
 
-                @if($currentPage <= $totalPage)
+                <!-- Trang sau và trang cuối -->
+                @if ($currentPage < $totalPage)
                     <a href="?page={{ $currentPage + 1 }}" class="page-link">></a>
-                    <a href="?page={{ $totalPage}}" class="page-link">>></a>
+                    <a href="?page={{ $totalPage }}" class="page-link">>></a>
                 @endif
             </div>
         @endif
+
     </main>
     <div class="form">
-        <form action="{{ route_url('admin/product/create') }}" method="post" enctype="multipart/form-data">
+        <form action="/admin/product/create" method="post" enctype="multipart/form-data">
             <div class="form-title">
                 <h2>Thêm sản phẩm</h2>
             </div>
@@ -78,7 +96,7 @@
                 <div class="input-category input1">
                     <h4>Loại</h4>
                     <select name="category_id" required>
-                        @foreach($category as $item)
+                        @foreach ($category as $item)
                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                         @endforeach
                     </select>
@@ -102,6 +120,14 @@
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="form-size">
+                <h4>Chọn các size có sẵn:</h4>
+                <label><input type="checkbox" name="sizes[]" value="S" checked> S</label>
+                <label><input type="checkbox" name="sizes[]" value="M"> M</label>
+                <label><input type="checkbox" name="sizes[]" value="L"> L</label>
+                <label><input type="checkbox" name="sizes[]" value="XL"> XL</label>
+
             </div>
             <div class="des-img">
                 <div class="form-des">

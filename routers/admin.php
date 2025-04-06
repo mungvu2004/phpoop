@@ -35,10 +35,11 @@ $router->mount('/coupon', function() use ($router) {
 $router->mount('/admin/product', function() use ($router) {
     $router->get('/', ProductController::class . '@index');
     $router->post('/create', ProductController::class . '@create');
+    $router->get('/show/{id}', ProductController::class . '@show');
     $router->post('/store', ProductController::class . '@store');
-    $router->get('/edit/{id}', ProductController::class . '@edit');
+    $router->post('/edit/{id}', ProductController::class . '@edit');
     $router->post('/update/{id}', ProductController::class . '@update');
-    $router->get('/delete/{id}', ProductController::class . '@delete');
+    $router->post('/delete/{id}', ProductController::class . '@delete');
 });
 
 $router->mount('/admin/cart', function() use ($router) {

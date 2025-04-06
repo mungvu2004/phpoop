@@ -70,11 +70,14 @@ class Model
             ->from($this->tableName)
             ->where('id = :id')
             ->setParameter('id', $id);
-        return $query->fetchAllAssociative();
+        return $query->fetchAssociative();
     }
     public function insert(array $data)
     {
         // $data = [];
+        if (isset($data['id'])) {
+            unset($data['id']); // Loại bỏ id để database tự sinh
+        }
         $this->conn->insert($this->tableName, $data);
         return $this->conn->lastInsertId();
     }
