@@ -103,17 +103,27 @@ class UserController extends Controller
         echo json_encode(['success' => false, 'message' => 'Invalid request']);
         exit();
     }
-    public function testUploadFile()
+    public function index() {
+        $users = $this->user->getAllUser();
+        return view('admin.users.user', 
+        compact('users')    
+        );
+    }
+    public function edit($id) {
+        $detailUser = $this->user->detailUser($id);
+        return view('admin.users.user-detail', 
+            compact('detailUser')
+        );
+    }
+    public function delete($id)
     {
         try {
-            $pathFile = $this->uploadFile($_FILES['avatar'], 'users');
-            $_SESSION['msg'] = 'Upload file Thanh cong';
-
-        } catch (\Throwable $error) {
-            $this->logError($error->getMessage());
-            $_SESSION['msg'] = 'Upload file That bai';
+            $this->user->delete($id);
+            $_SESSION["success"] = ["Đã xóa thành công người dùng"];
+        } catch (\Exception $e) {
+            $_SESSION["errors"] = ["Lỗi không thể xóa được: " . $e->getMessage()];
         }
-        header('Location: /admin/users');
+        header("Location: /admin/contact");
         exit;
     }
 }

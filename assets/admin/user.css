@@ -1,0 +1,98 @@
+.main-user {
+    background-color: #fff;
+    width: 100%;
+    max-height: 800px;
+    border-radius: 16px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    padding-bottom: 10px;
+    overflow: auto;
+}
+.user-title, .user-item {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(6, 1fr);
+    height: 50px;
+    padding: 0 30px;
+    text-transform: capitalize;
+}
+.user-title {
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-weight: 800;
+}
+.user-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.user-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0.5;
+    cursor: pointer;
+}
+/* Reset mặc định cho danh sách và form */
+.item-button {
+    list-style: none;
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+    padding: 10px 0;
+    align-items: center;
+}
+
+/* Định dạng form để không ảnh hưởng layout */
+.item-button form {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+/* Định dạng chung cho button */
+.item-button button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    z-index: 1000;
+}
+.btn-detail {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    z-index: 1000;
+}
+
+/* Nút "Chi tiết" */
+.item-button a {
+    background-color: #007bff; /* Màu xanh dương */
+}
+
+.item-button a:hover {
+    background-color: #0056b3; /* Đậm hơn khi hover */
+    transform: translateY(-2px); /* Nâng nhẹ lên */
+}
+
+/* Nút "Xóa" */
+.item-button form:last-child button {
+    background-color: #dc3545; /* Màu đỏ */
+}
+
+.item-button form:last-child button:hover {
+    background-color: #b02a37; /* Đậm hơn khi hover */
+    transform: translateY(-2px); /* Nâng nhẹ lên */
+}
+.active1 {
+    width: 100px;
+    padding: 5px 15px !important;
+    background-color: rgba(46, 204, 113, 0.3) !important;
+    color: rgb(46, 204, 113) !important;
+    border-radius: 4px !important;
+}

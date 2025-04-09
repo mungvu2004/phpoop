@@ -5,6 +5,7 @@
 @endpush
 @push('scripts')
     <script src="{{ file_url('assets/js/order.js') }}"></script>
+    <script src="{{ file_url('assets/js/confirm.js') }}"></script>
 @endpush
 
 @section('content')
@@ -45,7 +46,7 @@
                             <td>{{ $order['username'] }}</td>
                             <td>{{ $order['created_at'] }}</td>
                             <td>{{ $order['coupon_code'] ?? 'NULL'}}</td>
-                            <td>{{ $order['total_price'] }}</td>
+                            <td>{{ number_format($order['total_price'], 0, ',', '.') }} VND</td>
                             <td >
                                 <p class="status-color">{{ $order['status'] }}</p>
                             </td>

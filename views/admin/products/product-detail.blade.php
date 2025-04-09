@@ -8,12 +8,14 @@
 @endpush
 @section('content')
     <main class="main">
+
         {{-- <pre>{{ print_r($product) }}</pre>
         <pre>{{ print_r($review) }}</pre>
+        
         <pre>{{ print_r($sizes) }}</pre> --}}
         @php
             $defaultImg = 'storage/uploads/users/error.png';
-            $imagePath = $product['image_url'] ?? $defaultImg;
+            $imagePath = file_exists($product['image_url']) ? $product['image_url'] : $defaultImg;
             $rating = 0;
             $count = 0;
             $sizeDefault = ['S', 'M', 'L', 'XL'];

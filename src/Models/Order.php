@@ -58,13 +58,39 @@ class Order extends Model
     }
     public function detailOrder($id) {
         $query = $this->conn->createQueryBuilder();
-        $query->select('o.*', 'od.*', 'p.*')
-            ->from($this->tableName, 'o')
-            ->leftJoin('o', 'orderdetails', 'od', 'o.id = od.order_id')
-            ->leftJoin('od','products', 'p','od.product_id = p.id')
+        $query->select(
+            // Từ bảng orders (o)
+            'o.id AS order_id',
+            'o.user_id',
+            'o.total_price',
+            'o.status',
+            'o.shipping_address',
+            'o.shipping_method',
+            'o.shipping_fee',
+            
+            // Từ bảng orderdetails (od)
+            'od.quantity',
+            'od.subtotal',
+            
+            // Từ bảng products (p)
+            'p.name AS product_name',
+            'p.price',
+            'p.image_url',
+            
+            // Từ bảng users (u) - loại bỏ password_hash
+            'u.username',
+            
+            // Từ bảng paymenthistory (ph)
+            'ph.payment_method'
+        )
+            ->from($this->tableName, 'o') // Bảng orders
+            ->leftJoin('o', 'orderdetails', 'od', 'o.id = od.order_id') // Liên kết với orderdetails
+            ->leftJoin('od', 'products', 'p', 'od.product_id = p.id') // Liên kết với products
+            ->leftJoin('o', 'users', 'u', 'o.user_id = u.id') // Liên kết với users
+            ->leftJoin('o', 'paymenthistory', 'ph', 'o.id = ph.order_id') // Liên kết với paymenthistory
             ->where('o.id = :id')
             ->setParameter('id', $id);
-
+        
         return $query->fetchAllAssociative();
     }
 }
