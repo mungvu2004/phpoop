@@ -117,35 +117,36 @@ class Model
             ->setParameter('password', $pass);
         return $query->fetchAllAssociative();
     }
-    public function quickSort(array $data, int $left = 0, int $right, $sort_by) {
-        $count = count($data);
-        if($count < 2) {
-            $_SESSION['warning'] = ['Danh sách chỉ có 1 phần tử không thể sắp xếp'];
-            exit;
+    public function quickSort(array $data, int $left, int $right, $sort_by) {
+        if ($right === null) {
+            $right = count($data) - 1;
         }
-        $privotIndex = floor(($left + $right) / 2);
-        $privot = $data[ $privotIndex ];
-        $i = $left;
-        $j = $right;
-        while($i < $j) {
-            while($data[$i][$sort_by] < $privot[$sort_by]) $i++;
-            while($data[$j][$sort_by] > $privot[$sort_by]) $j--;
-            if($i <= $j) {
-                $tmp = $data[$i];
-                $data[$i] = $data[$j];
-                $data[$j] = $tmp;
-
-                $i++;
-                $j--;
+        if ($left < $right) {
+            $pivotIndex = (int) (($left + $right) / 2);
+            $pivot = $data[$pivotIndex];
+            $i = $left;
+            $j = $right;
+    
+            while ($i <= $j) {
+                while ($data[$i][$sort_by] > $pivot[$sort_by]) $i++;
+                while ($data[$j][$sort_by] < $pivot[$sort_by]) $j--;
+                if ($i <= $j) {
+                    $tmp = $data[$i];
+                    $data[$i] = $data[$j];
+                    $data[$j] = $tmp;
+    
+                    $i++;
+                    $j--;
+                }
+            }
+    
+            if ($left < $j) {
+                $data = $this->quickSort($data, $left, $j, $sort_by);
+            }
+            if ($i < $right) {
+                $data = $this->quickSort($data, $i, $right, $sort_by);
             }
         }
-        if($left < $j){ 
-            $data = $this->quickSort($data, $left, $j, $sort_by);
-        }
-        if($i < $right) {
-            $data = $this->quickSort($data, $i, $right, $sort_by);
-        }
         return $data;
-
     }
 }

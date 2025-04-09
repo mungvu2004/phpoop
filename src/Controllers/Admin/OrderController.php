@@ -15,7 +15,7 @@ class OrderController extends Controller{
     
     public function getSorttable() {
         return [
-            "create_at" => "Ngày tạo",
+            "created_at" => "Ngày tạo",
             "total_price" => "Tổng tiền",
             "status" => "Trạng thái"
         ];
@@ -29,49 +29,20 @@ class OrderController extends Controller{
     }
     public function index() {
 
-        if(isset($_GET["sort"])) {
-            $_SESSION['order_sort'] = $_GET['sort'];
-        } 
-        if(isset($_SESSION['sort_by'])) {
-            $_SESSION['order_sort_by'] = $_SESSION['sort_by'];
-        }
-        $sort = isset($_SESSION['sort']) ? $_SESSION['sort'] : null;
-        $sort_by = isset($_SESSION['order_sort_by']) ? $_SESSION['order_sort_by'] : 'created_at';
-        $page = isset($_GET['page']) ? (int)$_GET['page'] :1;
-        $page = max(1, $page);
-
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+        $sort_by = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'created_at';
         if($sort === 'quick') {
-            $allOrder = $this->order->findALL();
-            $orderSort = $this->arrange($allOrder, $sort_by);
-
-            $totalItem = count($allOrder);
-            $totalPage = ceil($totalItem / 8);
-
-            $page = min($page, max(1, $totalPage));
-
-            $offset = ($page -1) * 8;
-            $pageOrder = array_slice($allOrder, $offset, 8);
-
-            $result = [
-                'data' => $pageOrder,
-                'page' => $page,
-                'totalItem'=> $totalItem,
-                'totalPage'=> $totalPage
-            ];
+            $allOrder = $this->order->getAll();
+            $orders = $this->arrange($allOrder, $sort_by);
+            return view('admin.orders.order',
+                compact('orders')    
+        );
+            
         } else {
-            $result = $this->order->paginate($page);
+            $orders = $this->order->getAll();
+            return view('admin.orders.order', compact('orders'));
+
         }
-
-        $sortTable = $this->getSorttable();
-        return view('admin.orders.order', [
-            'orders' => $result['data'],
-            'currentPage' => $result['page'],
-            'totalPage' => $result['totalPage'],
-            'sort' => $sort,
-            'sort_by'=> $sort_by,
-            'sortTable'=> $sortTable
-        ]);
-
     }
 
     public function create() {
@@ -83,7 +54,8 @@ class OrderController extends Controller{
     }
 
     public function edit($id) {
-        echo "Chỉnh sửa dữ liệu ID: $id";
+        $orderDetail = $this->order->detailOrder($id);
+        return view('admin.orders.order-detail', compact('orderDetail'));
     }
 
     public function update($id) {
@@ -91,6 +63,15 @@ class OrderController extends Controller{
     }
 
     public function delete($id) {
-        echo "Xóa dữ liệu ID: $id";
+        $orderDelete = $this->order->delete($id);
+        if($orderDelete) {
+            $_SESSION['success'] = ['Đã xóa thành công đơn hàng mà bạn chọn'];
+            header('Location: /admin/order');
+            exit;
+        } else {
+            $_SESSION['error'] = ['Lỗi khi xóa đơn hàng '];
+            header('Location: /admin/order');
+            exit;
+        }
     }
 }
