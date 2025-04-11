@@ -22,14 +22,20 @@ class User extends Model
             ->leftJoin('u', 'user_addresses', 'ud', 'u.id = ud.user_id');
         return $query->fetchAllAssociative();
     }
-
+    public function getUser($id) {
+        $query = $this->conn->createQueryBuilder();
+        $query->select(
+            'u.email',
+            'u.username'
+        )
+            ->from($this->tableName, 'u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id);
+        return $query->fetchAssociative();
+    }
     public function detailUser($id) {
         $query = $this->conn->createQueryBuilder();
         $query->select(
-            'u.username',
-            'u.email',
-            'u.role',
-            'u.is_active',
             'ud.*',
         )
             ->from($this->tableName, 'u')

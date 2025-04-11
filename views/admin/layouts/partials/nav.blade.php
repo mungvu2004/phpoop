@@ -36,7 +36,7 @@
         </div>
         <div class="page-item">
             <div class="hide"></div>
-            <a href="{{ route_url("admin.") }}"><div class="menu-icon">
+            <a href="{{ route_url("admin/coupon/") }}"><div class="menu-icon">
                 <i class="bi bi-ticket-perforated"></i>
                 <h3>Invoice</h3>
             </div></a>

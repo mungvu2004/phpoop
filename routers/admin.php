@@ -24,13 +24,10 @@ $router->mount('/login', function() use ($router) {
     });
     $router->post('/register', UserController::class . '@signUp');
 });
-$router->mount('/coupon', function() use ($router) {
+$router->mount('/admin/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->post('/create', CouponController::class . '@create');
-    $router->post('/store', CouponController::class . '@store');
     $router->post('/edit/{id}', CouponController::class . '@edit');
-    $router->post('/update/{id}', CouponController::class . '@update');
-    $router->post('/delete/{id}', CouponController::class . '@delete');
 });
 $router->mount('/admin/contact', function() use ($router) {
     $router->get('/', UserController::class . '@index');
@@ -45,15 +42,6 @@ $router->mount('/admin/product', function() use ($router) {
     $router->post('/edit/{id}', ProductController::class . '@edit');
     $router->post('/update/{id}', ProductController::class . '@update');
     $router->post('/delete/{id}', ProductController::class . '@delete');
-});
-
-$router->mount('/admin/cart', function() use ($router) {
-    $router->get('/', CartController::class . '@index');
-    $router->get('/create', CartController::class . '@create');
-    $router->post('/store', CartController::class . '@store');
-    $router->post('/edit/{id}', CartController::class . '@edit');
-    $router->post('/update/{id}', CartController::class . '@update');
-    $router->post('/delete/{id}', CartController::class . '@delete');
 });
 
 $router->mount('/admin/order', function() use ($router) {

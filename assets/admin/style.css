@@ -31,7 +31,7 @@ body {
     justify-content: start;
     flex-direction: column;
     font-size: 14px;
-    min-height: 100vh;
+    min-height: 120vh;
     border-right: 1px solid #E0E0E0;
     z-index: 1000;
 }
@@ -212,7 +212,16 @@ body {
 }
 
 /*===============dashboard===================*/
-
+.overlay {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 25px);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998; /* Đặt thấp hơn z-index của .form */
+}
 .main {
     width: 100%;
     display: flex;
@@ -245,4 +254,62 @@ body {
 .title-h1 {
     height: 44px;
     align-items: center;
+}
+/* Định dạng chung cho thông báo */
+.error-messages, .success-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 300px;
+    opacity: 0; /* Ban đầu ẩn */
+    transform: translateX(100%); /* Ban đầu nằm ngoài bên phải */
+    animation: slideIn 0.5s ease forwards, slideOut 0.5s ease 2.5s forwards;
+}
+
+/* Thông báo lỗi */
+.error-messages {
+    background-color: #ffe6e6;
+    border: 1px solid #ff4d4d;
+    color: #d32f2f;
+}
+
+/* Thông báo thành công */
+.success-messages {
+    background-color: #e6ffed;
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+}
+
+/* Hiệu ứng trượt vào */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hiệu ứng trượt ra và mờ dần */
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Định dạng các đoạn văn trong thông báo */
+.error-messages p, .success-messages p {
+    margin: 5px 0;
+    font-size: 14px;
 }

@@ -9,7 +9,7 @@
         </div>
         <div class="header-menu">
             <ul>
-                <a href="">
+                <a href="{{route_url('/products')}}">
                     <li>Shop</li>
                 </a>
                 <a href="">

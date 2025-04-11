@@ -40,6 +40,7 @@
     @stack('scripts')
     {{-- @include('admin.layouts.partials.footer') --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ file_url('assets/js/chart.js') }}"></script>
+    
+    <script src="{{ file_url('assets/js/notifi.js') }}"></script>
 </body>
 </html>

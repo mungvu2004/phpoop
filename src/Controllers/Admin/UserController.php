@@ -110,9 +110,10 @@ class UserController extends Controller
         );
     }
     public function edit($id) {
+        $user = $this->user->getUser( $id );
         $detailUser = $this->user->detailUser($id);
         return view('admin.users.user-detail', 
-            compact('detailUser')
+            compact('user','detailUser')
         );
     }
     public function delete($id)
