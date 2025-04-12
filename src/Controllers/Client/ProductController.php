@@ -4,6 +4,7 @@ namespace App\Controllers\Client;
 
 use App\Controller;
 use App\Models\Product;
+
 class ProductController extends Controller
 {
     private Product $product;
@@ -23,6 +24,18 @@ class ProductController extends Controller
             compact('title', 'products')
         );
     }
+
+    public function listIndex()
+    {
+        $title = ' Danh sach san pham';
+        $products = $this-> product ->findAll();
+        return view(
+            'client.list-product',
+            compact('title','products')
+        );
+    }
+
+    
 
     
 }

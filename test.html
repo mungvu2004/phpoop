@@ -122,3 +122,204 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion E-Commerce Hero Section</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero-section {
+            background-color: #f1f1f1;
+            height: 500px;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 50%;
+            padding: 60px 0 0 60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .hero-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 450px;
+            color: #555;
+        }
+        
+        .shop-btn {
+            display: inline-block;
+            background-color: #000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .stats {
+            display: flex;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            margin-right: 40px;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 55%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-image img {
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .star-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .star-1 {
+            top: 60px;
+            right: 100px;
+        }
+        
+        .star-2 {
+            bottom: 120px;
+            left: 320px;
+        }
+        
+        .brands-strip {
+            background-color: #000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .brand {
+            color: white;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        .versace {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+        }
+        
+        .zara {
+            font-family: Arial, sans-serif;
+            letter-spacing: 3px;
+        }
+        
+        .gucci {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 2px;
+        }
+        
+        .prada {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .calvin-klein {
+            font-family: 'Helvetica', sans-serif;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>FIND CLOTHES<br>THAT MATCHES<br>YOUR STYLE</h1>
+            <p>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
+            <a href="#" class="shop-btn">Shop Now</a>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">International Brands</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2,000+</div>
+                    <div class="stat-label">High Quality Products</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30,000+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="/api/placeholder/500/500" alt="Stylish models wearing fashionable clothes">
+        </div>
+        
+        <!-- Star decorations -->
+        <svg class="star-decoration star-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,0 L15,9 L24,9 L17,14 L20,23 L12,18 L4,23 L7,14 L0,9 L9,9 Z" fill="black"/>
+        </svg>
+        
+        <svg class="star-decoration star-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,0 L15,9 L24,9 L17,14 L20,23 L12,18 L4,23 L7,14 L0,9 L9,9 Z" fill="black"/>
+        </svg>
+    </section>
+    
+    <div class="brands-strip">
+        <div class="brand versace">VERSACE</div>
+        <div class="brand zara">ZARA</div>
+        <div class="brand gucci">GUCCI</div>
+        <div class="brand prada">PRADA</div>
+        <div class="brand calvin-klein">Calvin Klein</div>
+    </div>
+</body>
+</html>

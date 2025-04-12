@@ -19,7 +19,7 @@ class ProductController extends Controller{
 
         return view(
             "admin.product", 
-            compact("product")    
+            compact("product","a")    
         );
     }
 

@@ -10,6 +10,8 @@
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ file_url('assets/admin/home.css') }}">
     <link rel="stylesheet" href="{{ file_url('assets/admin/media-home.css') }}">
+    <link rel="stylesheet" href="{{ file_url('assets/client/dashboard.css') }}">
+    @stack("styles")
 </head>
 <body>
     @include('client.layouts.partials.header')
@@ -22,5 +24,6 @@
         </div>
     </div>
     @include('client.layouts.partials.footer')
+    
 </body>
 </html>

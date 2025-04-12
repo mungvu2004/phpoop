@@ -9,7 +9,7 @@
         </div>
         <div class="header-menu">
             <ul>
-                <a href="">
+                <a href="/views/client/products/list-product.blade.php">
                     <li>Shop</li>
                 </a>
                 <a href="">

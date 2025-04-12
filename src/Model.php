@@ -114,4 +114,6 @@ class Model
             ->setParameter('password', $pass);
         return $query->fetchAllAssociative();
     }
+
+    
 }
