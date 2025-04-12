@@ -29,7 +29,7 @@
             <div class="item-coupon">
                 <div class="title">
                     <h3>{{$coupon['code']}}</h3>
-                    <h4>{{$coupon['discount']}}</h4>
+                    <h4>{{ number_format($coupon['discount'], 0) }}%</h4>
                     <h5>{{$coupon['expiry_date']}}</h5>
                 </div>
                 <div class="is-active">

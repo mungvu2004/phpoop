@@ -5,8 +5,13 @@ use App\Models\Payment;
 use App\Controller;
 
 class PaymentController {
+    private Payment $payment;
+    public function __construct() {
+       $this->payment = new Payment();
+    }
     public function index() {
-        echo "Danh sách dữ liệu.";
+        $payments = $this->payment->getAllPay();
+        return view("admin.payment", compact("payments"));
     }
 
     public function create() {

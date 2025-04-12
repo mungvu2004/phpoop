@@ -53,7 +53,7 @@ $router->mount('/admin/order', function() use ($router) {
     $router->post('/delete/{id}', OrderController::class . '@delete');
 });
 
-$router->mount('/payment', function() use ($router) {
+$router->mount('/admin/payment', function() use ($router) {
     $router->get('/', PaymentController::class . '@index');
     $router->get('/create', PaymentController::class . '@create');
     $router->post('/store', PaymentController::class . '@store');
