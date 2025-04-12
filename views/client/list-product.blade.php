@@ -86,58 +86,7 @@
             </div>
 
             <!-- Right Side - Products Grid -->
-            <div class="products-grid">
-                <!-- Product Card -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/graphic-tshirt.jpg') }}" alt="Graphic T-shirt">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Graphic T-shirt</h3>
-                        <p class="product-price">$144</p>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/plain-tshirt.jpg') }}" alt="Plain White Tipping Shirt">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Plain White Tipping Shirt</h3>
-                        <p class="product-price">$50</p>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/black-striped.jpg') }}" alt="Black Striped T-shirt">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Black Striped T-shirt</h3>
-                        <p class="product-price"><span class="sale-price">$100</span> <span class="original-price">$120</span></p>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/skinny-jeans.jpg') }}" alt="Skinny Fit Jeans">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Skinny Fit Jeans</h3>
-                        <p class="product-price"><span class="sale-price">$140</span> <span class="original-price">$150</span></p>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/oversized-shirt.jpg') }}" alt="Oversized Shirt">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Oversized Shirt</h3>
-                        <p class="product-price">$80</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
