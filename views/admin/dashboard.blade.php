@@ -3,7 +3,9 @@
 @push('styles')
     <link rel="stylesheet" href="{{ file_url('assets/admin/dashboard.css') }}">
 @endpush
-
+@push('scripts')
+<script src="{{ file_url('assets/js/chart.js') }}"></script>
+@endpush
 @section('content')
     <main class="main">
         <div class="main-title">

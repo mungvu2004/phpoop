@@ -16,13 +16,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $title = 'Trang danh sach san pham';
         $products = $this->product->findALL();
-
-        return view(
-            'client.products.index',
-            compact('title', 'products')
-        );
+        return view("client.products.list", compact("products"));
     }
 
     public function listIndex()

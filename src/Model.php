@@ -36,7 +36,7 @@ class Model
         return $query->fetchAllAssociative();
     }
 
-    public function paginate($page = 1, $limit = 9) 
+    public function paginate($page = 1, $limit = 8) 
     {
         $offset = ($page - 1) * $limit;
 
@@ -70,11 +70,14 @@ class Model
             ->from($this->tableName)
             ->where('id = :id')
             ->setParameter('id', $id);
-        return $query->fetchAllAssociative();
+        return $query->fetchAssociative();
     }
     public function insert(array $data)
     {
         // $data = [];
+        if (isset($data['id'])) {
+            unset($data['id']); // Loại bỏ id để database tự sinh
+        }
         $this->conn->insert($this->tableName, $data);
         return $this->conn->lastInsertId();
     }
@@ -115,5 +118,37 @@ class Model
         return $query->fetchAllAssociative();
     }
 
+    public function quickSort(array $data, int $left, int $right, $sort_by) {
+        if ($right === null) {
+            $right = count($data) - 1;
+        }
+        if ($left < $right) {
+            $pivotIndex = (int) (($left + $right) / 2);
+            $pivot = $data[$pivotIndex];
+            $i = $left;
+            $j = $right;
     
+            while ($i <= $j) {
+                while ($data[$i][$sort_by] > $pivot[$sort_by]) $i++;
+                while ($data[$j][$sort_by] < $pivot[$sort_by]) $j--;
+                if ($i <= $j) {
+                    $tmp = $data[$i];
+                    $data[$i] = $data[$j];
+                    $data[$j] = $tmp;
+    
+                    $i++;
+                    $j--;
+                }
+            }
+    
+            if ($left < $j) {
+                $data = $this->quickSort($data, $left, $j, $sort_by);
+            }
+            if ($i < $right) {
+                $data = $this->quickSort($data, $i, $right, $sort_by);
+            }
+        }
+        return $data;
+    }
+
 }

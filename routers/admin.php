@@ -24,48 +24,33 @@ $router->mount('/login', function() use ($router) {
     });
     $router->post('/register', UserController::class . '@signUp');
 });
-$router->mount('/coupon', function() use ($router) {
+$router->mount('/admin/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
-    $router->get('/create', CouponController::class . '@create');
-    $router->post('/store', CouponController::class . '@store');
-    $router->get('/edit/{id}', CouponController::class . '@edit');
-    $router->post('/update/{id}', CouponController::class . '@update');
-    $router->get('/delete/{id}', CouponController::class . '@delete');
+    $router->post('/create', CouponController::class . '@create');
+    $router->post('/edit/{id}', CouponController::class . '@edit');
+});
+$router->mount('/admin/contact', function() use ($router) {
+    $router->get('/', UserController::class . '@index');
+    $router->post('/delete/{id}', UserController::class . '@delete');
+    $router->get('/edit/{id}', UserController::class . '@edit');
 });
 $router->mount('/admin/product', function() use ($router) {
     $router->get('/', ProductController::class . '@index');
-    $router->get('/create', ProductController::class . '@create');
+    $router->post('/create', ProductController::class . '@create');
+    $router->get('/show/{id}', ProductController::class . '@show');
     $router->post('/store', ProductController::class . '@store');
-    $router->get('/edit/{id}', ProductController::class . '@edit');
+    $router->post('/edit/{id}', ProductController::class . '@edit');
     $router->post('/update/{id}', ProductController::class . '@update');
-    $router->get('/delete/{id}', ProductController::class . '@delete');
+    $router->post('/delete/{id}', ProductController::class . '@delete');
 });
 
-$router->mount('/cart', function() use ($router) {
-    $router->get('/', CartController::class . '@index');
-    $router->get('/create', CartController::class . '@create');
-    $router->post('/store', CartController::class . '@store');
-    $router->get('/edit/{id}', CartController::class . '@edit');
-    $router->post('/update/{id}', CartController::class . '@update');
-    $router->get('/delete/{id}', CartController::class . '@delete');
-});
-
-$router->mount('/order', function() use ($router) {
+$router->mount('/admin/order', function() use ($router) {
     $router->get('/', OrderController::class . '@index');
     $router->get('/create', OrderController::class . '@create');
     $router->post('/store', OrderController::class . '@store');
     $router->get('/edit/{id}', OrderController::class . '@edit');
     $router->post('/update/{id}', OrderController::class . '@update');
-    $router->get('/delete/{id}', OrderController::class . '@delete');
-});
-
-$router->mount('/order_detail', function() use ($router) {
-    $router->get('/', OrderDetailController::class . '@index');
-    $router->get('/create', OrderDetailController::class . '@create');
-    $router->post('/store', OrderDetailController::class . '@store');
-    $router->get('/edit/{id}', OrderDetailController::class . '@edit');
-    $router->post('/update/{id}', OrderDetailController::class . '@update');
-    $router->get('/delete/{id}', OrderDetailController::class . '@delete');
+    $router->post('/delete/{id}', OrderController::class . '@delete');
 });
 
 $router->mount('/payment', function() use ($router) {
@@ -75,13 +60,4 @@ $router->mount('/payment', function() use ($router) {
     $router->get('/edit/{id}', PaymentController::class . '@edit');
     $router->post('/update/{id}', PaymentController::class . '@update');
     $router->get('/delete/{id}', PaymentController::class . '@delete');
-});
-
-$router->mount('/review', function() use ($router) {
-    $router->get('/', ReviewController::class . '@index');
-    $router->get('/create', ReviewController::class . '@create');
-    $router->post('/store', ReviewController::class . '@store');
-    $router->get('/edit/{id}', ReviewController::class . '@edit');
-    $router->post('/update/{id}', ReviewController::class . '@update');
-    $router->get('/delete/{id}', ReviewController::class . '@delete');
 });

@@ -6,6 +6,11 @@ use App\Controller;
 
 
 class OrderDetailController {
+    private OrderDetail $orderDetail;
+
+    public function __construct() {
+        $this->orderDetail = new OrderDetail();
+    }
     public function index() {
         echo "Danh sách dữ liệu.";
     }

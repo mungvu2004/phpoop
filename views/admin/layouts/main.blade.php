@@ -13,14 +13,34 @@
     <script src="{{ file_url('assets/js/admin.js') }}"></script>
 </head>
 <body>
+    <div class="overlay"></div>
     @include('admin.layouts.partials.nav')
     <div class="container">
         @include('admin.layouts.partials.sidebar')
+        @if (isset($_SESSION['errors']) && !empty($_SESSION['errors']))
+        <div class="error-messages" style="color: red; margin-bottom: 10px;">
+            @foreach ($_SESSION['errors'] as $err)
+                <p>{{ $err }}</p>
+            @endforeach
+        </div>
+        @php unset($_SESSION['errors']) @endphp
+    @endif
+
+    @if (isset($_SESSION['success']) && !empty($_SESSION['success']))
+        <div class="success-messages" style="color: green; margin-bottom: 10px;">
+            @foreach ($_SESSION['success'] as $msg)
+                <p>{{ $msg }}</p>
+            @endforeach
+        </div>
+        @php unset($_SESSION['success']) @endphp
+    @endif
         @yield('content')
 
     </div>
+    @stack('scripts')
     {{-- @include('admin.layouts.partials.footer') --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ file_url('assets/js/chart.js') }}"></script>
+    
+    <script src="{{ file_url('assets/js/notifi.js') }}"></script>
 </body>
 </html>

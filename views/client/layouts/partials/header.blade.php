@@ -9,7 +9,9 @@
         </div>
         <div class="header-menu">
             <ul>
-                <a href="/views/client/products/list-product.blade.php">
+
+                <a href="{{route_url('/products')}}">
+
                     <li>Shop</li>
                 </a>
                 <a href="">

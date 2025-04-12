@@ -1,4 +1,5 @@
 @extends('client.layouts.main')
+
 @push('dashboard')
     <link rel="stylesheet" href="{{ file_url('assets/client/dashboard.css') }}">
 @endpush

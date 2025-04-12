@@ -1,0 +1,242 @@
+/* Reset mặc định */
+.main-user {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+/* Tiêu đề bảng */
+.user-title {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #1e293b;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 6px 6px 0 0;
+    list-style: none;
+}
+
+.user-title li {
+    flex: 1;
+    padding: 12px 16px;
+    text-align: left;
+    min-width: 100px;
+}
+
+.user-title li:nth-child(1) { flex: 0.7; } /* Tên */
+.user-title li:nth-child(3) { flex: 1.2; }   /* Email */
+.user-title li:last-child { flex: 1.2; }   /* Hoạt động */
+
+/* Dòng người dùng */
+.user-item {
+    display: flex;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #fafafa;
+    list-style: none;
+    transition: background-color 0.2s ease;
+}
+
+.user-item:hover {
+    background-color: #f1f5f9;
+}
+
+.user-item li {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+    text-transform: capitalize;
+}
+
+.user-item li:nth-child(1) { flex: 0.7; } /* Tên */
+.user-item li:nth-child(3) { flex: 1.2; }   /* Email */
+.user-item li:last-child { flex: 1.2; }   /* Hoạt động */
+
+/* Trạng thái */
+.active {
+    font-weight: 500;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.active p:not(.active1) {
+    color: #166534;
+    background-color: #dcfce7;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.active p.active1 {
+    color: #991b1b;
+    background-color: #fee2e2;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* Nút hành động */
+.item-button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btn-detail, .btn-delete {
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-detail {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.btn-detail:hover {
+    background-color: #2563eb;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-user {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .user-title, .user-item {
+        flex-direction: column;
+    }
+
+    .user-title li, .user-item li {
+        flex: none;
+        width: 100%;
+        padding: 10px 12px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .user-title li:last-child, .user-item li:last-child {
+        border-bottom: none;
+    }
+
+    .item-button {
+        padding: 10px 12px;
+        justify-content: flex-start;
+    }
+}
+/* Container chính của phần user detail */
+.users-detail {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    align-items: center;
+    margin: 20px auto;
+    width: 100%;
+}
+
+/* Phần logo của user: đặt vào hình tròn */
+.user-logo {
+    width: 120px;
+    height: 120px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #4a4a4a;
+    border: 3px solid #e0e0e0;
+    border-radius: 50%;
+    margin: 20px;
+    flex-shrink: 0;
+}
+
+/* Để căn giữa logo theo chiều dọc nếu cần */
+.users-detail > .user-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Phần thông tin chi tiết của user */
+.user-detail {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Tiêu đề tên user */
+.user-detail h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 26px;
+    color: #333333;
+}
+
+/* Các dòng thông tin liên hệ */
+.user-detail p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555555;
+}
+
+/* Bảng địa chỉ */
+.user-detail .user-address table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Header bảng */
+.user-detail .user-address table thead tr {
+    background-color: #f9f9f9;
+}
+
+.user-detail .user-address table th,
+.user-detail .user-address table td {
+    padding: 12px 15px;
+    border: 1px solid #eaeaea;
+    text-align: left;
+    font-size: 14px;
+}
+
+/* Các hàng xen kẽ cho bảng */
+.user-detail .user-address table tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+/* Hiệu ứng hover cho hàng bảng */
+.user-detail .user-address table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
