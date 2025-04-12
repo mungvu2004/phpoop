@@ -22,7 +22,7 @@ $router->mount('/coupon', function() use ($router) {
     $router->get('/delete/{id}', CouponController::class . '@delete');
 });
 $router->mount('/products', function() use ($router) {
-    $router->get('/', ProductController::class . '@index');
+    $router->get('/', ProductController::class . '@listIndex');
     $router->get('/create', ProductController::class . '@create');
     $router->post('/store', ProductController::class . '@store');
     $router->get('/edit/{id}', ProductController::class . '@edit');
@@ -77,3 +77,4 @@ $router->mount('/review', function() use ($router) {
     $router->post('/update/{id}', ReviewController::class . '@update');
     $router->get('/delete/{id}', ReviewController::class . '@delete');
 });
+

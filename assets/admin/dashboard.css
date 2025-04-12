@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    gap: 20px;
 }
 .total {
     width: 262px;
@@ -93,3 +94,4 @@
     padding: 10px 24px;
     text-align:start;
 }
+

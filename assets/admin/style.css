@@ -23,6 +23,7 @@ body {
     font-family: Nunito Sans;
     display: flex;
     flex-direction: row;
+
 }
 .nav {
     width: 240px;

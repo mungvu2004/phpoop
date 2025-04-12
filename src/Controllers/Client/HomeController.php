@@ -16,15 +16,10 @@ class HomeController
     }
     public function index()
     {
-        $products = $this->product->findAll();
-        return view('client.dashboard', 
-            compact('products')
+        $product4 = $this->product->paginate(1, 4);
+        return view(
+            'client.dashboard',
+            compact('product4')
         );
-    }
-    public function category() {
-        
-        
-    }
-
-    
+    }    
 }

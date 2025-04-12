@@ -53,6 +53,7 @@ class ProductController extends Controller
         return view(
             'admin.products.product-detail',
             compact('product', 'review', 'sizes')
+
         );
     }
     public function create()
