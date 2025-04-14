@@ -24,7 +24,7 @@ $router->mount('/coupon', function() use ($router) {
 $router->mount('/products', function() use ($router) {
     $router->get('/', ProductController::class . '@listIndex');
     $router->get('/create', ProductController::class . '@create');
-    $router->post('/store', ProductController::class . '@store');
+    $router->get('/show/{id}', ProductController::class . '@show');
     $router->get('/edit/{id}', ProductController::class . '@edit');
     $router->post('/update/{id}', ProductController::class . '@update');
     $router->get('/delete/{id}', ProductController::class . '@delete');
