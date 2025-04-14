@@ -3,15 +3,18 @@
 namespace App\Controllers\Client;
 
 use App\Controller;
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
     private Product $product;
+    protected $category;
 
     public function __construct()
     {
         $this->product = new Product();
+        $this->category = new Category();
     }
 
     public function index()
@@ -22,11 +25,13 @@ class ProductController extends Controller
 
     public function listIndex()
     {
-        $title = ' Danh sach san pham';
-        $products = $this-> product ->findAll();
+        $title = 'Danh sách sản phẩm';
+        $products = $this->product->findAll();
+        $categories = $this->category->findAll(); // lấy danh mục
+
         return view(
             'client.list-product',
-            compact('title','products')
+            compact('title', 'products', 'categories') // truyền thêm categories vào
         );
     }
 
