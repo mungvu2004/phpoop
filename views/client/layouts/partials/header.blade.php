@@ -5,7 +5,7 @@
     </div>
     <div class="header-i">
         <div class="header-logo">
-            <a href="#">PureWare</a>
+            <a href="{{ route_url(  '') }}"><li>PureWare</li></a>
         </div>
         <div class="header-menu">
             <ul>
