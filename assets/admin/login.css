@@ -145,6 +145,10 @@ body {
     align-items: center;
     gap: 10px;
 }
+#none {
+    display: none;
+}
+
 .element-2 {
     transform: translateX(0);
     transition: all 1.5s ease-in-out;
@@ -166,6 +170,9 @@ body {
     border: 1px solid #fff;
     position: relative;
     z-index: 1;
+}
+.none {
+    display: none;
 }
 .element-h3 {
     width: 125px;

@@ -23,34 +23,43 @@ class UserController extends Controller
     }
     public function account() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Làm sạch và xác thực dữ liệu đầu vào
             $name = htmlspecialchars($_POST['username'] ?? '');
             $password = $_POST['password'] ?? '';
-            
+    
             if (empty($name) || empty($password)) {
                 $_SESSION['msg'] = 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.';
-                return view('elements.login');
+                return view('elements.dashboard-login');
             }
     
-            // Thực hiện đăng nhập
-            $account = $this->user->login($name, $password);
-    
+            // Truy vấn thông tin người dùng dựa trên username
+            $account = $this->user->login($name);
             if (empty($account) || count($account) != 1) {
                 $_SESSION['msg'] = 'Tên đăng nhập hoặc mật khẩu không đúng.';
-                return view('elements.login');
+                return view('elements.dashboard-login');
             }
-            $role = $account[0]['role'];
-            // Kiểm tra vai trò của người dùng
-            if($this->role($role)) {
-                $_SESSION['admin'] = $account[0];
+    
+            $user = $account[0];
+    
+            // Kiểm tra mật khẩu với password_verify
+            if (!password_verify($password, $user['password_hash'])) {
+                $_SESSION['msg'] = 'Tên đăng nhập hoặc mật khẩu không đúng.';
+                return view('elements.dashboard-login');
+            }
+    
+            // Nếu đúng, kiểm tra vai trò
+            $role = $user['role'];
+            if ($this->role($role)) {
+                $_SESSION['admin'] = $user;
                 return view('admin.dashboard');
             } else {
-                $_SESSION['user'] = $account[0];
-                return view('client.layouts.main');
+                $_SESSION['user'] = $user;
+                return view('client.layouts.dashboard');
             }
         }
-        return view('elements.login.login');
+    
+        return view('elements.dashboard-login');
     }
+    
     private function validateEmail($email) {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
@@ -84,8 +93,8 @@ class UserController extends Controller
             }
 
             $data = [
-                'name' => $username,
-                'password' => password_hash($password, PASSWORD_BCRYPT),
+                'username' => $username,
+                'password_hash' => password_hash($password, PASSWORD_BCRYPT),
                 'email' => $email
             ];
 

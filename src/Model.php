@@ -20,7 +20,6 @@ class Model
         ];
 
         $this->conn = DriverManager::getConnection($connection);
-
     }
 
     public function __destruct()
@@ -36,7 +35,7 @@ class Model
         return $query->fetchAllAssociative();
     }
 
-    public function paginate($page = 1, $limit = 8) 
+    public function paginate($page = 1, $limit = 8)
     {
         $offset = ($page - 1) * $limit;
 
@@ -45,7 +44,7 @@ class Model
             ->from($this->tableName)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
-        
+
         $data = $query->fetchAllAssociative();
         $totalPage = ceil($this->count() / $limit);
 
@@ -56,14 +55,14 @@ class Model
             'totalPage' => $totalPage,
         ];
     }
-    public function count() 
+    public function count()
     {
         $query = $this->conn->createQueryBuilder();
         $query->select('COUNT(*) AS total')->from($this->tableName);
         return $query->fetchOne();
     }
 
-    public function find($id) 
+    public function find($id)
     {
         $query = $this->conn->createQueryBuilder();
         $query->select('*')
@@ -106,19 +105,19 @@ class Model
     {
         $this->conn->rollBack();
     }
-    public function login($user, $pass)
+    public function login($user)
     {
         $query = $this->conn->createQueryBuilder();
         $query->select('*')
             ->from($this->tableName)
-            ->where('name = :name')
-            ->andWhere('password = :password')
-            ->setParameter('name', $user)
-            ->setParameter('password', $pass);
+            ->where('username = :name')
+            ->setParameter('name', $user);
         return $query->fetchAllAssociative();
     }
 
-    public function quickSort(array $data, int $left, int $right, $sort_by) {
+
+    public function quickSort(array $data, int $left, int $right, $sort_by)
+    {
         if ($right === null) {
             $right = count($data) - 1;
         }
@@ -127,7 +126,7 @@ class Model
             $pivot = $data[$pivotIndex];
             $i = $left;
             $j = $right;
-    
+
             while ($i <= $j) {
                 while ($data[$i][$sort_by] > $pivot[$sort_by]) $i++;
                 while ($data[$j][$sort_by] < $pivot[$sort_by]) $j--;
@@ -135,12 +134,12 @@ class Model
                     $tmp = $data[$i];
                     $data[$i] = $data[$j];
                     $data[$j] = $tmp;
-    
+
                     $i++;
                     $j--;
                 }
             }
-    
+
             if ($left < $j) {
                 $data = $this->quickSort($data, $left, $j, $sort_by);
             }
@@ -150,5 +149,4 @@ class Model
         }
         return $data;
     }
-
 }

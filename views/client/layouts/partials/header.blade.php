@@ -31,7 +31,7 @@
         </div>
         <div class="header-set">
             <a href=""><i class="bi bi-cart2"></i></a>
-            <a href=""><i class="bi bi-person-circle"></i></a>
+            <a href="/login"><i class="bi bi-person-circle"></i></a>
         </div>
     </div>
 </div>

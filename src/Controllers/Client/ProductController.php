@@ -49,7 +49,4 @@ class ProductController extends Controller
             compact('productDetail', 'productSize', 'productReview'));
     }
 
-    
-
-    
 }

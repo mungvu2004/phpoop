@@ -50,7 +50,7 @@
         </div>
         <div class="page-item">
             <div class="hide"></div>
-            <a href="{{ route_url("admin") }}"><div class="menu-icon">
+            <a href="{{ route_url("") }}"><div class="menu-icon">
                 <i class="bi bi-table"></i>
                 <h3>Table</h3>
             </div></a>

@@ -1,40 +1,41 @@
 <?php
 
 use App\Controllers\Admin\UserController;
-use App\Controllers\Admin\ReviewController;
 use App\Controllers\Admin\ProductController;
 use App\Controllers\Admin\CouponController;
 use App\Controllers\Admin\OrderController;
-use App\Controllers\Admin\OrderDetailController;
 use App\Controllers\Admin\PaymentController;
-use App\Controllers\Admin\CartController;
 use App\Controllers\Admin\DashBoardController;
+use App\Middleware\AuthMiddleware;
 
-$router->mount('/admin', function() use ($router) {
-    // $router->get('/', DashBoardController::class . '@index');
-    $router->get('/', DashBoardController::class . '@index');
-    $router->get('/dashboard/sale', DashBoardController::class . '@getSaleData');
-    $router->post('/users', UserController::class . '@account');
-    $router->post('/users/testUploadFile', UserController::class . '@testUploadFile');
-});
 
 $router->mount('/login', function() use ($router) {
     $router->get('/', function() {
         return view('elements.dashboard-login');
     });
+    $router->post('/users', UserController::class . '@account');
     $router->post('/register', UserController::class . '@signUp');
 });
 $router->mount('/admin/coupon', function() use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
     $router->get('/', CouponController::class . '@index');
     $router->post('/create', CouponController::class . '@create');
     $router->post('/edit/{id}', CouponController::class . '@edit');
 });
 $router->mount('/admin/contact', function() use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
     $router->get('/', UserController::class . '@index');
     $router->post('/delete/{id}', UserController::class . '@delete');
     $router->get('/edit/{id}', UserController::class . '@edit');
 });
 $router->mount('/admin/product', function() use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
     $router->get('/', ProductController::class . '@index');
     $router->post('/create', ProductController::class . '@create');
     $router->get('/show/{id}', ProductController::class . '@show');
@@ -45,6 +46,9 @@ $router->mount('/admin/product', function() use ($router) {
 });
 
 $router->mount('/admin/order', function() use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
     $router->get('/', OrderController::class . '@index');
     $router->get('/create', OrderController::class . '@create');
     $router->post('/store', OrderController::class . '@store');
@@ -54,6 +58,9 @@ $router->mount('/admin/order', function() use ($router) {
 });
 
 $router->mount('/admin/payment', function() use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
     $router->get('/', PaymentController::class . '@index');
     $router->get('/create', PaymentController::class . '@create');
     $router->post('/store', PaymentController::class . '@store');
