@@ -26,7 +26,7 @@ class Model
     {
         $this->conn->close();
     }
-
+    
     public function findALL()
     {
         $query = $this->conn->createQueryBuilder();
@@ -114,7 +114,16 @@ class Model
             ->setParameter('name', $user);
         return $query->fetchAllAssociative();
     }
-
+    public function searchProductsByName($keyword)
+    {
+        $query = $this->conn->createQueryBuilder();
+        $query->select('p.id','p.name', 'c.name as category_name', 'p.price', 'p.image_url')
+            ->from('products', 'p')
+            ->leftJoin('p', 'categories', 'c', 'p.category_id = c.id')
+            ->where('p.name LIKE :keyword')
+            ->setParameter('keyword', '%' . $keyword . '%');
+        return $query->fetchAllAssociative();
+    }
 
     public function quickSort(array $data, int $left, int $right, $sort_by)
     {

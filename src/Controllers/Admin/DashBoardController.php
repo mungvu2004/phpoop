@@ -34,7 +34,6 @@ class DashBoardController extends Controller{
         $reviews = $this->review->count();
         $sale = $this->sale->dataMonth();
         $allOrder = $this->allOrder->getAll();
-        
         return view(
             'admin.dashboard',
             compact('users', 'orders', 'payments', 'reviews', 'sale', 'allOrder')
@@ -62,25 +61,5 @@ class DashBoardController extends Controller{
         var_dump($data);
         var_dump($labels);
         exit;
-    }
-
-    public function create() {
-        echo "Form thêm dữ liệu.";
-    }
-
-    public function store() {
-        echo "Xử lý thêm dữ liệu.";
-    }
-
-    public function edit($id) {
-        echo "Chỉnh sửa dữ liệu ID: $id";
-    }
-
-    public function update($id) {
-        echo "Cập nhật dữ liệu ID: $id";
-    }
-
-    public function delete($id) {
-        echo "Xóa dữ liệu ID: $id";
     }
 }

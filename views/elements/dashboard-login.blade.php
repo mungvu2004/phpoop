@@ -9,6 +9,18 @@
     
 </head>
 <body>
+    @php
+        if (isset($_SESSION['msg'])) {
+            foreach ($_SESSION['msg'] as $nofi) {
+                echo '<div class="notifi slide-in">';
+                echo '<p>' . htmlspecialchars($nofi) . '</p>';
+                echo '<button class="close-btn">&times;</button>';
+                echo '</div>';
+            }
+            unset($_SESSION['msg']); // Xóa sau khi hiển thị
+        }
+    @endphp
+
     <div class="container-login flex">
         <div id="login-element" class="login-element flex">
             <div id="element-1" class="element-1 flex-column">
@@ -16,9 +28,7 @@
                     <div class="form-header flex-column">
                         <h3>login</h3>
                         <p>Kindly enter your account details to access your Login.</p>
-                        <?php if (isset($_SESSION['msg'])): ?>
-                            <p style="color: red;"><?php echo $_SESSION['msg']; ?></p>
-                        <?php endif; ?>
+                        
                     </div>
                     <div class="form-input flex-column">
                         <div class="input-user">
@@ -50,7 +60,6 @@
                     <div class="form-header flex-column">
                         <h3>sign up</h3>
                         <p>Sign up by entering your information below.</p>
-                        <p id="error-msg" style="color: red;"></p>
                     </div>
                     <div class="form-input flex-column">
                         <div class="input-user">

@@ -16,6 +16,12 @@ $router->mount('/login', function() use ($router) {
     $router->post('/users', UserController::class . '@account');
     $router->post('/register', UserController::class . '@signUp');
 });
+$router->mount('/admin', function() use ($router){
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
+    $router->get('/', DashBoardController::class . '@index');
+});
 $router->mount('/admin/coupon', function() use ($router) {
     $router->before('GET|POST', '.*', function() {
         AuthMiddleware::isAuthenticated();

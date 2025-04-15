@@ -48,5 +48,23 @@ class ProductController extends Controller
         return view('client.product-detail', 
             compact('productDetail', 'productSize', 'productReview'));
     }
-
+    public function search($text) {
+        header('Content-Type: application/json');
+        try {
+            // Tìm kiếm sản phẩm
+            $products = $this->product->searchProductsByName($text);
+            if (empty($products)) {
+                echo json_encode([]);  
+            } else {
+                foreach ($products as &$product) {
+                    $product['image_url'] = file_exists($product['image_url']) ? file_url($product['image_url']) : '/storage/uploads/users/error.png';
+                }
+                echo json_encode($products);  
+            }
+        } catch (\Exception $e) {
+            echo json_encode(['error'=> $e->getMessage()]);
+        }
+    }
+    
+    
 }

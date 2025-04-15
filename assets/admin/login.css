@@ -248,3 +248,40 @@ body {
 #login-element:not(.swapped) {
     transform: translateX(0);
 }
+.notifi {
+    position: fixed;
+    top: 20px;
+    right: -400px; /* ban đầu nằm ngoài màn hình */
+    background-color: #f0f9ff;
+    border-left: 5px solid #2196F3;
+    padding: 15px 40px 15px 15px;
+    margin: 10px;
+    border-radius: 8px;
+    color: #333;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 9999;
+    max-width: 300px;
+    transition: right 0.5s ease, opacity 0.3s ease;
+}
+
+/* khi hiển thị */
+.notifi.slide-in.show {
+    right: 20px;
+}
+
+.notifi.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.notifi .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+}

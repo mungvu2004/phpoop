@@ -6,10 +6,9 @@
 @section('content')
     <section class="hero-section">
         <div class="hero-content">
-            <h1>FIND CLOTHES<br>THAT MATCHES<br>YOUR STYLE</h1>
-            <p>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality
-                and cater to your sense of style.</p>
-            <a href="/views/client/list-product.blade.php" class="shop-btn">Shop Now</a>
+            <h1>TÌM QUẦN ÁO<br>PHÙ HỢP VỚI PHONG CÁCH CỦA BẠN</h1>
+            <p>Với nhiều loại trang phục được thiết kế tỉ mỉ, đa dạng của chúng tôi, được thiết kế để tôn lên cá tính và phù hợp với phong cách của bạn.</p>
+            <a href="{{route_url('/products')}}" class="shop-btn">MUA NGAY</a>
 
             <div class="stats">
                 <div class="stat-item">
@@ -30,12 +29,7 @@
         <div class="hero-image">
             <img src="/storage/Badge/Banner.png" alt="Stylish models wearing fashionable clothes">
         </div>
-
-        <!-- Star decorations -->
-
-
     </section>
-
     <div class="brands-strip">
         <div class="brand versace">VERSACE</div>
         <div class="brand zara">ZARA</div>
@@ -43,7 +37,6 @@
         <div class="brand prada">PRADA</div>
         <div class="brand calvin-klein">Calvin Klein</div>
     </div>
-    <pre>{{ print_r($product4) }}</pre>
     <section class="section-container">
         <h2 class="section-title">NEW ARRIVALS</h2>
         <div class="product-grid">
@@ -52,44 +45,43 @@
             @endphp
             <!-- Product 1 -->
             @foreach ($product as $item)
-                <a href="/products/show/{{ $item['id'] }}">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ file_url($item['image_url']) }}" alt="T-shirt with Tape Details">
-                        </div>
-                        <h3 class="product-name">{{ $item['name'] }}</h3>
-                        <div class="rating">
-                            <div class="stars">
-                                @php
-                                    $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
-                                    $remainingStars = 5 - $rating;
-                                @endphp
-    
-                                @for ($i = 0; $i < $rating; $i++)
-                                    <div class="star">★</div>
-                                @endfor
-    
-                                @for ($i = 0; $i < $remainingStars; $i++)
-                                    <div class="star">☆</div>
-                                @endfor
+                    <a href="/products/show/{{ $item['id'] }}">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ file_url($item['image_url']) }}" alt="T-shirt with Tape Details">
                             </div>
-                            <span
-                                class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
+                            <h3 class="product-name">{{ $item['name'] }}</h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    @php
+                                        $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
+                                        $remainingStars = 5 - $rating;
+                                    @endphp
+
+                                    @for ($i = 0; $i < $rating; $i++)
+                                        <div class="star">★</div>
+                                    @endfor
+
+                                    @for ($i = 0; $i < $remainingStars; $i++)
+                                        <div class="star">☆</div>
+                                    @endfor
+                                </div>
+                                <span
+                                    class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">${{ $item['price'] }}</span>
+                            </div>
                         </div>
-                        <div class="product-price">
-                            <span class="current-price">${{ $item['price'] }}</span>
-                        </div>
-                    </div>
-                </a>
+                    </a>
             @endforeach
 
         </div>
         <div class="view-all">
-            <a href="/views/client/list-product.blade.php" class="view-all-btn">View All</a>
+            <a href="{{route_url('/products')}}" class="view-all-btn">View All</a>
         </div>
     </section>
 
-    <pre>{{ print_r($product4) }}</pre>
     <section class="section-container">
         <h2 class="section-title">TOP SELLING</h2>
         <div class="product-grid">
@@ -98,38 +90,40 @@
             @endphp
             <!-- Product 1 -->
             @foreach ($product as $item)
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ file_url($item['image_url']) }}" alt="T-shirt with Tape Details">
-                    </div>
-                    <h3 class="product-name">{{ $item['name'] }}</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            @php
-                                $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
-                                $remainingStars = 5 - $rating;
-                            @endphp
-
-                            @for ($i = 0; $i < $rating; $i++)
-                                <div class="star">★</div>
-                            @endfor
-
-                            @for ($i = 0; $i < $remainingStars; $i++)
-                                <div class="star">☆</div>
-                            @endfor
+                    <a href="/products/show/{{ $item['id'] }}">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="{{ file_url($item['image_url']) }}" alt="T-shirt with Tape Details">
+                            </div>
+                            <h3 class="product-name">{{ $item['name'] }}</h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    @php
+                                        $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
+                                        $remainingStars = 5 - $rating;
+                                    @endphp
+    
+                                    @for ($i = 0; $i < $rating; $i++)
+                                        <div class="star">★</div>
+                                    @endfor
+    
+                                    @for ($i = 0; $i < $remainingStars; $i++)
+                                        <div class="star">☆</div>
+                                    @endfor
+                                </div>
+                                <span
+                                    class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">${{ $item['price'] }}</span>
+                            </div>
                         </div>
-                        <span
-                            class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
-                    </div>
-                    <div class="product-price">
-                        <span class="current-price">${{ $item['price'] }}</span>
-                    </div>
-                </div>
+                    </a>
             @endforeach
 
         </div>
         <div class="view-all">
-            <a href="/views/client/list-product.blade.php" class="view-all-btn">View All</a>
+            <a href="{{route_url('/products')}}" class="view-all-btn">View All</a>
         </div>
     </section>
 
