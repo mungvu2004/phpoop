@@ -370,22 +370,21 @@
 .container2 {
     max-width: 1500px;
 }
-/* Reviews container */
-.reviews-container {
+/* PRODUCT REVIEWS SECTION - Scoped styles */
+#product-reviews-section .prd-reviews-container {
     max-width: 1300px;
     margin: 0 auto 50px auto;
     padding: 0 20px;
 }
 
-.reviews-title {
+#product-reviews-section .prd-reviews-title {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 25px;
     color: #000;
 }
 
-/* Header: Sort + Write Review */
-.reviews-header {
+#product-reviews-section .prd-reviews-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -394,13 +393,12 @@
     margin-bottom: 25px;
 }
 
-.reviews-sort {
+#product-reviews-section .prd-reviews-sort {
     display: flex;
     gap: 10px;
 }
 
-/* Sort button */
-.sort-button {
+#product-reviews-section .prd-sort-button {
     font-size: 14px;
     color: #888;
     cursor: pointer;
@@ -410,15 +408,14 @@
     transition: all 0.2s ease;
 }
 
-.sort-button.active {
+#product-reviews-section .prd-sort-button.prd-active {
     color: #000;
     font-weight: bold;
     border-color: #000;
     background-color: #f9f9f9;
 }
 
-/* Write Review button */
-.write-review-btn {
+#product-reviews-section .prd-write-review-btn {
     padding: 10px 20px;
     background: #000;
     color: #fff;
@@ -430,76 +427,82 @@
     transition: background 0.3s ease;
 }
 
-.write-review-btn:hover {
+#product-reviews-section .prd-write-review-btn:hover {
     background: #333;
 }
 
-
-/* Review item */
-.reviews-list {
+#product-reviews-section .prd-reviews-list {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.review-item {
+#product-reviews-section .prd-review-item {
     padding-bottom: 25px;
     border-bottom: 1px solid #eee;
 }
 
-.review-header {
+#product-reviews-section .prd-review-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.reviewer-info {
+#product-reviews-section .prd-reviewer-info {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.reviewer-name {
+#product-reviews-section .prd-reviewer-name {
     font-size: 16px;
     font-weight: 600;
 }
 
-.verified-badge {
+#product-reviews-section .prd-verified-badge {
     color: #4CAF50;
     font-size: 12px;
     display: inline-flex;
     align-items: center;
 }
 
-.verified-badge:before {
+#product-reviews-section .prd-verified-badge::before {
     content: "✓";
     margin-right: 3px;
 }
 
-.more-options {
+#product-reviews-section .prd-more-options {
     color: #999;
     cursor: pointer;
     font-weight: bold;
 }
 
-.review-rating {
+#product-reviews-section .prd-review-rating {
     margin-bottom: 10px;
 }
 
-.review-content {
+#product-reviews-section .prd-stars {
+    font-size: 18px;
+    color: #FFC107;
+}
+
+#product-reviews-section .prd-star {
+    margin-right: 2px;
+}
+
+#product-reviews-section .prd-review-content {
     color: #333;
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
-.review-date {
+#product-reviews-section .prd-review-date {
     color: #999;
     font-size: 13px;
 }
 
-.load-more-reviews {
+#product-reviews-section .prd-load-more-reviews {
     text-align: center;
-    margin-top: 30px;
     padding: 10px 20px;
     background: #fff;
     color: #000;
@@ -513,8 +516,57 @@
     margin: 30px auto;
 }
 
-.load-more-reviews:hover {
+#product-reviews-section .prd-load-more-reviews:hover {
     background: #f9f9f9;
+}
+
+
+.faq-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: auto;
+    transition: all 0.3s ease;
+}
+
+.faq-card h2 {
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 24px;
+}
+
+.faq-item h4::before {
+    content: "❓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 18px;
+    color: #007BFF;
+}
+
+.faq-item p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 24px;
 }
 
 /* Related products */

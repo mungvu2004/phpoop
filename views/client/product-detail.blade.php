@@ -75,7 +75,6 @@
     </div>
 
     {{-- Tabs Section --}}
-    {{-- Tabs Section --}}
     <div class="container2">
         <div class="tabs">
             <div class="tab-header">
@@ -89,22 +88,20 @@
             {{-- Product Details --}}
             <div class="tab-panel active" id="details">
                 <div class="product-card">
-                    <h2>Product Details</h2>
-            
-                    <h3>{{ $productDetail['name'] ?? 'Unnamed Product' }}</h3>
-                    <p class="price">{{ number_format($productDetail['price'], 0, ',', '.') }} VND</p>
-            
+
                     <p class="description">
                         {{ $productDetail['description'] ?: 'No product description available.' }}
                     </p>
-            
+
                     <ul class="product-specs">
                         <li><strong>Material:</strong> 100% Cotton</li>
                         <li><strong>Color:</strong> {{ $productDetail['color'] ?? 'Various' }}</li>
                         <li><strong>Available Sizes:</strong>
                             @php $count = count($productSize); @endphp
                             @foreach ($productSize as $index => $size)
-                                {{ $size['size_name'] }}@if ($index < $count - 1), @endif
+                                {{ $size['size_name'] }}@if ($index < $count - 1)
+                                    ,
+                                @endif
                             @endforeach
                         </li>
                     </ul>
@@ -112,31 +109,33 @@
             </div>
 
             {{-- Rating & Reviews --}}
-            <div class="tab-panel" id="reviews">
-                <div class="reviews-container">
-                    <h2 class="reviews-title">All Reviews
-                        ({{ isset($productDetail['review_count']) ? $productDetail['review_count'] : '25' }})</h2>
+            <div class="tab-panel" id="product-reviews-section">
+                <div class="prd-reviews-container">
+                    <h2 class="prd-reviews-title">
+                        All Reviews ({{ isset($productDetail['review_count']) ? $productDetail['review_count'] : '25' }})
+                    </h2>
 
-                    <div class="reviews-header">
-                        <div class="reviews-sort">
-                            <div class="sort-button active">Latest</div>
+                    <div class="prd-reviews-header">
+                        <div class="prd-reviews-sort">
+                            <div class="prd-sort-button prd-active">Latest</div>
                         </div>
-                        <button class="write-review-btn">Write a Review</button>
+                        <button class="prd-write-review-btn">Write a Review</button>
                     </div>
 
-                    <div class="reviews-list">
+                    <div class="prd-reviews-list">
                         @if (isset($productReview) && !empty($productReview['review']))
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="reviewer-info">
-                                        <span class="reviewer-name">{{ $productReview['user_name'] ?? 'Customer' }}</span>
-                                        <span class="verified-badge">✓</span>
+                            <div class="prd-review-item">
+                                <div class="prd-review-header">
+                                    <div class="prd-reviewer-info">
+                                        <span
+                                            class="prd-reviewer-name">{{ $productReview['user_name'] ?? 'Customer' }}</span>
+                                        <span class="prd-verified-badge"></span>
                                     </div>
-                                    <div class="more-options">···</div>
+                                    <div class="prd-more-options">···</div>
                                 </div>
 
-                                <div class="review-rating">
-                                    <div class="stars">
+                                <div class="prd-review-rating">
+                                    <div class="prd-stars">
                                         @php
                                             $rating = isset($productReview['rating'])
                                                 ? floor($productReview['rating'])
@@ -145,55 +144,56 @@
                                         @endphp
 
                                         @for ($i = 0; $i < $rating; $i++)
-                                            <span class="star">★</span>
+                                            <span class="prd-star">★</span>
                                         @endfor
 
                                         @for ($i = 0; $i < $remainingStars; $i++)
-                                            <span class="star">☆</span>
+                                            <span class="prd-star">☆</span>
                                         @endfor
                                     </div>
                                 </div>
 
-                                <div class="review-content">
+                                <div class="prd-review-content">
                                     "{{ $productReview['review'] }}"
                                 </div>
 
-                                <div class="review-date">Posted on {{ $productReview['date'] ?? 'August 15, 2023' }}</div>
+                                <div class="prd-review-date">
+                                    Posted on {{ $productReview['date'] ?? 'August 15, 2023' }}
+                                </div>
                             </div>
                         @else
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="reviewer-info">
-                                        <span class="reviewer-name">Samantha O.</span>
-                                        <span class="verified-badge">✓</span>
+                            <div class="prd-review-item">
+                                <div class="prd-review-header">
+                                    <div class="prd-reviewer-info">
+                                        <span class="prd-reviewer-name">Samantha O.</span>
+                                        <span class="prd-verified-badge"></span>
                                     </div>
-                                    <div class="more-options">···</div>
+                                    <div class="prd-more-options">···</div>
                                 </div>
 
-                                <div class="review-rating">
-                                    <div class="stars">
+                                <div class="prd-review-rating">
+                                    <div class="prd-stars">
                                         @for ($i = 0; $i < 5; $i++)
-                                            <span class="star">★</span>
+                                            <span class="prd-star">★</span>
                                         @endfor
                                     </div>
                                 </div>
 
-                                <div class="review-content">
+                                <div class="prd-review-content">
                                     "I absolutely love this t-shirt! Very comfortable and stylish."
                                 </div>
 
-                                <div class="review-date">Posted on August 15, 2023</div>
+                                <div class="prd-review-date">Posted on August 15, 2023</div>
                             </div>
                         @endif
                     </div>
 
-                    <div class="load-more-reviews">Load More Reviews</div>
+                    <div class="prd-load-more-reviews">Load More Reviews</div>
                 </div>
             </div>
 
             {{-- FAQs --}}
             <div class="tab-panel" id="faqs">
-                <h2>Frequently Asked Questions</h2>
                 <div class="faq-item">
                     <h4>Q: What is the return policy?</h4>
                     <p>A: You can return this product within 14 days of receiving it.</p>
