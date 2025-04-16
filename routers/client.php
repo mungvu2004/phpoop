@@ -14,6 +14,9 @@ use App\Middleware\AuthMiddleware;
 $router->mount('', function() use ($router) {
     $router->get('/', HomeController::class . '@index');
 });
+$router->get('/about', function() {
+    return view('client.about-us');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');
