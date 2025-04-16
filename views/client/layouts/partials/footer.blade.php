@@ -13,7 +13,7 @@
         <div class="content-item">
             <h2>Company</h2>
             <ul>
-                <li>About</li>        
+                <a href="{{ route_url('/about') }}"><li>About</li></a>        
                 <li>Features</li>
                 <li>Works</li>
                 <li>Career</li>
