@@ -14,43 +14,48 @@ class UserController extends Controller
     }
     private function role($role) {
         if ($role == 'admin') {
-            $_SESSION['msg'] = 'Đã đăng nhập thành công với quyền admin.';
+            $_SESSION['msg'] = ['Đã đăng nhập thành công với quyền admin.'];
             return true;
         } else {
-            $_SESSION['msg'] = 'Đã đăng nhập thành công.';
+            $_SESSION['msg'] = ['Đã đăng nhập thành công.'];
             return false;
         }
     }
     public function account() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Làm sạch và xác thực dữ liệu đầu vào
             $name = htmlspecialchars($_POST['username'] ?? '');
             $password = $_POST['password'] ?? '';
-            
+    
             if (empty($name) || empty($password)) {
-                $_SESSION['msg'] = 'Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.';
-                return view('elements.login');
+                $_SESSION['msg'] = ['Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.'];
+                return view('elements.dashboard-login');
             }
-    
-            // Thực hiện đăng nhập
-            $account = $this->user->login($name, $password);
-    
+            $account = $this->user->login($name);
             if (empty($account) || count($account) != 1) {
-                $_SESSION['msg'] = 'Tên đăng nhập hoặc mật khẩu không đúng.';
-                return view('elements.login');
+                $_SESSION['msg'] = ['Tên đăng nhập hoặc mật khẩu không đúng.'];
+                return view('elements.dashboard-login');
             }
-            $role = $account[0]['role'];
-            // Kiểm tra vai trò của người dùng
-            if($this->role($role)) {
-                $_SESSION['admin'] = $account[0];
-                return view('admin.dashboard');
+            $user = $account[0];
+            if (!password_verify($password, $user['password_hash'])) {
+                $_SESSION['msg'] = ['Tên đăng nhập hoặc mật khẩu không đúng.'];
+                return view('elements.dashboard-login');
+            }
+            $role = $user['role'];
+            if ($this->role($role)) {
+                $_SESSION['admin'] = $user;
+                header('Location: /admin');
+                exit;
             } else {
-                $_SESSION['user'] = $account[0];
-                return view('client.layouts.main');
+                $_SESSION['user'] = $user;
+                header('Location: /');
+                exit;
             }
         }
-        return view('elements.login.login');
+    
+        header('Location: /login');
+                exit;
     }
+    
     private function validateEmail($email) {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
@@ -60,49 +65,48 @@ class UserController extends Controller
     }
     public function signUp()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
-            $passwordRe = htmlspecialchars($_POST['password-re']);
-            $email = htmlspecialchars($_POST['email']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username    = trim($_POST['username'] ?? '');
+            $password    = trim($_POST['password'] ?? '');
+            $passwordRe  = trim($_POST['password-re'] ?? '');
+            $email       = trim($_POST['email'] ?? '');
 
-            if (empty($username) || empty($password) || empty($passwordRe) || empty($email)) {
-                echo json_encode(['success' => false, 'message' => 'Vui lòng nhập đầy đủ thông tin']);
-                exit();
-            }
-            if (!$this->validateEmail($email)) {
-                echo json_encode(['success' => false, 'message' => 'Vui lòng nhập đúng định dạng Email']);
-                exit();
-            }
-            if(!$this->validatePass($password)) {
-                echo json_encode(['success' => false, 'message' => 'Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất 1 chữ cái thường, 1 chữ cái in hoa, 1 chữ số và 1 ký tự đặc biệt']);
-                exit();
-            }
-            if ($password !== $passwordRe) {
-                echo json_encode(['success' => false, 'message' => 'Hãy nhập đúng mật khẩu của bạn']);
-                exit();
+            $validators = [
+                ['check' => empty($username) || empty($password) || empty($passwordRe) || empty($email), 'message' => 'Vui lòng nhập đầy đủ thông tin cần thiết để đăng ký tài khoản!!!'],
+                ['check' => !$this->validateEmail($email), 'message' => 'Vui lòng nhập đúng định dạng Email!!!'],
+                ['check' => !$this->validatePass($password), 'message' => 'Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất 1 chữ cái thường, 1 chữ cái in hoa, 1 chữ số và 1 ký tự đặc biệt'],
+                ['check' => $password !== $passwordRe, 'message' => 'Hãy nhập đúng mật khẩu của bạn'],
+                ['check' => $this->user->checkUsername($username) > 0, 'message' => 'Tên đăng nhập đã tồn tại'],
+                ['check' => $this->user->checkEmail($email) > 0, 'message' => 'Email của bạn đã tồn tại'],
+            ];
+            $errors = array_filter(array_map(function($validator) {
+                return $validator['check'] ? $validator['message'] : null;
+            }, $validators));
+
+            if (!empty($errors)) {
+                $_SESSION['msg'] = $errors;
+                return;
             }
 
             $data = [
-                'name' => $username,
-                'password' => password_hash($password, PASSWORD_BCRYPT),
-                'email' => $email
+                'username'      => $username,
+                'password_hash' => password_hash($password, PASSWORD_BCRYPT),
+                'email'         => $email
             ];
 
             $client = $this->user->insert($data);
 
             if ($client) {
-                echo json_encode(['success' => true, 'message' => 'Đăng ký thành công']);
+                $_SESSION['msg'] = ['Bạn đã đăng ký thành công. Vui lòng đăng nhập.'];
             } else {
-                echo json_encode(['success' => false, 'message' => 'Lỗi vui lòng đăng ký lại tài khoản']);
+                $_SESSION['msg'] = ['Việc đăng ký đang có lỗi. Vui lòng thử lại.'];
             }
 
+            header('Location: /login');
             exit();
         }
-        
-        echo json_encode(['success' => false, 'message' => 'Invalid request']);
-        exit();
     }
+
     public function index() {
         $users = $this->user->getAllUser();
         return view('admin.users.user', 
@@ -113,7 +117,7 @@ class UserController extends Controller
         $user = $this->user->getUser( $id );
         $detailUser = $this->user->detailUser($id);
         return view('admin.users.user-detail', 
-            compact('user','detailUser')
+            data: compact('user','detailUser')
         );
     }
     public function delete($id)

@@ -51,4 +51,10 @@ class Controller
 
         throw new \Exception("Có lỗi xảy ra khi upload file.");
     }
+    public static function logout() {
+        session_unset();
+        session_destroy();
+        header('Location: /');  
+        exit;
+    }
 }

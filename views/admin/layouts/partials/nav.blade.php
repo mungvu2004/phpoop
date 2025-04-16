@@ -50,7 +50,7 @@
         </div>
         <div class="page-item">
             <div class="hide"></div>
-            <a href="{{ route_url("admin") }}"><div class="menu-icon">
+            <a href="{{ route_url("") }}"><div class="menu-icon">
                 <i class="bi bi-table"></i>
                 <h3>Table</h3>
             </div></a>
@@ -62,9 +62,11 @@
             <i class="bi bi-gear"></i>
             <h3>Setting</h3>
         </div>
-        <div class="out-item">
-            <i class="bi bi-box-arrow-right"></i>
-            <h3>Logout</h3>
-        </div>
+        <a href="{{ route_url("logout/") }}">
+            <div class="out-item">
+                <i class="bi bi-box-arrow-right"></i>
+                <h3>Logout</h3>
+            </div>
+        </a>
     </div>
 </div>
