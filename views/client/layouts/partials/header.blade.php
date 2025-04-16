@@ -30,7 +30,7 @@
             <input type="text" name="" id="" placeholder="Search for product">
         </div>
         <div class="header-set">
-            <a href=""><i class="bi bi-cart2"></i></a>
+            <a href="{{route_url('/cart')}}"><i class="bi bi-cart2"></i></a>
             <a href=""><i class="bi bi-person-circle"></i></a>
         </div>
     </div>
