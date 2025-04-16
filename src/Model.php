@@ -124,9 +124,9 @@ class Model
             ->setParameter('keyword', '%' . $keyword . '%');
         return $query->fetchAllAssociative();
     }
-
     public function quickSort(array $data, int $left, int $right, $sort_by)
     {
+
         if ($right === null) {
             $right = count($data) - 1;
         }
@@ -158,4 +158,6 @@ class Model
         }
         return $data;
     }
+
 }
+
