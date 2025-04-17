@@ -7,10 +7,9 @@ use App\Controller;
 
 class OrderController extends Controller{
     private Order $order;
-    private OrderDetail $orderDetail;
     public function __construct() {
         $this->order = new Order();
-        $this->orderDetail = new OrderDetail();
+        
     }
     
     public function getSorttable() {
@@ -25,7 +24,7 @@ class OrderController extends Controller{
             $sort_by = "created_at";
         }
         $count = count($data) - 1;
-        return $this->order->quickSort($data,0, $count,  $sort_by);
+        return $this->order->quickSort($data,0,  $sort_by,$count);
     }
     public function index() {
 
@@ -45,21 +44,10 @@ class OrderController extends Controller{
         }
     }
 
-    public function create() {
-        echo "Form thêm dữ liệu.";
-    }
-
-    public function store() {
-        echo "Xử lý thêm dữ liệu.";
-    }
 
     public function edit($id) {
         $orderDetail = $this->order->detailOrder($id);
         return view('admin.orders.order-detail', compact('orderDetail'));
-    }
-
-    public function update($id) {
-        echo "Cập nhật dữ liệu ID: $id";
     }
 
     public function delete($id) {

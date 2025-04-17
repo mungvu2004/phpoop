@@ -38,7 +38,13 @@
             @if (!isset($_SESSION['user']))
                 <a href="/login"><i class="bi bi-person-circle"></i></a>
             @else 
-                <a href="/account"><i class="bi bi-person-check"></i></i></a>
+                <div class="user-icon">
+                    <p class="icon-account"><i class="bi bi-person-check"></i></i></p>
+                    <div class="account">
+                        <a href="/account"><i class="bi bi-person-vcard"></i>Tài khoản</a>
+                        <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                    </div>
+                </div>
             @endif
 
         </div>

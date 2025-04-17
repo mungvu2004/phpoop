@@ -18,3 +18,29 @@ document.addEventListener("DOMContentLoaded", function () {
     // Áp dụng cho thông báo thành công
     hideMessage(successMessages);
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const notifications = document.querySelectorAll('.notifi');
+    console.log(notifications);
+
+    notifications.forEach((notif, index) => {
+        // Delay hiển thị nếu có nhiều cái (xếp chồng nhau)
+        setTimeout(() => {
+            notif.classList.add('show');
+        }, 100 * index);
+
+        // Tự ẩn sau 5 giây
+        setTimeout(() => {
+            notif.classList.remove('show');
+            notif.classList.add('hide');
+        }, 5000 + (100 * index));
+
+        // Nút đóng thủ công
+        const closeBtn = notif.querySelector('.close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                notif.classList.remove('show');
+                notif.classList.add('hide');
+            });
+        }
+    });
+});

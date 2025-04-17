@@ -61,3 +61,20 @@ function selectSuggestion(name) {
     document.getElementById("searchInput").value = name;
     document.getElementById("searchForm").submit();
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const account = document.querySelector('.icon-account');
+    const ac = document.querySelector('.account');
+
+    account.addEventListener('click', function (e) {
+        e.stopPropagation(); // Ngăn click lan lên document
+        ac.style.display = 'flex';
+    });
+
+    document.addEventListener('click', function (e) {
+        // Nếu click ra ngoài cả .icon-account và .account thì ẩn
+        if (!ac.contains(e.target) && !account.contains(e.target)) {
+            ac.style.display = 'none';
+        }
+    });
+});

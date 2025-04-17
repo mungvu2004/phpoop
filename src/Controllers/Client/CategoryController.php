@@ -4,6 +4,7 @@ namespace App\Controllers\Client;
 
 use App\Controller;
 use App\Models\Category;
+use Doctrine\DBAL\Schema\View;
 
 class CategoryController extends Controller
 {

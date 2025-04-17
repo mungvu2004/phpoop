@@ -186,7 +186,7 @@
     }
 
     function goToProductDetail(id) {
-        window.location.href = `/product/${id}`;
+        window.location.href = `/products/show/${id}`;
     }
 </script><script>
     let currentPage = 1;

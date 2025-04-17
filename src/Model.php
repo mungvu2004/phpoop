@@ -124,12 +124,10 @@ class Model
             ->setParameter('keyword', '%' . $keyword . '%');
         return $query->fetchAllAssociative();
     }
-    public function quickSort(array $data, int $left, int $right, $sort_by)
+    public function quickSort(array $data, int $left, $sort_by, ?int $right = null)
     {
 
-        if ($right === null) {
-            $right = count($data) - 1;
-        }
+        $right = $right ?? count($data) - 1;
         if ($left < $right) {
             $pivotIndex = (int) (($left + $right) / 2);
             $pivot = $data[$pivotIndex];

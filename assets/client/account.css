@@ -1,0 +1,151 @@
+.card {
+    width: 70%;
+    margin: 50px auto;
+    padding: 50px;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.section-title {
+    font-size: 16px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 15px;
+}
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 1.5rem;
+    background: #000000;
+}
+.image-upload {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.image-preview:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.image-preview:not(.has-image)::before {
+    content: '\f03e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #888888;
+    font-size: 1.8rem;
+}
+
+
+label.block {
+    display: block; 
+    margin-top: 15px;
+}
+
+
+.mt-2 {
+    margin-top: 0.5rem; 
+}
+
+.hidden {
+    display: none; 
+}
+
+.file-input-label {
+    background: #000000; 
+    color: #ffffff; 
+    padding: 10px 16px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 0.75rem; 
+    font-weight: 500; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    transition: background 0.3s ease; 
+}
+
+.file-input-label:hover {
+    background: #1a1a1a; 
+}
+.grid-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.form-group {
+    position: relative;
+    height: 50px;
+    padding-right: 50px;
+    color: #666666;
+}
+.form-group i {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+.form-group label{
+    position: absolute;
+    top: 0;
+    left: 30px;
+    transform: translateY(-50%);
+    background-color: #fff;
+}
+.form-group input {
+    padding-left: 50px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #d1d1d1;
+    outline: none;
+    border-radius: 6px;
+}
+.form-group select {
+    padding-left: 50px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #d1d1d1;
+    outline: none;
+    border-radius: 6px;
+}
+.submit-btn {
+    width: 100%;
+    font-size: 16px;
+    color: #f0f0f0;
+    background-color: #000000;
+    height: 50px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    margin-top: 40px;
+    cursor: pointer;
+}

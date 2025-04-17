@@ -9,6 +9,7 @@ use App\Controllers\Client\OrderController;
 use App\Controllers\Client\OrderDetailController;
 use App\Controllers\Client\PaymentController;
 use App\Controllers\Client\ReviewController;
+use App\Controllers\Client\UserController;
 use App\Middleware\AuthMiddleware;
 
 $router->mount('', function() use ($router) {
@@ -30,12 +31,6 @@ $router->mount('/products', function() use ($router) {
     $router->get('/show/{id}', ProductController::class . '@show');
     $router->get('/search/{text}', ProductController::class . '@search');
 });
-// $router->mount('/test', function() use ($router) {
-//     $router->get('/', function() {
-//         return view('client.test');
-//     } );
-//     $router->get('/search/{text}', ProductController::class . '@search');
-// });
 $router->mount('/category', function() use ($router) {
     $router->get('/', CategoryController::class . '@index');
     $router->get('/create', CategoryController::class . '@create');
@@ -43,6 +38,13 @@ $router->mount('/category', function() use ($router) {
     $router->get('/edit/{id}', CategoryController::class . '@edit');
     $router->post('/update/{id}', CategoryController::class . '@update');
     $router->get('/delete/{id}', CategoryController::class . '@delete');
+});
+$router->mount('/account', function () use ($router) {
+    $router->before('GET|POST', '.*', function() {
+        AuthMiddleware::isAuthenticated();
+    });
+    $router->get('/', UserController::class . '@index');
+    $router->post('/update', UserController::class .'@update');
 });
 $router->mount('/cart', function() use ($router) {
     $router->before('GET|POST', '.*', function() {
