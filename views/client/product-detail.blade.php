@@ -257,7 +257,5 @@
                 {{-- More product cards can be added here --}}
             </div>
         </div>
-    </div>
-
-    
+    </div>    
 @endsection
