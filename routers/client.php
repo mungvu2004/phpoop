@@ -93,4 +93,7 @@ $router->mount('/review', function() use ($router) {
     $router->post('/update/{id}', ReviewController::class . '@update');
     $router->get('/delete/{id}', ReviewController::class . '@delete');
 });
+$router->get('/news', function() {
+    return view('client.news.news');
+});
 

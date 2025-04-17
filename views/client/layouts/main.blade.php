@@ -24,6 +24,7 @@
         </div>
     </div>
     @include('client.layouts.partials.footer')
+    @stack("scripts")
     <script src="{{file_url('assets/js/autocomplete.js')}}"></script>
 </body>
 </html>
