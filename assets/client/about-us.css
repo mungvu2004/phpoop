@@ -2,46 +2,96 @@
 
 /* Hero Section */
 .about-hero-section {
+    background-color: #f1f1f1;
+    height: 500px;
     display: flex;
-    background-color: #f8f9fa;
-    padding: 60px 0;
     position: relative;
     overflow: hidden;
 }
 
 .about-hero-content {
-    flex: 1;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 50%;
+    padding: 150px 0 0 60px;
+    position: relative;
+    z-index: 2;
 }
 
 .about-hero-content h1 {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: #000;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    text-transform: uppercase;
 }
 
 .about-hero-content p {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6;
-    color: #666;
-    max-width: 600px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    max-width: 450px;
+    color: #555;
 }
 
 .about-hero-image {
-    flex: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55%;
+    height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .about-hero-image img {
-    max-width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    margin-right: 60%;
+}
+
+/* Brands Strip (Already in your main CSS) */
+.brands-strip {
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.brand {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.versace {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.zara {
+    font-family: Arial, sans-serif;
+    letter-spacing: 3px;
+}
+
+.gucci {
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 2px;
+}
+
+.prada {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.calvin-klein {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: normal;
+}
+
+.brand:hover {
+    opacity: 1;
 }
 
 /* Philosophy Section */
@@ -246,117 +296,7 @@
     color: #666;
 }
 
-/* Team Section */
-.team-section {
-    padding: 80px 0;
-    background-color: #f8f9fa;
-}
 
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-}
-
-.team-member {
-    text-align: center;
-}
-
-.member-image {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%; /* Creates a square aspect ratio */
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.member-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.member-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #000;
-}
-
-.member-title {
-    font-size: 14px;
-    color: #666;
-}
-
-/* Brands Strip (Already in your main CSS) */
-.brands-strip {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 40px 0;
-    background-color: #fff;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-}
-
-.brand {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.brand:hover {
-    opacity: 1;
-}
-
-/* CTA Section */
-.cta-section {
-    padding: 80px 0;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-}
-
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cta-content h2 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.cta-content p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: #ccc;
-}
-
-.shop-btn {
-    display: inline-block;
-    padding: 14px 36px;
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    font-weight: 600;
-    border: 2px solid #fff;
-    transition: all 0.3s ease;
-}
-
-.shop-btn:hover {
-    background-color: transparent;
-    color: #fff;
-}
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
