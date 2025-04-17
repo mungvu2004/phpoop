@@ -16,6 +16,15 @@
         </div>
     </section>
 
+    <!-- Partner Brands Section -->
+    <div class="brands-strip">
+        <div class="brand versace">VERSACE</div>
+        <div class="brand zara">ZARA</div>
+        <div class="brand gucci">GUCCI</div>
+        <div class="brand prada">PRADA</div>
+        <div class="brand calvin-klein">Calvin Klein</div>
+    </div>
+
     <!-- Our Philosophy Section -->
     <section class="philosophy-section">
         <div class="section-container">
@@ -28,7 +37,7 @@
                     <h3>CLOTHING WITH PURPOSE</h3>
                     <p>Founded in 2015, PureWare began with a vision to create clothing that doesn't just look good, but feels good and does good. We believe that fashion should be both beautiful and responsible.</p>
                     <p>Each garment is thoughtfully designed with attention to detail, quality, and versatility. We create pieces that seamlessly integrate into your existing wardrobe and can be styled in multiple ways for different occasions.</p>
-                    <a href="/views/client/list-product.blade.php" class="learn-more-btn">Learn More</a>
+                    <a href="{{ file_url('views/client/list-product.css') }}" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
         </div>
@@ -85,28 +94,28 @@
             <div class="values-grid">
                 <div class="value-card">
                     <div class="value-icon">
-                        <img src="/storage/Badge/sustainability-icon.png" alt="Sustainability Icon">
+                        <img src="{{ file_url('/storage/Badge/sustainability.png') }}" alt="Sustainability Icon">
                     </div>
                     <h3>SUSTAINABILITY</h3>
                     <p>We're committed to reducing our environmental footprint through sustainable sourcing, eco-friendly packaging, and ethical production practices.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
-                        <img src="/storage/Badge/quality-icon.png" alt="Quality Icon">
+                        <img src="{{ file_url('/storage/Badge/quality.png') }}" alt="Quality Icon">
                     </div>
                     <h3>QUALITY</h3>
                     <p>We never compromise on quality. Each piece is crafted to last and become a beloved wardrobe staple that withstands the test of time.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
-                        <img src="/storage/Badge/transparency-icon.png" alt="Transparency Icon">
+                        <img src="{{ file_url('/storage/Badge/value.jpg') }}" alt="Transparency Icon">
                     </div>
                     <h3>TRANSPARENCY</h3>
                     <p>We are transparent about our production processes, costs, and business practices because we believe you deserve to know how your clothes are made.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
-                        <img src="/storage/Badge/community-icon.png" alt="Community Icon">
+                        <img src="{{ file_url('/storage/Badge/community.jpg') }}" alt="Community Icon">
                     </div>
                     <h3>COMMUNITY</h3>
                     <p>We believe in building a community of like-minded individuals who value quality, style, and conscious consumption.</p>
@@ -115,129 +124,5 @@
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="section-container">
-            <h2 class="section-title">MEET OUR TEAM</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="/storage/Badge/team-member-1.png" alt="Sarah Johnson - Founder & Creative Director">
-                    </div>
-                    <h3 class="member-name">Sarah Johnson</h3>
-                    <p class="member-title">Founder & Creative Director</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="/storage/Badge/team-member-2.png" alt="Michael Chen - Head of Design">
-                    </div>
-                    <h3 class="member-name">Michael Chen</h3>
-                    <p class="member-title">Head of Design</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="/storage/Badge/team-member-3.png" alt="Emma Rodriguez - Sustainability Manager">
-                    </div>
-                    <h3 class="member-name">Emma Rodriguez</h3>
-                    <p class="member-title">Sustainability Manager</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="/storage/Badge/team-member-4.png" alt="James Wilson - Operations Director">
-                    </div>
-                    <h3 class="member-name">James Wilson</h3>
-                    <p class="member-title">Operations Director</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partner Brands Section -->
-    <div class="brands-strip">
-        <div class="brand versace">VERSACE</div>
-        <div class="brand zara">ZARA</div>
-        <div class="brand gucci">GUCCI</div>
-        <div class="brand prada">PRADA</div>
-        <div class="brand calvin-klein">Calvin Klein</div>
-    </div>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="section-container">
-            <div class="testimonials-header">
-                <h2 class="testimonials-title">OUR HAPPY CUSTOMERS</h2>
-                <div class="navigation-arrows">
-                    <div class="arrow">←</div>
-                    <div class="arrow">→</div>
-                </div>
-            </div>
-
-            <div class="testimonials-grid">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                    </div>
-                    <div class="customer-info">
-                        <span class="customer-name">Sarah M.</span>
-                        <span class="verified-badge">✓</span>
-                    </div>
-                    <p class="testimonial-text">"I'm blown away by the quality and style of the items I received. The
-                        fabrics are top-notch and the sizes fit exactly as expected. I've already got compliments from my
-                        coworkers!"</p>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                    </div>
-                    <div class="customer-info">
-                        <span class="customer-name">Alex K.</span>
-                        <span class="verified-badge">✓</span>
-                    </div>
-                    <p class="testimonial-text">"Kudos to your shop with its amazing customer service and incredibly
-                        stylish collection. The range of options they offer is truly impressive, catering to a variety of
-                        tastes and styles."</p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                        <div class="star">★</div>
-                    </div>
-                    <div class="customer-info">
-                        <span class="customer-name">James L.</span>
-                        <span class="verified-badge">✓</span>
-                    </div>
-                    <p class="testimonial-text">"The garments which arrived on my doorstep far exceeded even my highest
-                        expectations. The selection of dressed up options was beyond my wildest dreams but also on-point
-                        with the latest trends."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="section-container">
-            <div class="cta-content">
-                <h2>JOIN OUR SUSTAINABLE FASHION MOVEMENT</h2>
-                <p>Discover our collection of thoughtfully designed, sustainable clothing that helps you express your unique style.</p>
-                <a href="/views/client/list-product.blade.php" class="shop-btn">Shop Now</a>
-            </div>
-        </div>
-    </section>
+    
 @endsection

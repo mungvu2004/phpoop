@@ -90,22 +90,6 @@ body {
     margin-right: 60%;
 }
 
-.star-decoration {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-}
-
-.star-1 {
-    top: 20px;
-    right: 70px;
-}
-
-.star-2 {
-    bottom: 270px;
-    left: 1150px;
-}
-
 .brands-strip {
     background-color: #000;
     display: flex;
