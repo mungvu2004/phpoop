@@ -1,7 +1,8 @@
 <div class="header">
     <div class="header-sign">
-        <h3>Sign up and get 20% off to your first order.</h3>
-        <a href="">Sign Up Now</a>
+        <h3>Đăng ký và được giảm giá 20% cho đơn hàng đầu tiên của bạn.
+            </h3>
+        <a href="">Đăng ký ngay</a>
     </div>
     <div class="header-i">
         <div class="header-logo">
@@ -9,29 +10,37 @@
         </div>
         <div class="header-menu">
             <ul>
-
                 <a href="{{route_url('/products')}}">
 
-                    <li>Shop</li>
+                    <li>Danh mục</li>
                 </a>
                 <a href="">
-                    <li>On sale</li>
+                    <li>top sản phẩm</li>
                 </a>
                 <a href="">
-                    <li>New Arrivals</li>
+                    <li>tin tức</li>
                 </a>
                 <a href="">
-                    <li>Brands</li>
+                    <li>Giới thiệu</li>
                 </a>
             </ul>
         </div>
         <div class="header-search">
-            <i class="bi bi-search"></i>
-            <input type="text" name="" id="" placeholder="Search for product">
+            <form action="/product/search" method="GET" id="searchForm">
+                <i class="bi bi-search"></i>
+                <input type="text" name="query" id="searchInput" placeholder="Search for product" autocomplete="off">
+                <div id="autocomplete-box" class="autocomplete-results">
+                </div>
+            </form>
         </div>
         <div class="header-set">
-            <a href=""><i class="bi bi-cart2"></i></a>
-            <a href=""><i class="bi bi-person-circle"></i></a>
+           <a href=""><i class="bi bi-cart2"></i></a>
+            @if (!isset($_SESSION['user']))
+                <a href="/login"><i class="bi bi-person-circle"></i></a>
+            @else 
+                <a href="/account"><i class="bi bi-person-check"></i></i></a>
+            @endif
+
         </div>
     </div>
 </div>

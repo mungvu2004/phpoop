@@ -44,4 +44,20 @@ class User extends Model
             ->setParameter('id', $id);
         return $query->fetchAllAssociative();
     }
+    public function checkUsername($username) {
+        $query = $this->conn->createQueryBuilder();
+        $query->select('COUNT(*)')
+            ->from($this->tableName)
+            ->where('username = :username')
+            ->setParameter('username', $username);
+        return $query->fetchOne();
+    }
+    public function checkEmail($email) {
+        $query = $this->conn->createQueryBuilder();
+        $query->select('COUNT(*)')
+            ->from($this->tableName)
+            ->where('email = :email')
+            ->setParameter('email', $email);
+        return $query->fetchOne();
+    }
 }
