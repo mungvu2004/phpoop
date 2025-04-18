@@ -195,7 +195,7 @@ body {
 .footer-content {
     display: flex;
     justify-content: space-between;
-    gap: 113.5px;
+    gap: 50px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 50px;
 }
@@ -209,6 +209,7 @@ body {
 .content-item h2 {
     padding-bottom: 25px;
     text-transform: uppercase;
+    font-size: 18px;
 }
 .content-item ul {
     display: flex;
@@ -216,7 +217,7 @@ body {
     gap: 20px;
 }
 .flex-2 {
-    flex: 2 !important;
+    flex: 1.7 !important;
 }
 .item-icon {
     display: flex;

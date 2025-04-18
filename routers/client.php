@@ -18,6 +18,18 @@ $router->mount('', function() use ($router) {
 $router->get('/about', function() {
     return view('client.about-us');
 });
+$router->get('/policy', function() {
+    return view('client.privacy-policy');
+});
+$router->get('/shipping', function() {
+    return view('client.shipping-policy');
+});
+$router->get('/payment', function() {
+    return view('client.payment-methods');
+});
+$router->get('/return', function() {
+    return view('client.return-policy');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');
