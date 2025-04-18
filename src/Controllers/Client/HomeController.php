@@ -14,10 +14,11 @@ class HomeController
     }
     public function index()
     {
-        $product4 = $this->product->paginate(1, 4);
+        $product4 = $this->product->getAll();
+        $ratings = $this->product->rating();
         return view(
             'client.dashboard',
-            compact('product4')
+            compact('product4', 'ratings')
         );
     }    
 }

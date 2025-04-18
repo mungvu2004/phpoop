@@ -1,9 +1,14 @@
 <div class="header">
-    <div class="header-sign">
-        <h3>Đăng ký và được giảm giá 20% cho đơn hàng đầu tiên của bạn.
-            </h3>
-        <a href="">Đăng ký ngay</a>
-    </div>
+    @if(!isset($_SESSION['user']))
+        <div class="header-sign">
+            <h3>Đăng ký và được giảm giá 20% cho đơn hàng đầu tiên của bạn.
+                </h3>
+            <a href="{{route_url('/login')}}">Đăng ký ngay</a>
+        </div>
+    @else
+        <div class="header-sign" style="display: none">
+        </div>
+    @endif
     <div class="header-i">
         <div class="header-logo">
             <a href="{{ route_url(  '') }}"><li>PureWare</li></a>

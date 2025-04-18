@@ -41,7 +41,7 @@
         <h2 class="section-title">NEW ARRIVALS</h2>
         <div class="product-grid">
             @php
-                $product = $product4['data'];
+                $product = $product4;
             @endphp
             <!-- Product 1 -->
             @foreach ($product as $item)
@@ -57,17 +57,15 @@
                                         $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
                                         $remainingStars = 5 - $rating;
                                     @endphp
-
                                     @for ($i = 0; $i < $rating; $i++)
                                         <div class="star">★</div>
                                     @endfor
-
                                     @for ($i = 0; $i < $remainingStars; $i++)
                                         <div class="star">☆</div>
                                     @endfor
                                 </div>
                                 <span
-                                    class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
+                                    class="review-count">({{ (int)$item['average_rating'] . '/5' }})</span>
                             </div>
                             <div class="product-price">
                                 <span class="current-price">${{ $item['price'] }}</span>
@@ -85,11 +83,9 @@
     <section class="section-container">
         <h2 class="section-title">TOP SELLING</h2>
         <div class="product-grid">
-            @php
-                $product = $product4['data'];
-            @endphp
             <!-- Product 1 -->
-            @foreach ($product as $item)
+            
+            @foreach ($ratings as $item)
                     <a href="/products/show/{{ $item['id'] }}">
                         <div class="product-card">
                             <div class="product-image">
@@ -102,20 +98,18 @@
                                         $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
                                         $remainingStars = 5 - $rating;
                                     @endphp
-    
                                     @for ($i = 0; $i < $rating; $i++)
                                         <div class="star">★</div>
                                     @endfor
-    
                                     @for ($i = 0; $i < $remainingStars; $i++)
                                         <div class="star">☆</div>
                                     @endfor
                                 </div>
                                 <span
-                                    class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
+                                    class="review-count">({{ (int)$item['average_rating'] . '/5' }})</span>
                             </div>
                             <div class="product-price">
-                                <span class="current-price">${{ $item['price'] }}</span>
+                                <span class="current-price">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
                             </div>
                         </div>
                     </a>

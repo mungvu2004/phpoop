@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 document.addEventListener('DOMContentLoaded', function () {
     const notifications = document.querySelectorAll('.notifi');
-    console.log(notifications);
 
     notifications.forEach((notif, index) => {
         // Delay hiển thị nếu có nhiều cái (xếp chồng nhau)

@@ -52,12 +52,10 @@
     @endphp
     
     @include('client.layouts.partials.header')
-    @include('client.layouts.partials.nav')
     <div class="container">
         <div class="row">
             @yield('content')
 
-            {{-- @include('client.layouts.partials.sidebar') --}}
         </div>
     </div>
     @include('client.layouts.partials.footer')

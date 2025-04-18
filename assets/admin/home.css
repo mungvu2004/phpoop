@@ -21,7 +21,9 @@ body {
     height: auto;
     font-family: 'Satoshi', sans-serif;
 }
-
+.header {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .header-sign {
     background-color: #000;
     color: #fff;
