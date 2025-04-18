@@ -22,7 +22,7 @@
                 <a href="">
                     <li>top sản phẩm</li>
                 </a>
-                <a href="">
+                <a href="{{route_url('/news')}}">
                     <li>tin tức</li>
                 </a>
                 <a href="">
