@@ -24,7 +24,7 @@
             <ul>
                 <li>Chăm sóc khách hàng</li>
                 <a href="{{ route_url('/shipping') }}"><li>Chính sách giao nhận</li></a>
-                <li>Điều khoản & điều kiện</li>
+                <a href="{{ route_url('/return') }}"><li>Chính sách đổi trả</li></a>
                 <a href="{{ route_url('/policy') }}"><li>Chính sách bảo mật</li></a>
             </ul>
         </div>
