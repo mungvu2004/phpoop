@@ -23,6 +23,9 @@ $router->get('/policy', function() {
 $router->get('/shipping', function() {
     return view('client.shipping-policy');
 });
+$router->get('/payment', function() {
+    return view('client.payment-methods');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');

@@ -1,0 +1,87 @@
+.payment-methods-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.payment-title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.payment-methods-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.payment-description {
+    margin-top: 20px;
+}
+
+.payment-description p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.payment-methods-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.payment-methods-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .payment-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    
+    .payment-icons {
+        margin-bottom: 30px;
+    }
+    
+    .payment-methods-image {
+        max-width: 90%;
+    }
+    
+    .payment-description p,
+    .payment-methods-list li {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .payment-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    .payment-icons {
+        margin-bottom: 25px;
+    }
+    
+    .payment-methods-image {
+        max-width: 95%;
+    }
+    
+    .payment-description p,
+    .payment-methods-list li {
+        font-size: 14px;
+    }
+}

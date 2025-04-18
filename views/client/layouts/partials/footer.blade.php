@@ -34,7 +34,7 @@
                 <li>Tài khoản</li>
                 <li>Quản lý giao hàng</li>
                 <li>Đặt hàng</li>
-                <li>Thanh toán</li>
+                <a href="{{ route_url('/payment') }}"><li>Phương thức thanh toán</li></a>
             </ul>
         </div>
         <div class="content-item">

@@ -93,7 +93,7 @@
         <div class="policy-section">
             <h2 class="section-title">3. Xem hàng và Đồng kiểm:</h2>
             <p class="section-content">
-                Các đơn hàng tại https://feelab.vn/ sẽ được áp dụng chính sách "Mở hộp và đồng kiểm trước khi nhận hàng". Theo đó, khách hàng được khuyến khích mở kiện hàng 
+                Các đơn hàng tại https://PUREWARE.vn/ sẽ được áp dụng chính sách "Mở hộp và đồng kiểm trước khi nhận hàng". Theo đó, khách hàng được khuyến khích mở kiện hàng 
                 kiểm tra để kiểm ngoại quan và sản phẩm (*) trước khi thanh toán tiền và xác nhận việc giao hàng.
             </p>
             <p class="section-content">
@@ -112,8 +112,8 @@
                 Khách vui lòng lưu lại chứng nhận hàng bị phản hiện kiểm hàng có dấu hiệu rủi, móp méo, không còn nguyên vẹn hoặc sai thông tin người nhận.
             </p>
             <p class="section-content">
-                Nếu quý khách không hài lòng hoặc có vấn đề với sản phẩm nhận được, quý khách có thể khiếu nại đến chúng tôi thông qua website https://feelab.vn/ hoặc Email: 
-                feelab@gmail.com, Điện thoại: 0865359083 trong vòng 24 giờ kể từ khi nhận hàng. Quý khách lưu ý, sau khoảng thời gian này, chúng tôi sẽ không hỗ trợ bất kỳ 
+                Nếu quý khách không hài lòng hoặc có vấn đề với sản phẩm nhận được, quý khách có thể khiếu nại đến chúng tôi thông qua website https://PUREWARE.vn/ hoặc Email: 
+                PUREWARE@gmail.com, Điện thoại: 0123456789 trong vòng 24 giờ kể từ khi nhận hàng. Quý khách lưu ý, sau khoảng thời gian này, chúng tôi sẽ không hỗ trợ bất kỳ 
                 trường hợp khiếu nại nào khác.
             </p>
         </div>
