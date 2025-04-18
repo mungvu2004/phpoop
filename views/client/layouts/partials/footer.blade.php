@@ -2,7 +2,7 @@
     <div class="footer-content">
         <div class="content-item flex-2">
             <a href=""><h1>PureWare</h1></a>
-            <p>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
+            <p>Chúng tôi cung cấp quần áo phù hợp với phong cách của bạn và khiến bạn tự hào khi mặc. Từ nữ đến nam.</p>
             <div class="item-icon">
                 <div class="icon"><i class="bi bi-twitter"></i></div>
                 <div class="icon"><i class="bi bi-facebook"></i></div>
@@ -11,51 +11,51 @@
             </div>
         </div>
         <div class="content-item">
-            <h2>Company</h2>
+            <h2>Công ty</h2>
             <ul>
-                <a href="{{ route_url('/about') }}"><li>About</li></a>        
-                <li>Features</li>
-                <li>Works</li>
-                <li>Career</li>
+                <a href="{{ route_url('/about') }}"><li>Về chúng tôi</li></a>        
+                <li>Tính năng</li>
+                <li>Dự án</li>
+                <li>Tuyển dụng</li>
             </ul>
         </div>
         <div class="content-item">
-            <h2>Help</h2>
+            <h2>Hỗ trợ</h2>
             <ul>
-                <li>Customer Support</li>
-                <li>Delivery Details</li>
-                <li>Terms & Conditions</li>
-                <li>Privacy Policy</li>
+                <li>Chăm sóc khách hàng</li>
+                <li>Chi tiết giao hàng</li>
+                <li>Điều khoản & điều kiện</li>
+                <a href="{{ route_url('/policy') }}"><li>Chính sách bảo mật</li></a>
             </ul>
         </div>
         <div class="content-item">
-            <h2>Faq</h2>
+            <h2>Câu hỏi</h2>
             <ul>
-                <li>Account</li>
-                <li>Manage Deliveries</li>
-                <li>Orders</li>
-                <li>Payments</li>
+                <li>Tài khoản</li>
+                <li>Quản lý giao hàng</li>
+                <li>Đặt hàng</li>
+                <li>Thanh toán</li>
             </ul>
         </div>
         <div class="content-item">
-            <h2>Resources</h2>
+            <h2>Tài nguyên</h2>
             <ul>
-                <li>Free eBooks</li>
-                <li>Development Tutorial</li>
-                <li>How to - Blog</li>
-                <li>Youtube Playlist</li>
+                <li>Sách điện tử miễn phí</li>
+                <li>Hướng dẫn lập trình</li>
+                <li>Blog chia sẻ</li>
+                <li>Danh sách phát trên Youtube</li>
             </ul>
         </div>
     </div>
     <div class="footer-posi">
-        <h1>STAY UPTO DATE ABOUT OUR LATEST OFFERS</h1>
+        <h1>NHẬN THÔNG TIN MỚI NHẤT VỀ ƯU ĐÃI CỦA CHÚNG TÔI</h1>
         <div class="posi-input">
             <input type="email" placeholder="Email">
-            <button type="submit">Subscribe to Newsletter</button>
+            <button type="submit">Đăng ký nhận bản tin</button>
         </div>
     </div>
     <div class="footer-end">
-        <p>Shop.co © 2000-2023, All Rights Reserved</p>
+        <p>Shop.co © 2000-2023, Đã đăng ký bản quyền</p>
         <div class="end-pay">
             <img src="./storage/Badge/Badge.png" alt="">
             <img src="./storage/Badge/Badge-1.png" alt="">

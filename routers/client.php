@@ -17,6 +17,9 @@ $router->mount('', function() use ($router) {
 $router->get('/about', function() {
     return view('client.about-us');
 });
+$router->get('/policy', function() {
+    return view('client.privacy-policy');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');
