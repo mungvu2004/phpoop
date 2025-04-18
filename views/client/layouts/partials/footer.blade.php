@@ -23,7 +23,7 @@
             <h2>Hỗ trợ</h2>
             <ul>
                 <li>Chăm sóc khách hàng</li>
-                <li>Chi tiết giao hàng</li>
+                <a href="{{ route_url('/shipping') }}"><li>Chính sách giao nhận</li></a>
                 <li>Điều khoản & điều kiện</li>
                 <a href="{{ route_url('/policy') }}"><li>Chính sách bảo mật</li></a>
             </ul>

@@ -20,6 +20,9 @@ $router->get('/about', function() {
 $router->get('/policy', function() {
     return view('client.privacy-policy');
 });
+$router->get('/shipping', function() {
+    return view('client.shipping-policy');
+});
 $router->mount('/coupon', function() use ($router) {
     $router->get('/', CouponController::class . '@index');
     $router->get('/create', CouponController::class . '@create');
