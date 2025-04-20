@@ -37,51 +37,39 @@
 
 /* Product gallery */
 .product-gallery {
-    flex: 1;
-    min-width: 300px;
     display: flex;
-    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
 }
-
-.thumbnails-column {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-right: 0;
-    width: 100%;
-}
-.product-thumbnails img {
-    width: 120px;
-}
-.thumbnail-item {
-    width: 70px;
-    height: 70px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.thumbnail-item img {
-    width: 120px;
-    height: auto;
-    object-fit: cover;
-}
-
-.thumbnail-item.active {
-    border-color: #000;
-}
-
 .product-main-image {
     flex: 1;
-    text-align: center;
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    overflow: hidden;
 }
-
+.img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: none;
+    width: 100px;
+    height: 100px;
+    /* Hiệu ứng kính lúp */
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
 .product-main-image img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 500px;
     height: auto;
     object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 /* Product info */

@@ -79,11 +79,7 @@ $router->mount('/order', function() use ($router) {
 });
 $router->mount('/order_detail', function() use ($router) {
     $router->get('/', OrderDetailController::class . '@index');
-    $router->get('/create', OrderDetailController::class . '@create');
-    $router->post('/store', OrderDetailController::class . '@store');
-    $router->get('/edit/{id}', OrderDetailController::class . '@edit');
-    $router->post('/update/{id}', OrderDetailController::class . '@update');
-    $router->get('/delete/{id}', OrderDetailController::class . '@delete');
+    $router->post('/create', OrderDetailController::class . '@create');
 });
 $router->mount('/payment', function() use ($router) {
     $router->before('GET|POST', '.*', function() {

@@ -16,64 +16,75 @@
         </div>
     </div>
     <div class="product-detail">
-        {{-- <pre>{{ print_r($productDetail) }}</pre> --}}
+        {{--
+        <pre>{{ print_r($productDetail) }}</pre> --}}
         <div class="product-gallery">
-            <div class="product-thumbnails">
-                @php
-                    $imgPath = $productDetail['image_url'];
-                    $defaultImg = file_url('storage/Badge/Badge-1.png');
-                    $imgSrc = file_exists($imgPath) ? file_url($imgPath) : $defaultImg;
-                @endphp
-                @for ($i = 0; $i <= 2; $i++)
-                    <img src="{{ $imgSrc }}"></img>
-                @endfor
-            </div>
+            @php
+                $imgPath = $productDetail['image_url'];
+                $defaultImg = file_url('storage/Badge/Badge-1.png');
+                $imgSrc = file_exists($imgPath) ? file_url($imgPath) : $defaultImg;
+            @endphp
             <div class="product-main-image">
-                <img src="{{ $imgSrc }}"></img>
+                <div class="product-img">
+                    <img src="{{$imgSrc}}" alt="" class="zoom-image">
+                </div>
             </div>
         </div>
+        <form action="/order_detail/create" method="post">
+            <div class="product-info">
+                <input type="hidden" name="product_id" value="{{ $productDetail['id'] }}">
+                @if(!empty($orders) && is_iterable($orders))
+                    @foreach ($orders as $order)
+                        @if($order['status'] == 'pending')
+                        <pre>{{print_r($order)}}</pre>
+                            <input type="hidden" name="order_id" value="{{$order['id']}}">
+                        @endif
+                    @endforeach
+                @else
+                    <input type="hidden" name="order_id" value="">
+                @endif
+                <h1 class="product-title">{{ $productDetail['name'] }}</h1>
+                <div class="product-rating">
+                    <div class="stars">
+                        @php
+                            $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
+                            $remainingStars = 5 - $rating;
+                        @endphp
 
-        <div class="product-info">
-            <h1 class="product-title">{{ $productDetail['name'] }}</h1>
-            <div class="product-rating">
-                <div class="stars">
-                    @php
-                        $rating = isset($item['average_rating']) ? floor($item['average_rating']) : 0;
-                        $remainingStars = 5 - $rating;
-                    @endphp
+                        @for ($i = 0; $i < $rating; $i++)
+                            <div class="star">★</div>
+                        @endfor
 
-                    @for ($i = 0; $i < $rating; $i++)
-                        <div class="star">★</div>
-                    @endfor
-
-                    @for ($i = 0; $i < $remainingStars; $i++)
-                        <div class="star">☆</div>
-                    @endfor
+                        @for ($i = 0; $i < $remainingStars; $i++)
+                            <div class="star">☆</div>
+                        @endfor
+                    </div>
+                    <span
+                        class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
                 </div>
-                <span
-                    class="review-count">({{ isset($item['review_count']) ? number_format($item['review_count'], 1) . 'K' : '0' }})</span>
-            </div>
-            <div class="product-price">
-                <span class="old-price">${{ $productDetail['price'] }}</span>
-            </div>
-
-            <div class="product-size">
-                {{-- <pre>{{ print_r($productSize) }}</pre> --}}
-                @foreach ($productSize as $size)
-                    <button class="size-option">{{ $size['size_name'] }}</button>
-                @endforeach
-            </div>
-
-            <div class="action-row">
-                <div class="quantity-selector">
-                    <div class="quantity-btn minus">-</div>
-                    <input type="text" class="quantity-input" value="1" readonly>
-                    <div class="quantity-btn plus">+</div>
+                <div class="product-price">
+                    <span class="old-price">{{ number_format($productDetail['price'], 0, ',', '.') }} VNĐ</span>
                 </div>
 
-                <button class="add-to-cart">ADD TO CART</button>
+                <div class="product-size">
+                    <pre>{{ print_r($productSize) }}</pre>
+                    @foreach ($productSize as $size)
+                        <input type="hidden" value="{{$size['id']}}" name="size_id">
+                        <button type="button" class="size-option">{{ $size['size_name'] }}</button>
+                    @endforeach
+                </div>
+                <div class="action-row">
+                    <div class="quantity-selector">
+                        <div class="quantity-btn minus">-</div>
+                        <input type="text" name="quantity" class="quantity-input" value="1" readonly>
+                        <div class="quantity-btn plus">+</div>
+                    </div>
+
+                    <button type="submit" class="add-to-cart">ADD TO CART</button>
+                </div>
+
             </div>
-        </div>
+        </form>
     </div>
 
     {{-- Tabs Section --}}
@@ -126,43 +137,42 @@
 
                     <div class="prd-reviews-list">
                         @if (isset($productReview) && !empty($productReview['review']))
-                            <div class="prd-review-item">
-                                <div class="prd-review-header">
-                                    <div class="prd-reviewer-info">
-                                        <span
-                                            class="prd-reviewer-name">{{ $productReview['user_name'] ?? 'Customer' }}</span>
-                                        <span class="prd-verified-badge"></span>
-                                    </div>
-                                    <div class="prd-more-options">···</div>
-                                </div>
+                                            <div class="prd-review-item">
+                                                <div class="prd-review-header">
+                                                    <div class="prd-reviewer-info">
+                                                        <span class="prd-reviewer-name">{{ $productReview['user_name'] ?? 'Customer' }}</span>
+                                                        <span class="prd-verified-badge"></span>
+                                                    </div>
+                                                    <div class="prd-more-options">···</div>
+                                                </div>
 
-                                <div class="prd-review-rating">
-                                    <div class="prd-stars">
-                                        @php
-                                            $rating = isset($productReview['rating'])
-                                                ? floor($productReview['rating'])
-                                                : 5;
-                                            $remainingStars = 5 - $rating;
-                                        @endphp
+                                                <div class="prd-review-rating">
+                                                    <div class="prd-stars">
+                                                        @php
+                                                            $rating = isset($productReview['rating'])
+                                                                ? floor($productReview['rating'])
+                                                                : 5;
+                                                            $remainingStars = 5 - $rating;
+                                                        @endphp
 
-                                        @for ($i = 0; $i < $rating; $i++)
-                                            <span class="prd-star">★</span>
-                                        @endfor
+                                                        @for ($i = 0; $i < $rating; $i++)
+                                                            <span class="prd-star">★</span>
+                                                        @endfor
 
-                                        @for ($i = 0; $i < $remainingStars; $i++)
-                                            <span class="prd-star">☆</span>
-                                        @endfor
-                                    </div>
-                                </div>
+                                                        @for ($i = 0; $i < $remainingStars; $i++)
+                                                            <span class="prd-star">☆</span>
+                                                        @endfor
+                                                    </div>
+                                                </div>
 
-                                <div class="prd-review-content">
-                                    "{{ $productReview['review'] }}"
-                                </div>
+                                                <div class="prd-review-content">
+                                                    "{{ $productReview['review'] }}"
+                                                </div>
 
-                                <div class="prd-review-date">
-                                    Posted on {{ $productReview['date'] ?? 'August 15, 2023' }}
-                                </div>
-                            </div>
+                                                <div class="prd-review-date">
+                                                    Posted on {{ $productReview['date'] ?? 'August 15, 2023' }}
+                                                </div>
+                                            </div>
                         @else
                             <div class="prd-review-item">
                                 <div class="prd-review-header">
@@ -257,5 +267,6 @@
                 {{-- More product cards can be added here --}}
             </div>
         </div>
-    </div>    
+    </div>
+
 @endsection

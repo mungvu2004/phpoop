@@ -4,10 +4,26 @@ namespace App\Models;
 
 use App\Model;
 
+/**
+ * Lớp Order quản lý các thao tác liên quan đến đơn hàng
+ * 
+ * Lớp này kế thừa từ Model cơ sở và cung cấp các phương thức đặc thù
+ * cho việc quản lý thông tin đơn hàng trong hệ thống.
+ */
 class Order extends Model
 {
+    /**
+     * @var string Tên bảng orders trong cơ sở dữ liệu
+     */
     protected $tableName = 'orders';
 
+    /**
+     * Lấy dữ liệu doanh thu theo tháng
+     * 
+     * @param int|null $month Tháng cần lấy dữ liệu (mặc định là tháng hiện tại)
+     * @param int|null $year Năm cần lấy dữ liệu (mặc định là năm hiện tại)
+     * @return array Dữ liệu doanh thu theo ngày trong tháng
+     */
     public function dataMonth($month = null, $year = null) 
     {
         $month = $month ?? date('n');
@@ -25,6 +41,13 @@ class Order extends Model
 
         return $query->fetchAllAssociative();
     }
+
+    /**
+     * Lấy danh sách tất cả đơn hàng với thông tin người dùng và mã giảm giá
+     * 
+     * @return array Danh sách đơn hàng với các thông tin: order_id, user_id, total_price, 
+     * status, shipping_address, shipping_method, shipping_fee, username, coupon_code
+     */
     public function getAll() {
         $query = $this->conn->createQueryBuilder();
         $query->select('o.*, u.username, c.code AS coupon_code')  
@@ -34,6 +57,13 @@ class Order extends Model
         return $query->fetchAllAssociative();
     }
     
+    /**
+     * Lấy danh sách đơn hàng phân trang
+     * 
+     * @param int $page Số trang hiện tại
+     * @param int $limit Số đơn hàng trên mỗi trang
+     * @return array Dữ liệu phân trang gồm: data, page, limit, totalItem, totalPage
+     */
     public function paginateOrder($page = 1, $limit = 8) {
         $offset = ($page -1) * $limit;
         $query = $this->conn->createQueryBuilder();
@@ -56,6 +86,15 @@ class Order extends Model
             'totalPage' => $totalPage,
         ];
     }
+
+    /**
+     * Lấy chi tiết đơn hàng theo ID
+     * 
+     * @param int $id ID của đơn hàng
+     * @return array Chi tiết đơn hàng với các thông tin: order_id, user_id, total_price,
+     * status, shipping_address, shipping_method, shipping_fee, quantity, subtotal,
+     * product_name, price, image_url, username, payment_method
+     */
     public function detailOrder($id) {
         $query = $this->conn->createQueryBuilder();
         $query->select(
@@ -92,5 +131,20 @@ class Order extends Model
             ->setParameter('id', $id);
         
         return $query->fetchAllAssociative();
+    }
+
+    /**
+     * Tìm đơn hàng theo ID người dùng
+     * 
+     * @param int $id ID của người dùng
+     * @return array Danh sách đơn hàng của người dùng
+     */
+    public function findUser(int $id) {
+        $qb = $this->conn->createQueryBuilder();
+        $qb->select('*')
+            ->from($this->tableName)
+            ->where('user_id = :id')
+            ->setParameter('id', $id);
+        return $qb->fetchAllAssociative();
     }
 }

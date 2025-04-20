@@ -6,16 +6,38 @@ use App\Models\User;
 use App\Models\UserAddress;
 use App\Controller;
 
+/**
+ * Lớp UserController quản lý các thao tác liên quan đến người dùng từ phía client
+ * 
+ * Lớp này kế thừa từ Controller cơ sở và cung cấp các phương thức đặc thù
+ * cho việc quản lý thông tin cá nhân và địa chỉ của người dùng.
+ */
 class UserController extends Controller
 {
+    /**
+     * @var User Model xử lý dữ liệu người dùng
+     */
     private User $user;
+
+    /**
+     * @var UserAddress Model xử lý dữ liệu địa chỉ người dùng
+     */
     private UserAddress $userAddress;
+
+    /**
+     * Khởi tạo controller và các model liên quan
+     */
     public function __construct()
     {
         $this->user = new User();
         $this->userAddress = new UserAddress();
     }
 
+    /**
+     * Hiển thị trang thông tin tài khoản người dùng
+     * 
+     * @return mixed View hiển thị trang chủ hoặc trang thông tin tài khoản
+     */
     public function index()
     {
         if (!isset($_SESSION['user'])) {
@@ -29,6 +51,12 @@ class UserController extends Controller
             );
         }
     }
+
+    /**
+     * Cập nhật thông tin địa chỉ và ảnh đại diện của người dùng
+     * 
+     * @return void Chuyển hướng về trang thông tin tài khoản
+     */
     public function update()
     {
         $user = $_SESSION['user'];

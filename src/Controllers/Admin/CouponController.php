@@ -4,18 +4,42 @@ namespace App\Controllers\Admin;
 use App\Models\Coupon;
 use App\Controller;
 
+/**
+ * Lớp CouponController quản lý các thao tác liên quan đến mã giảm giá
+ * 
+ * Lớp này kế thừa từ Controller cơ sở và cung cấp các phương thức đặc thù
+ * cho việc quản lý mã giảm giá như thêm, sửa, xóa và cập nhật trạng thái.
+ */
 class CouponController extends Controller
 {
+    /**
+     * @var Coupon Model xử lý dữ liệu mã giảm giá
+     */
     private Coupon $coupon;
+
+    /**
+     * Khởi tạo controller và model Coupon
+     */
     public function __construct()
     {
         $this->coupon = new Coupon();
     }
+
+    /**
+     * Hiển thị danh sách mã giảm giá
+     * 
+     * @return mixed View hiển thị danh sách mã giảm giá
+     */
     public function index() {
         $coupons = $this->coupon->findALL();
         return view("admin.coupon", compact("coupons"));
     }
 
+    /**
+     * Xử lý thêm mã giảm giá mới
+     * 
+     * @return void Chuyển hướng về trang danh sách mã giảm giá
+     */
     public function create() {
         try {
             // Khởi tạo mảng lỗi
@@ -80,7 +104,12 @@ class CouponController extends Controller
         }
     }
 
-
+    /**
+     * Cập nhật trạng thái của mã giảm giá
+     * 
+     * @param int $id ID của mã giảm giá cần cập nhật
+     * @return void Chuyển hướng về trang danh sách mã giảm giá
+     */
     public function edit($id) {
         try {
             $is_active = $_POST['is_active'] ?? null;
@@ -95,6 +124,4 @@ class CouponController extends Controller
         header('Location: /admin/coupon');
         exit;
     }
-    
-
 }

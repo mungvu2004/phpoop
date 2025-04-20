@@ -306,6 +306,7 @@ body {
 .notifi.hide {
     opacity: 0;
     pointer-events: none;
+    display: none;
 }
 
 .notifi .close-btn {
