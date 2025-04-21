@@ -31,4 +31,42 @@ class Payment extends Model
 
     return $query->fetchAllAssociative();
     }
+
+    public function create($data)
+    {
+        $query = $this->conn->createQueryBuilder();
+        $query->insert($this->tableName)
+            ->values([
+                'user_id' => '?',
+                'order_id' => '?',
+                'amount' => '?',
+                'payment_method' => '?',
+                'status' => '?',
+            ])
+            ->setParameter(0, $data['user_id'])
+            ->setParameter(1, $data['order_id'])
+            ->setParameter(2, $data['amount'])
+            ->setParameter(3, $data['payment_method'])
+            ->setParameter(4, $data['status']);
+        return $query->executeQuery();
+    }
+
+    /**
+     * Cập nhật trạng thái thanh toán
+     * 
+     * @param int $orderId ID của đơn hàng
+     * @param string $status Trạng thái mới
+     * @return bool Kết quả cập nhật
+     */
+    public function updatePaymentStatus($orderId, $status)
+    {
+        $query = $this->conn->createQueryBuilder();
+        $query->update($this->tableName)
+            ->set('status', ':status')
+            ->where('order_id = :order_id')
+            ->setParameter('status', $status)
+            ->setParameter('order_id', $orderId);
+
+        return $query->executeQuery();
+    }
 }

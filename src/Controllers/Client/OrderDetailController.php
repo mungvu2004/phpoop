@@ -26,17 +26,6 @@ class OrderDetailController extends Controller
         $this->userAddress = new UserAddress();
     }
 
-    /**
-     * Hiển thị danh sách đơn hàng và chi tiết đơn hàng
-     * 
-     * @return mixed View hiển thị danh sách đơn hàng
-     */
-    public function index()
-    {
-        $orders = $this->order->findALL();
-        $orderDetail = $this->orderDetail->findALL();
-        return view("", compact("orders", "orderDetail"));
-    }
 
     /**
      * Kiểm tra trạng thái đăng nhập của người dùng

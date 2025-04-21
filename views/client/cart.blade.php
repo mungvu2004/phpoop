@@ -162,13 +162,15 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="checkout-modal-body">
-                <form id="checkout-form" action="/payment/processCOD" method="POST">
+                <form id="checkout-form" action="/payment/process" method="POST">
                     <input type="hidden" name="order_ids" id="selected-order-ids" value="">
+                    <input type="hidden" name="amount" id="total-amount" value="">
+                    
                     <div class="form-section">
                         <h3>Phương thức vận chuyển</h3>
                         <div class="shipping-methods">
                             <label class="shipping-method">
-                                <input type="radio" name="shipping_method" value="standard" {{ isset($shipping_method) && $shipping_method == 'standard' ? 'checked' : '' }}>
+                                <input type="radio" name="shipping_method" value="standard" checked>
                                 <div class="method-content">
                                     <span class="method-name">Giao hàng tiêu chuẩn</span>
                                     <span class="method-price">20,000 ₫</span>
@@ -176,7 +178,7 @@
                                 </div>
                             </label>
                             <label class="shipping-method">
-                                <input type="radio" name="shipping_method" value="express" {{ isset($shipping_method) && $shipping_method == 'express' ? 'checked' : '' }}>
+                                <input type="radio" name="shipping_method" value="express">
                                 <div class="method-content">
                                     <span class="method-name">Giao hàng nhanh</span>
                                     <span class="method-price">40,000 ₫</span>
@@ -190,14 +192,14 @@
                         <h3>Phương thức thanh toán</h3>
                         <div class="payment-methods">
                             <label class="payment-method">
-                                <input type="radio" name="payment_method" value="cod" {{ isset($payment_method) && $payment_method == 'cod' ? 'checked' : '' }}>
+                                <input type="radio" name="payment_method" value="cod" checked>
                                 <div class="method-content">
                                     <span class="method-name">Thanh toán khi nhận hàng (COD)</span>
                                     <span class="method-icon">💵</span>
                                 </div>
                             </label>
                             <label class="payment-method">
-                                <input type="radio" name="payment_method" value="vnpay" {{ isset($payment_method) && $payment_method == 'vnpay' ? 'checked' : '' }}>
+                                <input type="radio" name="payment_method" value="vnpay">
                                 <div class="method-content">
                                     <span class="method-name">Thanh toán qua VNPay</span>
                                     <span class="method-icon">💳</span>

@@ -83,6 +83,8 @@ $router->mount('/payment', function() use ($router) {
     $router->get('/edit/{id}', PaymentController::class . '@edit');
     $router->post('/update/{id}', PaymentController::class . '@update');
     $router->get('/delete/{id}', PaymentController::class . '@delete');
+    $router->post('/vnpay', PaymentController::class . '@processVNPay');
+    $router->get('/vnpay-return', PaymentController::class . '@vnpayReturn');
 });
 $router->mount('/review', function() use ($router) {
     $router->before('GET|POST', '.*', function() {

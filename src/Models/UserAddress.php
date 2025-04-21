@@ -50,7 +50,7 @@ class UserAddress extends Model {
      */
     public function findId($id) {
         $query = $this->conn->createQueryBuilder();
-        $query->select("*")
+        $query->select("id")  // Chỉ lấy cột id thay vì *
             ->from($this->tableName)
             ->where("user_id = :id")
             ->andWhere("is_default = 1")
