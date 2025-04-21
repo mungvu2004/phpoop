@@ -2,7 +2,10 @@
 namespace App\Controllers\Client;
 
 use App\Controller;
+use App\Models\PaySession;
+use App\Models\Order;
 use App\Models\Payment;
+use PDO;
 
 /**
  * Lớp PaymentController quản lý các thao tác liên quan đến thanh toán
@@ -10,61 +13,29 @@ use App\Models\Payment;
  * Lớp này kế thừa từ Controller cơ sở và cung cấp các phương thức đặc thù
  * cho việc xử lý các yêu cầu liên quan đến thanh toán từ phía người dùng.
  */
-class PaymentController {
-    /**
-     * Hiển thị danh sách thanh toán
-     * 
-     * @return void
-     */
-    public function index() {
-        echo "Danh sách dữ liệu.";
+class PaymentController extends Controller{
+    private PaySession $paySession;
+    private Order $order;
+    private Payment $payment;
+
+    public function __construct()
+    {
+        $this->paySession = new PaySession();
+        $this->order = new Order();
+        $this->payment = new Payment();
     }
 
-    /**
-     * Hiển thị form thêm thanh toán mới
-     * 
-     * @return void
-     */
-    public function create() {
-        echo "Form thêm dữ liệu.";
+    public function checkPay($paymentMethod) {
+        return strtolower($paymentMethod) === 'cod';
+    } 
+
+    public function checkShipping($shippingMethod) {
+        return strtolower($shippingMethod) === 'standard';
     }
 
-    /**
-     * Xử lý thêm thanh toán mới
-     * 
-     * @return void
-     */
-    public function store() {
-        echo "Xử lý thêm dữ liệu.";
-    }
-
-    /**
-     * Hiển thị form chỉnh sửa thanh toán
-     * 
-     * @param int $id ID của thanh toán cần chỉnh sửa
-     * @return void
-     */
-    public function edit($id) {
-        echo "Chỉnh sửa dữ liệu ID: $id";
-    }
-
-    /**
-     * Xử lý cập nhật thanh toán
-     * 
-     * @param int $id ID của thanh toán cần cập nhật
-     * @return void
-     */
-    public function update($id) {
-        echo "Cập nhật dữ liệu ID: $id";
-    }
-
-    /**
-     * Xử lý xóa thanh toán
-     * 
-     * @param int $id ID của thanh toán cần xóa
-     * @return void
-     */
-    public function delete($id) {
-        echo "Xóa dữ liệu ID: $id";
+    public function processCOD() {
+        $orderId = $_POST['order_id'];
+        $method = $_POST['shipping_method'];
+        
     }
 }

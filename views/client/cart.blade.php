@@ -2,10 +2,12 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ file_url('assets/client/cart.css') }}">
+    <link rel="stylesheet" href="{{ file_url('assets/client/checkout.css') }}">
 @endpush
 @push('scripts')
     <script src="{{file_url('assets/client/js/cart.js')}}"></script>
     <script src="{{file_url('assets/js/notifi.js')}}"></script>
+    <script src="{{file_url('assets/client/js/checkout.js')}}"></script>
 @endpush
 
 @section('content')
@@ -149,6 +151,67 @@
                     <path d="M3 9H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-modal-content">
+            <div class="checkout-modal-header">
+                <h2>Thanh toán</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="checkout-modal-body">
+                <form id="checkout-form" action="/payment/processCOD" method="POST">
+                    <input type="hidden" name="order_ids" id="selected-order-ids" value="">
+                    <div class="form-section">
+                        <h3>Phương thức vận chuyển</h3>
+                        <div class="shipping-methods">
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping_method" value="standard" {{ isset($shipping_method) && $shipping_method == 'standard' ? 'checked' : '' }}>
+                                <div class="method-content">
+                                    <span class="method-name">Giao hàng tiêu chuẩn</span>
+                                    <span class="method-price">20,000 ₫</span>
+                                    <span class="method-time">3-5 ngày</span>
+                                </div>
+                            </label>
+                            <label class="shipping-method">
+                                <input type="radio" name="shipping_method" value="express" {{ isset($shipping_method) && $shipping_method == 'express' ? 'checked' : '' }}>
+                                <div class="method-content">
+                                    <span class="method-name">Giao hàng nhanh</span>
+                                    <span class="method-price">40,000 ₫</span>
+                                    <span class="method-time">1-2 ngày</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Phương thức thanh toán</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="payment_method" value="cod" {{ isset($payment_method) && $payment_method == 'cod' ? 'checked' : '' }}>
+                                <div class="method-content">
+                                    <span class="method-name">Thanh toán khi nhận hàng (COD)</span>
+                                    <span class="method-icon">💵</span>
+                                </div>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment_method" value="vnpay" {{ isset($payment_method) && $payment_method == 'vnpay' ? 'checked' : '' }}>
+                                <div class="method-content">
+                                    <span class="method-name">Thanh toán qua VNPay</span>
+                                    <span class="method-icon">💳</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

@@ -79,7 +79,7 @@ $router->mount('/payment', function() use ($router) {
     });
     $router->get('/', PaymentController::class . '@index');
     $router->get('/create', PaymentController::class . '@create');
-    $router->post('/store', PaymentController::class . '@store');
+    $router->post('/processCOD', PaymentController::class . '@processCOD');
     $router->get('/edit/{id}', PaymentController::class . '@edit');
     $router->post('/update/{id}', PaymentController::class . '@update');
     $router->get('/delete/{id}', PaymentController::class . '@delete');

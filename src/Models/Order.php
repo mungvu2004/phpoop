@@ -204,4 +204,49 @@ class Order extends Model
 
         return $query->fetchAssociative();
     }
+
+    public function canPayCOD($orderId)
+    {
+        $order = $this->getOrderById($orderId);
+        if (!$order) {
+            return false;
+        }
+
+        // Kiểm tra trạng thái đơn hàng
+        if ($order['status'] != 'pending') {
+            return false;
+        }
+
+        // Kiểm tra tổng giá trị đơn hàng
+        if ($order['total_price'] > 5000000) { // Giới hạn 5 triệu cho COD
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Cập nhật thông tin thanh toán COD
+     * 
+     * @param int $orderId ID của đơn hàng
+     * @param array $paymentData Dữ liệu thanh toán
+     * @return bool Kết quả cập nhật
+     */
+    public function updateCOD($orderId, $paymentData)
+    {
+        if (!$this->canPayCOD($orderId)) {
+            return false;
+        }
+
+        $query = $this->conn->createQueryBuilder();
+        $query->update($this->tableName)
+            ->set('payment_method', ':payment_method')
+            ->set('status', ':status')
+            ->where('id = :id')
+            ->setParameter('payment_method', 'COD')
+            ->setParameter('status', 'pending')
+            ->setParameter('id', $orderId);
+
+        return $query->fetchOne();
+    }
 }
