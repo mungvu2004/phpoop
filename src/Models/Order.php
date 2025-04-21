@@ -17,6 +17,106 @@ class Order extends Model
      */
     protected $tableName = 'orders';
 
+    protected $fillable = [
+        'user_id',
+        'total_price',
+        'total_amount',
+        'status',
+        'payment_status',
+        'payment_method',
+        'payment_time',
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
+     * Trả về kết nối database để sử dụng trong các class khác
+     */
+    public function getConnection() 
+    {
+        return $this->conn;
+    }
+
+    /**
+     * Tạo mới một đơn hàng
+     * 
+     * @param array $data Dữ liệu đơn hàng
+     * @return int ID của đơn hàng mới
+     */
+    public function create(array $data)
+    {
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['updated_at'] = date('Y-m-d H:i:s');
+        $data['payment_status'] = $data['payment_status'] ?? 'pending';
+        
+        return $this->insert($data);
+    }
+
+    /**
+     * Cập nhật thông tin đơn hàng
+     * 
+     * @param int $id ID đơn hàng
+     * @param array $data Dữ liệu cập nhật
+     * @return int Số dòng ảnh hưởng
+     */
+    public function update($id, array $data)
+    {
+        // Ghi log trước khi cập nhật
+        $oldData = $this->find($id);
+        error_log("Update order $id - Old data: " . json_encode($oldData));
+        error_log("Update order $id - New data: " . json_encode($data));
+        
+        // Kiểm tra cấu trúc bảng trước khi thêm updated_at
+        try {
+            $tableColumns = $this->getTableColumns($this->tableName);
+            $columnNames = array_column($tableColumns, 'Field');
+            
+            // Chỉ thêm updated_at nếu cột này tồn tại trong bảng
+            if (in_array('updated_at', $columnNames)) {
+                $data['updated_at'] = date('Y-m-d H:i:s');
+            }
+            
+            // Lọc dữ liệu để chỉ lấy các cột tồn tại trong bảng
+            $filteredData = [];
+            foreach ($data as $key => $value) {
+                if (in_array($key, $columnNames)) {
+                    $filteredData[$key] = $value;
+                } else {
+                    error_log("Column '$key' does not exist in table '$this->tableName', skipping...");
+                }
+            }
+            
+            error_log("Filtered data for update: " . json_encode($filteredData));
+            $result = parent::update($id, $filteredData);
+            
+            // Ghi log sau khi cập nhật
+            error_log("Update order $id - Result: " . ($result ? "success" : "failed"));
+            
+            return $result;
+        } catch (\Exception $e) {
+            error_log("Error in update method: " . $e->getMessage());
+            
+            // Thử cập nhật không có updated_at
+            unset($data['updated_at']);
+            $result = parent::update($id, $data);
+            
+            error_log("Fallback update order $id - Result: " . ($result ? "success" : "failed"));
+            return $result;
+        }
+    }
+
+    /**
+     * Lấy cấu trúc bảng
+     * 
+     * @param string $tableName Tên bảng
+     * @return array Thông tin cấu trúc bảng
+     */
+    private function getTableColumns($tableName)
+    {
+        $statement = $this->conn->executeQuery("DESCRIBE $tableName");
+        return $statement->fetchAllAssociative();
+    }
+
     /**
      * Lấy dữ liệu doanh thu theo tháng
      * 

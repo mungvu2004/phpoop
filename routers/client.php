@@ -84,8 +84,8 @@ $router->mount('/payment', function() use ($router) {
     $router->post('/update/{id}', PaymentController::class . '@update');
     $router->get('/delete/{id}', PaymentController::class . '@delete');
     $router->post('/vnpay', PaymentController::class . '@processVNPay');
-    $router->get('/vnpay-return', PaymentController::class . '@vnpayReturn');
 });
+$router->get('/payment/vnpay-return', PaymentController::class . '@vnpayReturn');
 $router->mount('/review', function() use ($router) {
     $router->before('GET|POST', '.*', function() {
         AuthMiddleware::isAuthenticated();

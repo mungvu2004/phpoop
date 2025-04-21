@@ -201,8 +201,8 @@
                             <label class="payment-method">
                                 <input type="radio" name="payment_method" value="vnpay">
                                 <div class="method-content">
-                                    <span class="method-name">Thanh toán qua VNPay</span>
-                                    <span class="method-icon">💳</span>
+                                    <span class="method-name">Thanh toán qua VNPAY</span>
+                                    <img src="{{ file_url('assets/images/vnpay-logo.png') }}" alt="VNPay" class="method-icon" style="height: 30px;">
                                 </div>
                             </label>
                         </div>
@@ -217,3 +217,85 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const paymentMethod = formData.get('payment_method');
+    const orderIds = formData.get('order_ids');
+    let amount = formData.get('amount');
+    const shippingMethod = formData.get('shipping_method');
+    
+    // Đảm bảo amount là số
+    amount = parseFloat(amount) || 0;
+    
+    // Debug
+    console.log("Form data:", {
+        payment_method: paymentMethod,
+        order_ids: orderIds,
+        amount: amount,
+        shipping_method: shippingMethod
+    });
+
+    try {
+        let response;
+        if (paymentMethod === 'cod') {
+            // Gửi request thanh toán COD
+            response = await fetch('/payment/processCOD', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    order_ids: orderIds,
+                    shipping_method: shippingMethod
+                })
+            });
+        } else if (paymentMethod === 'vnpay') {
+            // Gửi request thanh toán VNPAY
+            response = await fetch('/payment/vnpay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    order_ids: orderIds,
+                    amount: amount,
+                    shipping_method: shippingMethod
+                })
+            });
+        }
+
+        console.log("Response status:", response.status);
+        const text = await response.text();
+        console.log("Response text:", text);
+        
+        try {
+            const data = JSON.parse(text);
+            console.log("Parsed data:", data);
+            
+            if (data.status === 'success') {
+                if (paymentMethod === 'cod') {
+                    window.location.href = '/orders';
+                } else if (paymentMethod === 'vnpay') {
+                    window.location.href = data.payment_url;
+                }
+            } else {
+                alert(data.message || 'Có lỗi xảy ra');
+            }
+        } catch (jsonError) {
+            console.error("JSON parse error:", jsonError);
+            alert("Lỗi xử lý phản hồi từ server");
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        alert('Có lỗi xảy ra khi xử lý thanh toán');
+    }
+});
+</script>
+@endpush

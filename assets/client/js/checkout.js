@@ -1,69 +1,86 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const checkoutForm = document.getElementById('checkout-form');
-    const selectedOrderIds = document.getElementById('selected-order-ids');
-    const totalAmount = document.getElementById('total-amount');
-    const closeModalBtn = document.querySelector('.close-modal');
-    const checkoutModal = document.getElementById('checkout-modal');
     const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutModal = document.getElementById('checkout-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
     const orderCheckboxes = document.querySelectorAll('.order-checkbox');
-
-    // Lấy danh sách đơn hàng đã chọn
-    const selectedOrders = document.querySelectorAll('.order-checkbox:checked');
-    const orderIds = Array.from(selectedOrders).map(checkbox => checkbox.dataset.orderId);
-    selectedOrderIds.value = orderIds.join(',');
-
-    // Tính tổng tiền
-    let total = 0;
-    selectedOrders.forEach(checkbox => {
-        const orderCard = checkbox.closest('.order-card');
-        total += parseFloat(orderCard.dataset.total);
-    });
-    totalAmount.value = total;
+    const selectedOrderIdsInput = document.getElementById('selected-order-ids');
+    const totalAmountInput = document.getElementById('total-amount');
 
     // Kiểm tra trạng thái nút thanh toán
     function updateCheckoutButton() {
         const hasSelectedOrder = Array.from(orderCheckboxes).some(checkbox => checkbox.checked);
-        if (checkoutBtn) {
-            checkoutBtn.disabled = !hasSelectedOrder;
-            checkoutBtn.style.opacity = hasSelectedOrder ? '1' : '0.5';
-            checkoutBtn.style.cursor = hasSelectedOrder ? 'pointer' : 'not-allowed';
-        }
+        checkoutBtn.disabled = !hasSelectedOrder;
+        checkoutBtn.style.opacity = hasSelectedOrder ? '1' : '0.5';
+        checkoutBtn.style.cursor = hasSelectedOrder ? 'pointer' : 'not-allowed';
+    }
+
+    // Lấy danh sách các order_id đã chọn
+    function getSelectedOrderIds() {
+        return Array.from(orderCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.dataset.orderId)
+            .join(',');
+    }
+
+    // Tính tổng tiền các đơn hàng đã chọn
+    function calculateTotalAmount() {
+        let total = 0;
+        Array.from(orderCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .forEach(checkbox => {
+                const orderId = checkbox.dataset.orderId;
+                const orderCard = document.querySelector(`.order-card[data-order-id="${orderId}"]`);
+                if (orderCard) {
+                    const orderTotal = parseFloat(orderCard.dataset.total) || 0;
+                    total += orderTotal;
+                }
+            });
+        return total;
     }
 
     // Lắng nghe sự kiện khi chọn đơn hàng
     orderCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateCheckoutButton);
+        checkbox.addEventListener('change', function() {
+            updateCheckoutButton();
+            // Cập nhật tổng tiền trong summary
+            const totalAmount = calculateTotalAmount();
+            document.getElementById('summary-total').textContent = totalAmount.toLocaleString('vi-VN') + ' ₫';
+            
+            // Cập nhật giá trị cuối cùng
+            const finalAmount = totalAmount;
+            document.getElementById('summary-final').textContent = finalAmount.toLocaleString('vi-VN') + ' ₫';
+        });
     });
 
     // Mở modal khi click vào nút thanh toán
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
-            if (!this.disabled) {
-                // Cập nhật order_ids trước khi hiển thị modal
-                selectedOrderIds.value = getSelectedOrderIds();
-                checkoutModal.style.display = 'block';
-            }
-        });
-    }
-
-    // Đóng modal khi click vào nút đóng
-    closeModalBtn.addEventListener('click', function() {
-        checkoutModal.style.display = 'none';
-    });
-
-    // Đóng modal khi click ra ngoài
-    window.addEventListener('click', function(e) {
-        if (e.target === checkoutModal) {
-            checkoutModal.style.display = 'none';
+    checkoutBtn.addEventListener('click', function() {
+        if (!this.disabled) {
+            // Cập nhật order_ids và amount trước khi hiển thị modal
+            const selectedIds = getSelectedOrderIds();
+            const totalAmount = calculateTotalAmount();
+            
+            selectedOrderIdsInput.value = selectedIds;
+            totalAmountInput.value = totalAmount;
+            
+            console.log("Order IDs:", selectedOrderIdsInput.value);
+            console.log("Total Amount:", totalAmountInput.value);
+            
+            checkoutModal.style.display = 'block';
         }
     });
 
-    // Xử lý sự kiện khi chọn phương thức vận chuyển
-    const shippingMethods = document.querySelectorAll('input[name="shipping_method"]');
-    shippingMethods.forEach(method => {
-        method.addEventListener('change', function() {
-            console.log('Phương thức vận chuyển đã chọn:', this.value);
+    // Đóng modal khi click vào nút đóng
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            checkoutModal.style.display = 'none';
         });
+    });
+
+    // Đóng modal khi click ra ngoài
+    window.addEventListener('click', function(event) {
+        if (event.target === checkoutModal) {
+            checkoutModal.style.display = 'none';
+        }
     });
 
     // Xử lý sự kiện khi chọn phương thức thanh toán
@@ -76,42 +93,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Khởi tạo trạng thái ban đầu của nút thanh toán
     updateCheckoutButton();
-
-    // Xử lý submit form
-    checkoutForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
-        const formData = new FormData(this);
-        formData.append('payment_method', paymentMethod);
-
-        fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success' && data.redirect_url) {
-                window.location.href = data.redirect_url;
-            } else {
-                alert(data.message || 'Có lỗi xảy ra. Vui lòng thử lại sau.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
-        });
-    });
-
-    // Hàm lấy danh sách order_id đã chọn
-    function getSelectedOrderIds() {
-        return Array.from(orderCheckboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.dataset.orderId)
-            .join(',');
-    }
-}); 
+});
