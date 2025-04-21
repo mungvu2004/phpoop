@@ -63,4 +63,16 @@ class OrderDetail extends Model
         $result = $query->executeQuery()->fetchAssociative();
         return $result['count'] > 0;
     }
+    public function getAllOrder(int $orderId) {
+        $query = $this->conn->createQueryBuilder();
+        $query
+            ->select('oi.*', 'p.name AS product_name', 'p.image_url', 'p.price AS product_price')
+            ->from($this->tableName, 'oi')
+            ->leftJoin('oi', 'products', 'p', 'oi.product_id = p.id')
+            ->where('oi.order_id = :order_id')
+            ->setParameter('order_id', $orderId);
+    
+        return $query->fetchAllAssociative();
+    }
+    
 }

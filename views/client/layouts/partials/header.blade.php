@@ -39,7 +39,7 @@
             </form>
         </div>
         <div class="header-set">
-           <a href=""><i class="bi bi-cart2"></i></a>
+           <a href="/order"><i class="bi bi-cart2"></i></a>
             @if (!isset($_SESSION['user']))
                 <a href="/login"><i class="bi bi-person-circle"></i></a>
             @else 

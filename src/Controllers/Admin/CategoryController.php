@@ -22,4 +22,8 @@ class CategoryController {
     public function __construct() {
         $this->category = new Category();
     }
+    public function index() {
+        $categories = $this->category->findALL();
+        return view("", compact("categories"));
+    }
 }

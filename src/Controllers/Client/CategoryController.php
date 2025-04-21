@@ -30,7 +30,7 @@ class CategoryController extends Controller
     /**
      * Hiển thị danh sách tất cả danh mục sản phẩm
      * 
-     * @return View Trang hiển thị danh sách danh mục
+     * View Trang hiển thị danh sách danh mục
      */
     public function index()
     {

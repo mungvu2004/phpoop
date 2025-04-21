@@ -52,11 +52,7 @@ class OrderController extends Controller{
         return $this->order->quickSort($data,0,  $sort_by,$count);
     }
 
-    /**
-     * Hiển thị danh sách đơn hàng
-     * 
-     * @return View Trang hiển thị danh sách đơn hàng
-     */
+  
     public function index() {
         $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
         $sort_by = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'created_at';
@@ -72,12 +68,7 @@ class OrderController extends Controller{
         }
     }
 
-    /**
-     * Hiển thị chi tiết đơn hàng
-     * 
-     * @param int $id ID của đơn hàng cần xem chi tiết
-     * @return View Trang hiển thị chi tiết đơn hàng
-     */
+   
     public function edit($id) {
         $orderDetail = $this->order->detailOrder($id);
         return view('admin.orders.order-detail', compact('orderDetail'));

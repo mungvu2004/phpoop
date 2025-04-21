@@ -16,8 +16,6 @@
         </div>
     </div>
     <div class="product-detail">
-        {{--
-        <pre>{{ print_r($productDetail) }}</pre> --}}
         <div class="product-gallery">
             @php
                 $imgPath = $productDetail['image_url'];
@@ -36,7 +34,6 @@
                 @if(!empty($orders) && is_iterable($orders))
                     @foreach ($orders as $order)
                         @if($order['status'] == 'pending')
-                        <pre>{{print_r($order)}}</pre>
                             <input type="hidden" name="order_id" value="{{$order['id']}}">
                         @endif
                     @endforeach
@@ -67,11 +64,10 @@
                 </div>
 
                 <div class="product-size">
-                    <pre>{{ print_r($productSize) }}</pre>
                     @foreach ($productSize as $size)
-                        <input type="hidden" value="{{$size['id']}}" name="size_id">
-                        <button type="button" class="size-option">{{ $size['size_name'] }}</button>
+                        <button type="button" class="size-option" data-size-id="{{$size['id']}}">{{ $size['size_name'] }}</button>
                     @endforeach
+                    <input type="hidden" name="size_id" id="selected_size_id" value="">
                 </div>
                 <div class="action-row">
                     <div class="quantity-selector">
@@ -268,5 +264,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sizeOptions = document.querySelectorAll('.size-option');
+        const sizeInput = document.getElementById('selected_size_id');
+        const addToCartBtn = document.querySelector('.add-to-cart');
+        
+        // Add click event to size options
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                sizeOptions.forEach(opt => opt.classList.remove('active'));
+                // Add active class to clicked option
+                this.classList.add('active');
+                // Update hidden input value
+                sizeInput.value = this.getAttribute('data-size-id');
+            });
+        });
+
+        // Add form submit validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (!sizeInput.value) {
+                e.preventDefault();
+                alert('Vui lòng chọn size trước khi thêm vào giỏ hàng');
+            }
+        });
+    });
+    </script>
 
 @endsection

@@ -2,7 +2,6 @@
 
 use App\Controllers\Client\HomeController;
 use App\Controllers\Client\ProductController;
-use App\Controllers\Client\CartController;
 use App\Controllers\Client\CategoryController;
 use App\Controllers\Client\CouponController;
 use App\Controllers\Client\OrderController;
@@ -58,28 +57,21 @@ $router->mount('/account', function () use ($router) {
     $router->get('/', UserController::class . '@index');
     $router->post('/update', UserController::class .'@update');
 });
-$router->mount('/cart', function() use ($router) {
+$router->mount('/order', function() use ($router) {
     $router->before('GET|POST', '.*', function() {
         AuthMiddleware::isAuthenticated();
     });
-    $router->get('/', CartController::class . '@index');
-    $router->get('/create', CartController::class . '@create');
-    $router->post('/store', CartController::class . '@store');
-    $router->get('/edit/{id}', CartController::class . '@edit');
-    $router->post('/update/{id}', CartController::class . '@update');
-    $router->get('/delete/{id}', CartController::class . '@delete');
-});
-$router->mount('/order', function() use ($router) {
     $router->get('/', OrderController::class . '@index');
     $router->get('/create', OrderController::class . '@create');
     $router->post('/store', OrderController::class . '@store');
     $router->get('/edit/{id}', OrderController::class . '@edit');
-    $router->post('/update/{id}', OrderController::class . '@update');
-    $router->get('/delete/{id}', OrderController::class . '@delete');
+    $router->post('/update', OrderController::class . '@update');
+    $router->post('/delete/{id}', OrderController::class . '@delete');
 });
 $router->mount('/order_detail', function() use ($router) {
     $router->get('/', OrderDetailController::class . '@index');
     $router->post('/create', OrderDetailController::class . '@create');
+    $router->post('/update/{id}', OrderDetailController::class . '@update');
 });
 $router->mount('/payment', function() use ($router) {
     $router->before('GET|POST', '.*', function() {

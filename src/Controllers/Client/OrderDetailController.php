@@ -58,7 +58,11 @@ class OrderDetailController extends Controller
      */
     private function isValidInput($productId, $sizeId, $quantity): bool
     {
-        return !empty($productId) && !empty($sizeId) && is_numeric($quantity) && $quantity > 0;
+        if (empty($sizeId)) {
+            $_SESSION['errors'] = ['Vui lòng chọn size trước khi thêm vào giỏ hàng'];
+            return false;
+        }
+        return !empty($productId) && is_numeric($quantity) && $quantity > 0;
     }
 
     /**
@@ -119,7 +123,7 @@ class OrderDetailController extends Controller
         if ($existing > 0) {
             $currentOrderDetail = $this->orderDetail->findByOrderAndProduct($orderId, $productId, $sizeId);
             $currentQuantity = $currentOrderDetail['quantity'] ?? 0;
-            
+
             $this->orderDetail->update($currentOrderDetail['id'], [
                 'quantity' => $currentQuantity + $quantity
             ]);
@@ -132,7 +136,8 @@ class OrderDetailController extends Controller
             ]);
         }
     }
-
+    
+    
     /**
      * Xử lý tạo đơn hàng mới và thêm sản phẩm vào đơn hàng
      * 
@@ -153,19 +158,16 @@ class OrderDetailController extends Controller
         if (!$this->isValidInput($productId, $sizeId, $quantity)) {
             $this->redirectWithError("/products/show/$productId", 'Dữ liệu không hợp lệ!');
         }
-
         if (!$orderId) {
             $orderId = $this->createNewOrder($user['id'], $productId);
             if (!$orderId) return;
         }
-
         try {
             $this->addProductToOrder($orderId, $productId, $sizeId, $quantity);
             $_SESSION['success'] = ['Đã thêm sản phẩm vào giỏ hàng thành công!'];
         } catch (\Exception $e) {
             $this->redirectWithError("/products/show/$productId", 'Lỗi thêm vào giỏ hàng: ' . $e->getMessage());
         }
-
         header("Location: /products/show/$productId");
         exit();
     }
@@ -174,13 +176,51 @@ class OrderDetailController extends Controller
     {
         echo "Xử lý thêm dữ liệu.";
     }
-    public function edit($id)
-    {
-        echo "Chỉnh sửa dữ liệu ID: $id";
-    }
     public function update($id)
     {
-        echo "Cập nhật dữ liệu ID: $id";
+        // Lấy dữ liệu từ yêu cầu POST (JSON)
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        // Kiểm tra dữ liệu đầu vào
+        if (!isset($input['id']) || !isset($input['quantity']) || $input['quantity'] < 1) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Dữ liệu không hợp lệ: id hoặc quantity bị thiếu hoặc không hợp lệ'
+            ]);
+        }
+
+        // Dữ liệu để cập nhật
+        $data = [
+            'quantity' => (int)$input['quantity']
+        ];
+
+        try {
+            // Gọi phương thức update của $this->orderDetail
+            $result = $this->orderDetail->update($input['id'], $data);
+
+            if ($result) {
+                // Trả về phản hồi JSON thành công
+                http_response_code(200);
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Cập nhật chi tiết đơn hàng thành công'
+                ]);
+            } else {
+                http_response_code(500);
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Cập nhật chi tiết đơn hàng thất bại'
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Trả về phản hồi JSON nếu có lỗi
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Lỗi: ' . $e->getMessage()
+            ]);
+        }
     }
     public function delete($id)
     {
