@@ -3,12 +3,13 @@
     {
     id: 1,
     image: "storage/news/bao_quan.jpg",
-    title: "Cách bảo quản áo ",
+    title: "Cách bảo quản áo đúng cách giúp áo luôn như mới ",
     content: `
     <p>Áo thun (áo phông) là một trong những món đồ thời trang phổ biến và dễ phối đồ nhất trong tủ quần áo. Tuy nhiên,
         để áo luôn giữ được form dáng đẹp, màu sắc bền và hình in không bị bong tróc theo thời gian, bạn cần lưu ý đến
         cách bảo quản và sử dụng đúng cách.</p>
     <img src="./storage/news/bao_quan.jpg" alt="Ảnh bảo quản áo thun">
+    <p><i>Bảo quản áo thun</i></p>
     <p>Trước hết, không nên để áo thun ở những nơi ẩm ướt. Với đặc tính hút ẩm và hút nước tốt, áo thun rất dễ bị mốc
         hoặc xuất hiện các vết ố nếu để lâu trong môi trường không thông thoáng. Sau khi mặc áo để đi chơi, tập thể thao
         hoặc vận động nhiều ra mồ hôi, bạn nên giặt ngay để tránh mùi hôi và vi khuẩn tích tụ. Khi phơi, hãy lộn trái áo
@@ -36,7 +37,8 @@
     image: "storage/news/phoi_do.jpeg",
     content: `
     <p><b>Áo phông quần jeans</b></p>
-    <img src="{{file_url ('storage/news/ao_quan_jean.jpeg') }}" alt="Ảnh áo thun phối quần jeans">
+    <img src= "./storage//news/ao_quan_jean.jpeg" alt="Ảnh áo thun phối quần jeans">
+    <p><i>Áo phông phối quần jeans</i></p>
     <p>Áo phông và quần jeans là một bộ đôi bất bại, chưa từng đánh mất vị trí được người tiêu dùng ưa chuộng và lựa
         chọn nhất. Bất kể là quần skinny jeans, baggy, hay short jeans thì chắc chắn khi kết hợp cùng với áo phông chúng
         sẽ cực kỳ ăn khớp. Đây là combo cực kỳ trẻ trung, có tính ứng dụng cao mà lại phù hợp với tất cả mọi người.</p>
@@ -66,13 +68,16 @@
     image: "storage/news/cac_kieu.jpg",
     content: `
     <p><b>Áo phông cổ tròn</b></p>
-    <img src="{{file_url ('storage/news/co_tron.jpeg') }}" alt="Ảnh áo phông cổ tròn">
+    <img src= "./storage/news/co_tron.jpeg"  alt="Ảnh áo phông cổ tròn">
+    <p><i>Áo phông cổ tròn</i></p>
     <p>Đây là dáng áo phông phổ biến nhất vì nó đem lại cho người dùng sự thoải mái, linh hoạt trong việc phối đồ, đem lại phong cách trẻ trung và năng động cho người mặc. Áo phông cổ tròn hay áo phông cổ thuyền là một trong những item bán chạy nhất của hãng thời trang ONOFF nhờ các đặc tính thoải mái, thấm hút mồ hôi tốt,..</p>
     <p><b>Áo phông cổ tim</b></p>
-    <img src="{{file_url ('storage/news/co_tim.jpeg') }}" alt="Ảnh áo phông cổ tim">
+    <img src= "./storage/news/co_tim.jpeg" alt="Ảnh áo phông cổ tim">
+    <p><i>Áo phông cổ tim</i></p>
     <p>Áo phông cổ tim có thiết kế gần giống áo phông cổ chữ V nhưng cổ áo nông và tròn hơn. Chiếc áo này thường được thiết kế với dáng áo body, khoe các đường nét khoẻ khoắn của cơ thể, đem lại cảm giác phong lưu, quyến rũ.</p>
     <p><b>Áo phông cổ sơ mi</b></p>
-    <img src="{{ file_url('storage/news/thun_so_mi.jpg') }}" alt="Ảnh áo phông cổ sơ mi">
+    <img src="./storage/news/ao_phong_so_mi.jpeg"  alt="Ảnh áo phông cổ sơ mi">
+    <p><i>Áo phông cổ sơ mi</i></p>
     <p>Áo phông cổ sơ mi còn có tên gọi là áo phông polo. Áo này thường được các chàng trai lựa chọn vào những dịp mang tính chất formal, lịch sự hơn, ví dụ như gặp đối tác, đi chơi golf,.. Áo polo còn có thể thay thế cho áo sơ mi khi bạn kết hợp với Vest để tạo cảm giác thanh lịch mà vẫn giữ vẻ trẻ trung.</p>
     <p><b>Áo phông thể thao</b></p>
     <p>Áo phông thể thao thường có kiểu dáng như áo phông cổ tròn nhưng được thiết kế với chất liệu thoải mái và thấm hút tốt hơn. </p>
@@ -85,7 +90,8 @@
     title: "Chất liệu làm áo phông",
     image: "storage/news/chat_lieu.png",
     content: `
-    <img src="{{ file_url ('storage/news/chat_lieu.png') }}" alt="Chất liệu làm áo phông">,
+    <img src="./storage/news/chat_lieu.png"  alt="Chất liệu làm áo phông">,
+    <p><i>Chất liệu làm áo phông</i></p>
     <p><b>Cotton</b></p>
     <p>Vải cotton hay còn gọi là cotton 100%, được làm từ sợi bông thiên nhiên. Đây là chất liệu phổ biến nhất được chọn làm áo thun bởi vì áo thun được làm từ loại vải này có khả năng co giãn rất tốt, thấm hút mồ hôi nhanh, mặc rất mát nên mang đến cảm giác thoải mái và rất dễ chịu. Vải cotton được sử dụng nhiều trên áo thun cao cấp, có giá trị sử dụng lớn, phù hợp là sản phẩm biếu tặng.</p>
     <p><b>Polyester</b></p>
@@ -102,12 +108,14 @@
     {
     id: 5,
     title: "Áo phông là gì?",
-    image: "storage/news/ao_phong T-shirt.png",
+    image: "storage/news/ao_phong T-shirt.jpg",
     content: `
-    <img src="{{ file_url('storage/news/ao_phong_polo.png') }}" alt="Áo phông">
+    <img src="./storage/news/ao_phong_henley.jpeg"  alt="Áo phông">
+    <p><i>Hình ảnh áo phông henley</i></p>
     <p>Có lẽ trong thời trang hàng ngày, áo phông là item không thể thiếu trong tủ quần áo của mỗi người. Nhờ sự linh hoạt trong sự phối đồ, áo phông hay còn gọi là áo thun phù hợp với mọi giới tính và mọi lứa tuổi từ già đến trẻ và với mọi vóc dáng. Chính vì vậy, tuy đã xuất hiện từ rất lâu trong lịch sử thời trang nhưng sức hút của áo phông vẫn chưa bao giờ giảm “nhiệt”, luôn giữ vững vị trí được ưa chuộng trong lòng khách hàng tiêu dùng. Nhưng không phải ai cũng biết rõ về chiếc áo thun yêu thích của mình. </p>
     <p><b>Áo phông là gì</b></p>
-    <img src="{{ file_url('storage/news/ao_phong_henley.png') }}" alt="Áo phông">
+    <img src="./storage/news/ao_phong_so_mi.jpeg"  alt="Áo phông">
+    <p><i>Hình ảnh áo phông sơ mi</i></p>
     <p>Áo thun (Phông) là một cụm từ chỉ một loại áo phổ biến, được gọi ở miền nam, còn một số tỉnh miền Bắc và các tỉnh khác thì chúng được gọi là áo phông hoặc áo T-shirt. Cái tên T-shirt bắt nguồn từ hình dáng của chiếc áo này có hình chữ T đơn giản với hai cánh tay áo ngắn và phần thân hình chữ nhật. Loại áo này được làm từ vải thun (vải cotton nguyên chất hoặc vải sợi cotton pha trộn cùng PE) do đó áo thun có đặc tính mềm mại và có khả năng co giãn. </p>
     `},
     {
@@ -115,7 +123,8 @@
     title: "ƯU ĐÃI TRI ÂN",
     image: "storage/news/tri_an.png",
     content: `
-    <img src="{{ file_url('storage/news/tri_an.png') }}" alt="Khuyến mãi">
+    <img src="./storage/news/tri_an.png" alt="Khuyến mãi">
+    <p><i>Khuyến mãi</i></p>
     <p>
         <strong>🎉 TUẦN LỄ VÀNG – TRI ÂN KHÁCH HÀNG THÂN THIẾT 🎉</strong><br><br>
         Nhằm gửi lời cảm ơn sâu sắc đến quý khách hàng đã luôn tin tưởng và đồng hành cùng <strong>PUREWARE</strong> trong suốt thời gian qua, chúng tôi hân hạnh giới thiệu chương trình ưu đãi đặc biệt mang tên <strong>"Tuần lễ vàng – Tri ân khách hàng thân thiết"</strong> với hàng loạt ưu đãi hấp dẫn chưa từng có.<br><br>
@@ -168,6 +177,8 @@
                 const imgEl = document.createElement("img");
                 imgEl.src = news.image;
                 imgEl.alt = news.title;
+                imgEl.style.cursor = "pointer"; // Cho biết có thể click
+                imgEl.onclick = () => showNewsDetail(news.id); // Bấm vào ảnh sẽ mở chi tiết
                 newsItem.appendChild(imgEl);
             }
             
@@ -180,7 +191,6 @@
             newsListEl.appendChild(newsItem);
         });
     }
-
     // Hiển thị chi tiết
     function showNewsDetail(id) {
         const news = newsData.find(n => n.id === id);

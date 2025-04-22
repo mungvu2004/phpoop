@@ -18,5 +18,6 @@
     <div id="detail-content"></div>
 </div>
 
+
 <script src="{{ file_url('assets/client/js/news.js') }}"></script>
 @endsection
