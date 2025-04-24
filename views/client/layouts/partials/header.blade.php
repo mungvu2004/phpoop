@@ -25,7 +25,7 @@
                 <a href="{{route_url('/news')}}">
                     <li>tin tức</li>
                 </a>
-                <a href="">
+                <a href="{{route_url('/about')}}">
                     <li>Giới thiệu</li>
                 </a>
             </ul>

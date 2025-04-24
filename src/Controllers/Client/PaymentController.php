@@ -134,7 +134,7 @@ class PaymentController extends Controller
             if ($vnp_ResponseCode !== '00') {
                 error_log('VNPay payment failed with code: ' . $vnp_ResponseCode);
                 $_SESSION['error'] = 'Thanh toán không thành công: ' . $this->getVnpResponseMessage($vnp_ResponseCode);
-                header('Location: /cart');
+                header('Location: /order');
                 exit;
             }
             
@@ -205,13 +205,13 @@ class PaymentController extends Controller
             }
 
             $_SESSION['error'] = 'Xác thực thanh toán thất bại';
-            header('Location: /cart');
+            header('Location: /order');
             exit;
 
         } catch (\Exception $e) {
             error_log('Exception in vnpayReturn: ' . $e->getMessage());
             $_SESSION['error'] = 'Có lỗi xảy ra: ' . $e->getMessage();
-            header('Location: /cart');
+            header('Location: /order');
             exit;
         }
     }
@@ -351,38 +351,35 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Tạo bảng payment_history nếu chưa tồn tại
-     */
-    private function createPaymentHistoryTable()
-    {
-        try {
-            $connection = $this->orderModel->getConnection();
-            $query = "CREATE TABLE IF NOT EXISTS payment_history (
-                id INT(11) NOT NULL AUTO_INCREMENT,
-                user_id INT(11) NOT NULL,
-                order_id INT(11) NOT NULL,
-                amount DECIMAL(10,2) NOT NULL,
-                payment_method VARCHAR(50) NOT NULL,
-                transaction_code VARCHAR(100) NULL,
-                bank_code VARCHAR(50) NULL,
-                status VARCHAR(50) NOT NULL DEFAULT 'pending',
-                created_at DATETIME NOT NULL,
-                updated_at DATETIME NOT NULL,
-                PRIMARY KEY (id),
-                KEY order_id (order_id),
-                KEY user_id (user_id)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+    // private function createPaymentHistoryTable()
+    // {
+    //     try {
+    //         $connection = $this->orderModel->getConnection();
+    //         $query = "CREATE TABLE IF NOT EXISTS payment_history (
+    //             id INT(11) NOT NULL AUTO_INCREMENT,
+    //             user_id INT(11) NOT NULL,
+    //             order_id INT(11) NOT NULL,
+    //             amount DECIMAL(10,2) NOT NULL,
+    //             payment_method VARCHAR(50) NOT NULL,
+    //             transaction_code VARCHAR(100) NULL,
+    //             bank_code VARCHAR(50) NULL,
+    //             status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    //             created_at DATETIME NOT NULL,
+    //             updated_at DATETIME NOT NULL,
+    //             PRIMARY KEY (id),
+    //             KEY order_id (order_id),
+    //             KEY user_id (user_id)
+    //         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
             
-            $result = $connection->exec($query);
-            error_log('Payment history table created: ' . ($result !== false ? 'success' : 'failed'));
+    //         $result = $connection->exec($query);
+    //         error_log('Payment history table created: ' . ($result !== false ? 'success' : 'failed'));
             
-            return $result !== false;
-        } catch (\Exception $e) {
-            error_log('Error creating payment_history table: ' . $e->getMessage());
-            return false;
-        }
-    }
+    //         return $result !== false;
+    //     } catch (\Exception $e) {
+    //         error_log('Error creating payment_history table: ' . $e->getMessage());
+    //         return false;
+    //     }
+    // }
 
     // Hàm phụ trợ để lấy thông báo lỗi từ mã lỗi VNPay
     private function getVnpResponseMessage($responseCode)
@@ -461,7 +458,7 @@ class PaymentController extends Controller
                     exit;
                 }
 
-                $this->orderModel->update($orderId, [
+                $this->orderModel->updateCOD($orderId, [
                     'payment_method' => 'cod',
                     'payment_status' => 'pending',
                     'status' => 'processing',
@@ -470,7 +467,7 @@ class PaymentController extends Controller
                 ]);
                 
                 // Lấy thông tin đơn hàng để lưu lịch sử thanh toán
-                $order = $this->orderModel->findById($orderId);
+                $order = $this->orderModel->getOrderById($orderId);
                 if ($order) {
                     // Lưu lịch sử thanh toán
                     $paymentData = [

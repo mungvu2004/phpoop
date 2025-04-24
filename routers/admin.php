@@ -22,6 +22,10 @@ $router->mount('/admin', function() use ($router){
     });
     $router->get('/', DashBoardController::class . '@index');
 });
+
+// Thêm route riêng cho sale dashboard để đảm bảo nó truy cập được
+$router->get('/admin/dashboard/sale', DashBoardController::class . '@getSaleData');
+
 $router->mount('/admin/coupon', function() use ($router) {
     $router->before('GET|POST', '.*', function() {
         AuthMiddleware::isAuthenticated();

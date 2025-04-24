@@ -115,7 +115,7 @@
             <div class="des-img">
                 <div class="form-des">
                     <h4>Mô tả sản phẩm</h4>
-                    <textarea name="description" maxlength="500" rows="5" cols="50" placeholder="Nhập tối đa 500 ký tự..."></textarea>
+                    <textarea name="description" maxlength="50000" rows="5" cols="50" placeholder="Nhập tối đa 50000 ký tự..."></textarea>
                 </div>
                 <div class="form-img">
                     <div class="img-button">

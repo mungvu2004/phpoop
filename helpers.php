@@ -3,11 +3,17 @@
 use eftec\bladeone\BladeOne;
 
 if(!function_exists('view')) {
-    function view($view, $data = [])
+    function view($view, $data = [], $title = null)
     {
         $views = __DIR__ . '/views';
         $cache = __DIR__ . '/storage/compiles';
         $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
+        
+        // Thêm title vào data nếu được truyền vào và chưa tồn tại trong data
+        if ($title && !isset($data['title'])) {
+            $data['title'] = $title;
+        }
+        
         echo $blade->run($view, $data);
     }
 }

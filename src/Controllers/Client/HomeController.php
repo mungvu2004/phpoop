@@ -37,7 +37,8 @@ class HomeController
         $ratings = $this->product->rating();
         return view(
             'client.dashboard',
-            compact('product4', 'ratings')
+            compact('product4', 'ratings'),
+            'Trang chủ - PWShop'
         );
     }    
 }

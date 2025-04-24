@@ -15,36 +15,38 @@ function sendToggleRequest(id, value) {
 }
 
 
-document.getElementById("toggleSwitch").addEventListener("change", function (e) {
-    const id = this.dataset.id;
-    const status = parseInt(this.dataset.status); // Trạng thái hiện tại trước khi thay đổi
-    const isChecked = this.checked; // Trạng thái mới sau khi người dùng thao tác
-
-    // Nếu đang bật và tắt đi
-    if (status === 1 && !isChecked) {
-        Swal.fire({
-            title: 'Bạn có chắc muốn tắt?',
-            text: "Hành động này sẽ thay đổi trạng thái của mã giảm giá.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Vâng, tắt đi!',
-            cancelButtonText: 'Không, giữ nguyên'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                sendToggleRequest(id, 0);
-            } else {
-                e.target.checked = true;
-            }
-        });
-    }
-
-    // Nếu đang tắt và bật lên
-    if (status === 0 && isChecked) {
-        sendToggleRequest(id, 1);
-    }
-});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("toggleSwitch").addEventListener("change", function (e) {
+        const id = this.dataset.id;
+        const status = parseInt(this.dataset.status); // Trạng thái hiện tại trước khi thay đổi
+        const isChecked = this.checked; // Trạng thái mới sau khi người dùng thao tác
+    
+        // Nếu đang bật và tắt đi
+        if (status === 1 && !isChecked) {
+            Swal.fire({
+                title: 'Bạn có chắc muốn tắt?',
+                text: "Hành động này sẽ thay đổi trạng thái của mã giảm giá.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Vâng, tắt đi!',
+                cancelButtonText: 'Không, giữ nguyên'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    sendToggleRequest(id, 0);
+                } else {
+                    e.target.checked = true;
+                }
+            });
+        }
+    
+        // Nếu đang tắt và bật lên
+        if (status === 0 && isChecked) {
+            sendToggleRequest(id, 1);
+        }
+    });
+})
 
 document.addEventListener('DOMContentLoaded', function () {
     const btnCoupon = document.querySelector('.btn-coupon');

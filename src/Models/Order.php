@@ -128,8 +128,12 @@ class Order extends Model
     {
         $month = $month ?? date('n');
         $year = $year ?? date('Y');
+        
+        // Log debug information
+        error_log("Fetching sales data for month: $month, year: $year");
+        
         $query = $this->conn->createQueryBuilder();
-        $query->select('DAY(created_at) AS day, total_price')
+        $query->select('DAY(created_at) AS day, SUM(total_price) AS total_price')
             ->from($this->tableName)
             ->where('MONTH(created_at) = :month')
             ->andWhere('YEAR(created_at) = :year')
@@ -137,9 +141,15 @@ class Order extends Model
             ->setParameter('month', $month)
             ->setParameter('year', $year)
             ->setParameter('status', 'completed')
+            ->groupBy('DAY(created_at)')
             ->orderBy('DAY(created_at)', 'ASC');
-
-        return $query->fetchAllAssociative();
+        
+        $result = $query->executeQuery()->fetchAllAssociative();
+        
+        // Log the result for debugging
+        error_log("Query result: " . json_encode($result));
+        
+        return $result;
     }
 
     /**

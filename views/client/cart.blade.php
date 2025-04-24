@@ -36,12 +36,11 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="order-body" id="order-body-{{ $order['order_id'] }}">
                             <div class="order-summary">
                                 <div class="summary-item">
                                     <div class="summary-label">Tổng số lượng</div>
-                                    <div class="summary-value">{{ $order['items']['quantity'] }}</div>
+                                    <div class="summary-value">{{ $order['total_quantity'] }}</div>
                                 </div>
                             </div>
                             <table class="product-list">

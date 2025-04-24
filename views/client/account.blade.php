@@ -60,6 +60,11 @@
                 <label for="city">Thành phố</label>
             </div>
             <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="text" id="postal_code" name="postal_code" autocomplete="off" value="{{$userDetail[0]['postal_code'] ?? ''}}" placeholder=" ">
+                <label for="postal_code">Mã bưu điện</label>
+            </div>
+            <div class="form-group">
                 <i class="fas fa-globe"></i>
                 <input type="text" id="country" name="country" autocomplete="off" value="Việt Nam" placeholder=" ">
                 <label for="country">Quốc gia</label>

@@ -72,7 +72,8 @@ class DashBoardController extends Controller{
         $allOrder = $this->allOrder->getAll();
         return view(
             'admin.dashboard',
-            compact('users', 'orders', 'payments', 'reviews', 'sale', 'allOrder')
+            compact('users', 'orders', 'payments', 'reviews', 'sale', 'allOrder'),
+            'Bảng điều khiển Admin - PWShop'
         );
     }
 
@@ -82,25 +83,50 @@ class DashBoardController extends Controller{
      * @return void Trả về dữ liệu doanh thu dưới dạng JSON
      */
     public function getSaleData() {
-        $month = isset($_GET['month']) ? $_GET['month'] : date('n');
-        $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+        try {
+            // Lấy tham số từ request
+            $month = isset($_GET['month']) ? intval($_GET['month']) : date('n');
+            $year = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
+            
+            // Log thông tin debug
+            error_log("Getting sale data for month: $month, year: $year");
+            
+            // Lấy dữ liệu doanh thu từ model
+            $saleData = $this->sale->dataMonth($month, $year);
+            error_log("Raw sale data: " . json_encode($saleData));
 
-        $saleData = $this->sale->dataMonth($month, $year);
-        $dayInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        $labels = range(1, $dayInMonth);
-        $data = array_fill(0, $dayInMonth, 0);
+            // Tạo dữ liệu biểu đồ đúng định dạng
+            $dayInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+            $data = array_fill(0, $dayInMonth, 0);
 
-        foreach($saleData as $row) {
-            $dayIndex = $row['day'] - 1;
-            $data[$dayIndex] = (float)$row['total_price'];
+            foreach ($saleData as $item) {
+                $day = intval($item['day']) - 1;
+                if ($day >= 0 && $day < $dayInMonth) {
+                    $data[$day] = floatval($item['total_price']);
+                }
+            }
+
+            $labels = range(1, $dayInMonth);
+            
+            // Set header và trả về JSON
+            header('Content-Type: application/json');
+            echo json_encode([
+                'labels' => $labels,
+                'data' => $data
+            ]);
+            
+        } catch (\Exception $e) {
+            // Log lỗi
+            error_log("Error in getSaleData: " . $e->getMessage());
+            
+            // Trả về lỗi dưới dạng JSON
+            header('Content-Type: application/json');
+            http_response_code(500);
+            echo json_encode([
+                'error' => true,
+                'message' => 'Đã xảy ra lỗi khi lấy dữ liệu doanh thu: ' . $e->getMessage()
+            ]);
         }
-        header('Content-Type: application/json');
-        echo json_encode([
-            'labels' => $labels,
-            'data' => $data,
-        ]);
-        var_dump($data);
-        var_dump($labels);
-        exit;
+        return;
     }
 }

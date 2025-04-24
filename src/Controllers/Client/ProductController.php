@@ -67,7 +67,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->product->findALL();
-        return view("client.products.list", compact("products"));
+        return view("client.products.list", compact("products"), "Danh sách sản phẩm");
     }
 
     /**
@@ -77,11 +77,10 @@ class ProductController extends Controller
      */
     public function listIndex()
     {
-        $title = 'Danh sách sản phẩm';
         $categories = $this->category->findAll();
         $products = $this->product->listProduct();
 
-        return view('client.list-product', compact('products', 'title', 'categories'));
+        return view('client.list-product', compact('products', 'categories'), 'Danh sách sản phẩm');
     }
 
     /**
@@ -102,10 +101,13 @@ class ProductController extends Controller
         $productDetail = $this->product->find($id);
         $productReview = $this->review->review($id);
         $productSize = $this->size->selectAll($id);
+        
+        $title = $productDetail['name'] ?? 'Chi tiết sản phẩm';
        
         return view(
             'client.product-detail',
-            compact('productDetail', 'productSize', 'productReview', 'orders')
+            compact('productDetail', 'productSize', 'productReview', 'orders'),
+            $title
         );
     }
 

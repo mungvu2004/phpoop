@@ -132,8 +132,8 @@ class ProductController extends Controller
             exit;
         }
 
-        if (strlen($description) > 500) {
-            $_SESSION['errors'] = ["Mô tả không được vượt quá 500 ký tự!"];
+        if (strlen($description) > 50000) {
+            $_SESSION['errors'] = ["Mô tả không được vượt quá 50000 ký tự!"];
             header("Location: /admin/product");
             exit;
         }

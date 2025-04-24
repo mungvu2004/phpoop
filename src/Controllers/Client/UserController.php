@@ -66,6 +66,7 @@ class UserController extends Controller
         $address = $_POST['address_line1'];
         $city = $_POST['city'];
         $country = $_POST['country'];
+        $postal_code = $_POST['postal_code'] ?? '';
         $is_default = 1;
         $image = $_FILES['image_url'];
 
@@ -77,6 +78,7 @@ class UserController extends Controller
             'address_line1' => $address,
             'city' => $city,
             'country' => $country,
+            'postal_code' => $postal_code,
             'is_default' => $is_default,
         ];
         $img_path = '';

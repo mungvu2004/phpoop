@@ -51,13 +51,6 @@ class Payment extends Model
         return $query->executeQuery();
     }
 
-    /**
-     * Cập nhật trạng thái thanh toán
-     * 
-     * @param int $orderId ID của đơn hàng
-     * @param string $status Trạng thái mới
-     * @return bool Kết quả cập nhật
-     */
     public function updatePaymentStatus($orderId, $status)
     {
         $query = $this->conn->createQueryBuilder();
@@ -66,7 +59,6 @@ class Payment extends Model
             ->where('order_id = :order_id')
             ->setParameter('status', $status)
             ->setParameter('order_id', $orderId);
-
         return $query->executeQuery();
     }
 }

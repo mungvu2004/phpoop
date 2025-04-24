@@ -68,7 +68,7 @@
                                     class="review-count">({{ (int)$item['average_rating'] . '/5' }})</span>
                             </div>
                             <div class="product-price">
-                                <span class="current-price">${{ $item['price'] }}</span>
+                                <span class="current-price">{{ number_format($item['price'], 0, ',', '.') }} VNĐ</span>
                             </div>
                         </div>
                     </a>
