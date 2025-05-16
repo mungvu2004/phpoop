@@ -130,6 +130,7 @@ class UserController extends Controller
 
             if (!empty($errors)) {
                 $_SESSION['msg'] = $errors;
+                header('Location: /login');
                 return;
             }
 

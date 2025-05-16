@@ -24,7 +24,7 @@
                             <div class="order-header-left">
                                 <input type="checkbox" class="order-checkbox" data-order-id="{{ $order['order_id'] }}"
                                     data-status="{{$order['status']}}">
-                                <div class="order-id">Đơn hàng #{{ $order['order_id'] }}</div>
+                                <div class="order-id">Đơn hàng</div>
                                 <div class="order-date">{{$order['created_at']}}</div>
                             </div>
                             <div class="order-status status-{{ strtolower(str_replace(' ', '-', $order['status'])) }}">

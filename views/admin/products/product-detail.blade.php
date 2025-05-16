@@ -54,6 +54,7 @@
                 <div class="description">
                     <p>{{$product['description']}}</p>
                 </div>
+                <pre>{{print_r($sizes)}}</pre>
                 <div class="size">
                     @foreach ($sizes as $size)
                         <div class="size-item">

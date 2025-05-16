@@ -1,5 +1,5 @@
 let currentPage = 1;
-const productsPerPage = 9;
+const productsPerPage = 8;
 let allProducts = [];
 let filteredProducts = [];
 

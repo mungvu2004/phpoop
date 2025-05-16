@@ -1,4 +1,4 @@
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const newsData = [
     {
     id: 1,
@@ -36,7 +36,7 @@
     image: "storage/news/phoi_do.jpeg",
     content: `
     <p><b>Áo phông quần jeans</b></p>
-    <img src="{{file_url ('storage/news/ao_quan_jean.jpeg') }}" alt="Ảnh áo thun phối quần jeans">
+    <img src="./storage/news/ao_quan_jean.jpeg" alt="Ảnh áo thun phối quần jeans">
     <p>Áo phông và quần jeans là một bộ đôi bất bại, chưa từng đánh mất vị trí được người tiêu dùng ưa chuộng và lựa
         chọn nhất. Bất kể là quần skinny jeans, baggy, hay short jeans thì chắc chắn khi kết hợp cùng với áo phông chúng
         sẽ cực kỳ ăn khớp. Đây là combo cực kỳ trẻ trung, có tính ứng dụng cao mà lại phù hợp với tất cả mọi người.</p>
@@ -66,13 +66,13 @@
     image: "storage/news/cac_kieu.jpg",
     content: `
     <p><b>Áo phông cổ tròn</b></p>
-    <img src="{{file_url ('storage/news/co_tron.jpeg') }}" alt="Ảnh áo phông cổ tròn">
+    <img src="./storage/news/co_tron.jpeg" alt="Ảnh áo phông cổ tròn">
     <p>Đây là dáng áo phông phổ biến nhất vì nó đem lại cho người dùng sự thoải mái, linh hoạt trong việc phối đồ, đem lại phong cách trẻ trung và năng động cho người mặc. Áo phông cổ tròn hay áo phông cổ thuyền là một trong những item bán chạy nhất của hãng thời trang ONOFF nhờ các đặc tính thoải mái, thấm hút mồ hôi tốt,..</p>
     <p><b>Áo phông cổ tim</b></p>
-    <img src="{{file_url ('storage/news/co_tim.jpeg') }}" alt="Ảnh áo phông cổ tim">
+    <img src="./storage/news/co_tim.jpeg" alt="Ảnh áo phông cổ tim">
     <p>Áo phông cổ tim có thiết kế gần giống áo phông cổ chữ V nhưng cổ áo nông và tròn hơn. Chiếc áo này thường được thiết kế với dáng áo body, khoe các đường nét khoẻ khoắn của cơ thể, đem lại cảm giác phong lưu, quyến rũ.</p>
     <p><b>Áo phông cổ sơ mi</b></p>
-    <img src="{{ file_url('storage/news/thun_so_mi.jpg') }}" alt="Ảnh áo phông cổ sơ mi">
+    <img src="./storage/news/thun_so_mi.jpg" alt="Ảnh áo phông cổ sơ mi">
     <p>Áo phông cổ sơ mi còn có tên gọi là áo phông polo. Áo này thường được các chàng trai lựa chọn vào những dịp mang tính chất formal, lịch sự hơn, ví dụ như gặp đối tác, đi chơi golf,.. Áo polo còn có thể thay thế cho áo sơ mi khi bạn kết hợp với Vest để tạo cảm giác thanh lịch mà vẫn giữ vẻ trẻ trung.</p>
     <p><b>Áo phông thể thao</b></p>
     <p>Áo phông thể thao thường có kiểu dáng như áo phông cổ tròn nhưng được thiết kế với chất liệu thoải mái và thấm hút tốt hơn. </p>
@@ -85,7 +85,7 @@
     title: "Chất liệu làm áo phông",
     image: "storage/news/chat_lieu.png",
     content: `
-    <img src="{{ file_url ('storage/news/chat_lieu.png') }}" alt="Chất liệu làm áo phông">,
+    <img src="./storage/news/chat_lieu.png" alt="Chất liệu làm áo phông">,
     <p><b>Cotton</b></p>
     <p>Vải cotton hay còn gọi là cotton 100%, được làm từ sợi bông thiên nhiên. Đây là chất liệu phổ biến nhất được chọn làm áo thun bởi vì áo thun được làm từ loại vải này có khả năng co giãn rất tốt, thấm hút mồ hôi nhanh, mặc rất mát nên mang đến cảm giác thoải mái và rất dễ chịu. Vải cotton được sử dụng nhiều trên áo thun cao cấp, có giá trị sử dụng lớn, phù hợp là sản phẩm biếu tặng.</p>
     <p><b>Polyester</b></p>
@@ -104,7 +104,7 @@
     title: "Áo phông là gì?",
     image: "storage/news/ao_phong T-shirt.png",
     content: `
-    <img src="{{ file_url('storage/news/ao_phong_polo.png') }}" alt="Áo phông">
+    <img src="./storage/news/ao_phong_polo.png" alt="Áo phông">
     <p>Có lẽ trong thời trang hàng ngày, áo phông là item không thể thiếu trong tủ quần áo của mỗi người. Nhờ sự linh hoạt trong sự phối đồ, áo phông hay còn gọi là áo thun phù hợp với mọi giới tính và mọi lứa tuổi từ già đến trẻ và với mọi vóc dáng. Chính vì vậy, tuy đã xuất hiện từ rất lâu trong lịch sử thời trang nhưng sức hút của áo phông vẫn chưa bao giờ giảm “nhiệt”, luôn giữ vững vị trí được ưa chuộng trong lòng khách hàng tiêu dùng. Nhưng không phải ai cũng biết rõ về chiếc áo thun yêu thích của mình. </p>
     <p><b>Áo phông là gì</b></p>
     <img src="{{ file_url('storage/news/ao_phong_henley.png') }}" alt="Áo phông">
@@ -115,7 +115,7 @@
     title: "ƯU ĐÃI TRI ÂN",
     image: "storage/news/tri_an.png",
     content: `
-    <img src="{{ file_url('storage/news/tri_an.png') }}" alt="Khuyến mãi">
+    <img src="./storage/news/tri_an.png" alt="Khuyến mãi">
     <p>
         <strong>🎉 TUẦN LỄ VÀNG – TRI ÂN KHÁCH HÀNG THÂN THIẾT 🎉</strong><br><br>
         Nhằm gửi lời cảm ơn sâu sắc đến quý khách hàng đã luôn tin tưởng và đồng hành cùng <strong>PUREWARE</strong> trong suốt thời gian qua, chúng tôi hân hạnh giới thiệu chương trình ưu đãi đặc biệt mang tên <strong>"Tuần lễ vàng – Tri ân khách hàng thân thiết"</strong> với hàng loạt ưu đãi hấp dẫn chưa từng có.<br><br>
@@ -146,13 +146,35 @@
 
     const newsListEl = document.getElementById("news-list");
     const newsDetailEl = document.getElementById("news-detail");
-    const detailTitleEl = document.getElementById("detail-title");
-    const detailContentEl = document.getElementById("detail-content");
 
-    // Debug - kiểm tra xem có tìm thấy phần tử hay không
-    console.log("News list element:", newsListEl);
+    // Chuyển showNewsDetail và showNewsList ra global scope
+    window.showNewsDetail = function(id) {
+        const news = newsData.find(n => n.id === id);
+        if (news) {
+            let html = `
+                <button class="back-button" onclick="showNewsList()">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </button>
+                <h2>${news.title}</h2>
+                <div class="news-content">
+                    ${news.content}
+                </div>
+            `;
+            
+            newsDetailEl.innerHTML = html;
+            newsListEl.style.display = "none";
+            newsDetailEl.style.display = "block";
 
-    // Hiển thị danh sách
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    };
+
+    window.showNewsList = function() {
+        newsDetailEl.style.display = "none";
+        newsListEl.style.display = "grid";
+    };
+
+    // Sửa lại cách render danh sách tin tức
     function renderNewsList() {
         if (!newsListEl) {
             console.error("Cannot find news-list element");
@@ -164,43 +186,21 @@
             const newsItem = document.createElement("div");
             newsItem.className = "news-item";
             
-            if (news.image) {
-                const imgEl = document.createElement("img");
-                imgEl.src = news.image;
-                imgEl.alt = news.title;
-                newsItem.appendChild(imgEl);
-            }
+            newsItem.innerHTML = `
+                <img src="${news.image}" alt="${news.title}">
+                <div class="news-item-content">
+                    <h3>${news.title}</h3>
+                    <button class="read-more" onclick="showNewsDetail(${news.id})">
+                        Đọc thêm <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            `;
             
-            const titleEl = document.createElement("h3");
-            titleEl.textContent = news.title;
-            titleEl.style.cursor = "pointer";
-            titleEl.onclick = () => showNewsDetail(news.id);
-            
-            newsItem.appendChild(titleEl);
             newsListEl.appendChild(newsItem);
         });
     }
 
-    // Hiển thị chi tiết
-    function showNewsDetail(id) {
-        const news = newsData.find(n => n.id === id);
-        if (news) {
-            detailTitleEl.textContent = news.title;
-            detailContentEl.innerHTML = news.content;
-            newsListEl.style.display = "none";
-            newsDetailEl.style.display = "block";
-        }
-    }
-
-    // Quay lại danh sách
-    window.showNewsList = function() {
-        newsDetailEl.style.display = "none";
-        newsListEl.style.display = "flex";
-    };
-    
-
     // Load danh sách khi mở trang
     renderNewsList();
-
 });
 

@@ -1,4 +1,0 @@
-parameters:
-    level: 5 # Mức độ nghiêm ngặt (0-9, bắt đầu với 0)
-    paths:
-        - src/ # Thư mục cần phân tích (thay đổi theo cấu trúc dự án)
