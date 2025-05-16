@@ -21,21 +21,29 @@ class Model
      * @var string Tên bảng cơ sở dữ liệu tương ứng với model
      */
     protected $tableName;
+
+    /**
+     * @var \Doctrine\DBAL\Connection|null Kết nối cơ sở dữ liệu tĩnh
+     */
+    private static $connection = null;
     
     /**
      * Khởi tạo - Thiết lập kết nối cơ sở dữ liệu sử dụng biến môi trường
      */
     public function __construct()
     {
-        $connection = [
-            'dbname' => $_ENV['DB_NAME'],
-            'user' => $_ENV['DB_USERNAME'],
-            'password' => $_ENV['DB_PASSWORD'] ?? '',
-            'host' => $_ENV['DB_HOST'],
-            'driver' => $_ENV['DB_DRIVER'],
-        ];
+        if (self::$connection === null) {
+            $connection = [
+                'dbname' => $_ENV['DB_NAME'],
+                'user' => $_ENV['DB_USERNAME'],
+                'password' => $_ENV['DB_PASSWORD'] ?? '',
+                'host' => $_ENV['DB_HOST'],
+                'driver' => $_ENV['DB_DRIVER'],
+            ];
 
-        $this->conn = DriverManager::getConnection($connection);
+            self::$connection = DriverManager::getConnection($connection);
+        }
+        $this->conn = self::$connection;
     }
 
     /**
@@ -43,7 +51,21 @@ class Model
      */
     public function __destruct()
     {
-        $this->conn->close();
+        // Only close if this is the last instance using the connection
+        if (self::$connection !== null && !$this->hasActiveConnections()) {
+            self::$connection->close();
+            self::$connection = null;
+        }
+    }
+
+    /**
+     * Kiểm tra xem có kết nối nào đang hoạt động không
+     * 
+     * @return bool True nếu có kết nối đang hoạt động, False nếu không
+     */
+    private function hasActiveConnections()
+    {
+        return count(get_object_vars($this)) > 0;
     }
     
     /**

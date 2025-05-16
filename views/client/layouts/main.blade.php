@@ -20,7 +20,7 @@
         if (isset($_SESSION['msg'])) {
             foreach ($_SESSION['msg'] as $nofi) {
                 echo '<div class="notifi slide-in">';
-                echo '<p>' . htmlspecialchars($nofi) . '</p>';
+                echo '<p>' . htmlspecialchars($nofi, ENT_QUOTES, 'UTF-8') . '</p>';
                 echo '<button class="close-btn">&times;</button>';
                 echo '</div>';
             }
@@ -32,18 +32,19 @@
         if (isset($_SESSION['success'])) {
             foreach ($_SESSION['success'] as $nofi) {
                 echo '<div class="notifi slide-in">';
-                echo '<p>' . htmlspecialchars($nofi) . '</p>';
+                echo '<p>' . htmlspecialchars($nofi, ENT_QUOTES, 'UTF-8') . '</p>';
                 echo '<button class="close-btn">&times;</button>';
                 echo '</div>';
             }
             unset($_SESSION['success']); // Xóa sau khi hiển thị
         }
     @endphp
+
     @php
     if (isset($_SESSION['errors'])) {
         foreach ($_SESSION['errors'] as $nofi) {
             echo '<div class="notifi slide-in">';
-            echo '<p>' . htmlspecialchars($nofi) . '</p>';
+            echo '<p>' . htmlspecialchars($nofi, ENT_QUOTES, 'UTF-8') . '</p>';
             echo '<button class="close-btn">&times;</button>';
             echo '</div>';
         }

@@ -140,7 +140,7 @@ class Order extends Model
             ->andWhere('status = :status')
             ->setParameter('month', $month)
             ->setParameter('year', $year)
-            ->setParameter('status', 'completed')
+            ->setParameter('status', 'processing')
             ->groupBy('DAY(created_at)')
             ->orderBy('DAY(created_at)', 'ASC');
         
@@ -350,11 +350,9 @@ class Order extends Model
 
         $query = $this->conn->createQueryBuilder();
         $query->update($this->tableName)
-            ->set('payment_method', ':payment_method')
             ->set('status', ':status')
             ->where('id = :id')
-            ->setParameter('payment_method', 'COD')
-            ->setParameter('status', 'pending')
+            ->setParameter('status', 'processing')
             ->setParameter('id', $orderId);
 
         return $query->fetchOne();

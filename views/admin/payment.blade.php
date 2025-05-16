@@ -25,7 +25,7 @@
             <tbody>
                 @forelse ($payments as $payment)
                     <tr>
-                        <td data-label="ID">{{$i = 1}}</td>
+                        <td data-label="ID">{{isset($__i) ? ++$__i : ($__i = 1)}}</td>
                         <td data-label="Recipient Name">{{ $payment['recipient_name'] ?: '-' }}</td>
                         <td data-label="Order ID">{{ $payment['order_id'] }}</td>
                         <td data-label="Amount" class="amount">{{ number_format($payment['amount'], 0, ',', '.') }} VND</td>

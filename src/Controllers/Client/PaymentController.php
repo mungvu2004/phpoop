@@ -459,8 +459,6 @@ class PaymentController extends Controller
                 }
 
                 $this->orderModel->updateCOD($orderId, [
-                    'payment_method' => 'cod',
-                    'payment_status' => 'pending',
                     'status' => 'processing',
                     'shipping_method' => $shippingMethod,
                     'shipping_fee' => $shippingMethod === 'express' ? 40000 : 20000
@@ -472,7 +470,7 @@ class PaymentController extends Controller
                     // Lưu lịch sử thanh toán
                     $paymentData = [
                         'order_id' => $orderId,
-                        'amount' => $order['total'],
+                        'amount' => $order['total_price'],
                         'status' => 0, // Pending
                         'payment_method' => 'cod'
                     ];

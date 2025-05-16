@@ -62,4 +62,4 @@ document.addEventListener('DOMContentLoaded', function() {
             this.nextElementSibling.style.backgroundColor = '#f0f7ff';
         });
     });
-}); 
+});

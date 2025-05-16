@@ -84,6 +84,7 @@
                                                 <button class="btn btn-danger delete-product-btn notifis"
                                                     data-product-id="{{ $item['product_id'] }}"
                                                     data-order-detail-id="{{ $item['id'] }}"
+                                                    data-status="{{ $order['status'] }}"
                                                     onclick="return confirmDelete()">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -280,7 +281,7 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
             
             if (data.status === 'success') {
                 if (paymentMethod === 'cod') {
-                    window.location.href = '/orders';
+                    window.location.href = '/order ';
                 } else if (paymentMethod === 'vnpay') {
                     window.location.href = data.payment_url;
                 }

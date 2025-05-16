@@ -26,19 +26,35 @@ class OrderDetail extends Model
      * @return array|null Chi tiết đơn hàng nếu tìm thấy, null nếu không tìm thấy
      */
     public function findByOrderAndProduct($orderId, $productId, $sizeId)
-    {
-        $query = $this->conn->createQueryBuilder();
-        $query->select('*')
-            ->from($this->tableName)
-            ->where('order_id = :orderId')
-            ->andWhere('product_id = :productId')
-            ->andWhere('size_id = :sizeId')
-            ->setParameter('orderId', $orderId)
-            ->setParameter('productId', $productId)
-            ->setParameter('sizeId', $sizeId);
-        
-        return $query->fetchAssociative();
+{
+    // Bước 1: Kiểm tra trạng thái đơn hàng
+    $orderQuery = $this->conn->createQueryBuilder();
+    $orderQuery->select('status')
+        ->from('orders')
+        ->where('id = :orderId')
+        ->setParameter('orderId', $orderId);
+    
+    $order = $orderQuery->fetchAssociative();
+
+    if (!$order || $order['status'] !== 'pending') {
+        // Nếu không tồn tại đơn hàng hoặc không phải 'pending', trả null
+        return null;
     }
+
+    // Bước 2: Nếu đơn hàng đang chờ ('pending'), tìm order_item
+    $query = $this->conn->createQueryBuilder();
+    $query->select('*')
+        ->from($this->tableName)
+        ->where('order_id = :orderId')
+        ->andWhere('product_id = :productId')
+        ->andWhere('size_id = :sizeId')
+        ->setParameter('orderId', $orderId)
+        ->setParameter('productId', $productId)
+        ->setParameter('sizeId', $sizeId);
+
+    return $query->fetchAssociative();
+}
+
 
     /**
      * Kiểm tra xem sản phẩm đã tồn tại trong đơn hàng chưa
@@ -66,9 +82,10 @@ class OrderDetail extends Model
     public function getAllOrder(int $orderId) {
         $query = $this->conn->createQueryBuilder();
         $query
-            ->select('oi.*', 'p.name AS product_name', 'p.image_url', 'p.price AS product_price')
+            ->select('oi.*', 'p.name AS product_name', 'p.image_url', 'p.price AS product_price', 'o.status AS order_status')
             ->from($this->tableName, 'oi')
             ->leftJoin('oi', 'products', 'p', 'oi.product_id = p.id')
+            ->leftJoin('oi', 'orders', 'o', 'oi.order_id = o.id')
             ->where('oi.order_id = :order_id')
             ->setParameter('order_id', $orderId);
     

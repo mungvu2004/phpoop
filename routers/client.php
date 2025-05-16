@@ -10,7 +10,9 @@ use App\Controllers\Client\PaymentController;
 use App\Controllers\Client\ReviewController;
 use App\Controllers\Client\UserController;
 use App\Middleware\AuthMiddleware;
-
+$router->before('GET|POST', '/(account|order|payment|review)(/.*)?', function() {
+    AuthMiddleware::isAuthenticated();
+});
 $router->mount('', function() use ($router) {
     $router->get('/', HomeController::class . '@index');
 });

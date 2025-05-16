@@ -94,20 +94,51 @@ class OrderController extends Controller
      */
     public function delete($id)
     {
-        $input = json_decode(file_get_contents('php://input'), true);
+        try {
+            header('Content-Type: application/json');
+            
+            $input = json_decode(file_get_contents('php://input'), true);
 
-        if (isset($input['order_detail_id'])) {
-            $orderDetailId = $input['order_detail_id'];
-
-            $statement = $this->orderDetail->delete($orderDetailId);
-
-            if ($statement) {
-                echo json_encode(['success' => true, 'message' => 'Chi tiết đơn hàng đã được xóa.']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Không thể xóa chi tiết đơn hàng.']);
+            if (!isset($input['order_detail_id'])) {
+                throw new \Exception('Thiếu order_detail_id.');
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Thiếu order_detail_id.']);
+
+            $orderDetailId = $input['order_detail_id'];
+            
+            // Lấy thông tin chi tiết đơn hàng
+            $orderDetail = $this->orderDetail->find($orderDetailId);
+            if (!$orderDetail) {
+                throw new \Exception('Không tìm thấy chi tiết đơn hàng.');
+            }
+
+            // Lấy thông tin đơn hàng
+            $order = $this->order->find($orderDetail['order_id']);
+            if (!$order) {
+                throw new \Exception('Không tìm thấy đơn hàng.');
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if ($order['status'] !== 'pending') {
+                throw new \Exception('Chỉ có thể xóa đơn hàng ở trạng thái chờ xử lý.');
+            }
+
+            // Thực hiện xóa
+            $statement = $this->orderDetail->delete($orderDetailId);
+            if (!$statement) {
+                throw new \Exception('Không thể xóa chi tiết đơn hàng.');
+            }
+
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Chi tiết đơn hàng đã được xóa.'
+            ]);
+
+        } catch (\Exception $e) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
         }
     }
 }

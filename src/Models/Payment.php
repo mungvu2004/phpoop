@@ -25,12 +25,15 @@ class Payment extends Model
      */
     public function getAllPay() {
         $query = $this->conn->createQueryBuilder();
-        $query->select('p.*', 'ud.recipient_name')
-        ->from($this->tableName, 'p')
-        ->leftJoin('p', 'user_addresses', 'ud', 'p.user_id = ud.user_id');
-
-    return $query->fetchAllAssociative();
+        $query->select('pa.*', 'o.*', 'ud.recipient_name')
+            ->from('payment_history', 'pa') // pa = payment_history
+            ->leftJoin('pa', 'orders', 'o', 'pa.order_id = o.id')
+            ->leftJoin('o', 'user_addresses', 'ud', 'o.user_id = ud.user_id');
+    
+        return $query->fetchAllAssociative();
     }
+    
+                                             
 
     public function create($data)
     {

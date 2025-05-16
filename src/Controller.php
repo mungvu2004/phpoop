@@ -42,6 +42,20 @@ class Controller
             throw new \Exception("File quá lớn. Kích thước tối đa là 5MB.");
         }
 
+        // Kiểm tra MIME type
+        $allowedMimes = [
+            'image/jpeg',
+            'image/png', 
+            'image/gif',
+            'application/pdf',
+            'text/plain'
+        ];
+        
+        $fileMime = mime_content_type($file['tmp_name']);
+        if (!in_array($fileMime, $allowedMimes)) {
+            throw new \Exception("Loại file không được phép.");
+        }
+
         // Chỉ cho phép một số loại file
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt'];
         $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
